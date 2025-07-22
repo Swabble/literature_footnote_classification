@@ -1,5 +1,7 @@
 import json
 import logging
+import time
+from threading import Lock
 from typing import Any, Dict, Optional
 
 logger = logging.getLogger(__name__)
@@ -18,18 +20,31 @@ class LLMClient:
         model: str = "gpt-4.1-nano",
         max_tokens: int = 500,
         temperature: float = 0.3,
+        request_interval: float = 1.0,
     ) -> None:
         self.api_client = api_client
         self.api_key = api_key
         self.model = model
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.request_interval = request_interval
+        self._last_request_time = 0.0
+        self._lock = Lock()
         self._client: Optional[object] = None
 
         if self.api_client is None and self.api_key:
             self._initialize_client()
         elif self.api_client is None:
             self.api_client = DummyAPIClient()
+
+    def _wait_for_slot(self) -> None:
+        """Wait until enough time has passed since the last request."""
+        with self._lock:
+            now = time.time()
+            wait = self._last_request_time + self.request_interval - now
+            if wait > 0:
+                time.sleep(wait)
+            self._last_request_time = time.time()
 
     def _initialize_client(self) -> None:
         """Initialize OpenAI client."""
@@ -49,6 +64,7 @@ class LLMClient:
 
     def _send_prompt(self, prompt: str) -> str:
         """Send prompt using either the OpenAI client or the provided API client."""
+        self._wait_for_slot()
         if self._client is not None:
             try:
                 response = self._client.chat.completions.create(
