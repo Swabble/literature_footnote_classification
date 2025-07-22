@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 from typing import Dict, List
 
 from .data_ingestion import LiteratureEntry, Footnote
@@ -12,6 +13,8 @@ class Matcher:
     def __init__(self, llm_client: LLMClient, status: StatusManager):
         self.llm_client = llm_client
         self.status = status
+        template_path = Path("prompt_templates/basic_prompt.txt")
+        self.base_prompt = template_path.read_text(encoding="utf-8").strip()
 
     def match(self, entries: List[LiteratureEntry], footnotes: List[Footnote]) -> Dict[str, List[str]]:
         logger.info("Starting matching of %d entries", len(entries))
@@ -37,6 +40,10 @@ class Matcher:
 
     def _build_prompt(self, entry: LiteratureEntry, footnotes: List[Footnote]) -> str:
         notes = "\n".join(f"{f.key}: {f.text}" for f in footnotes)
-        prompt = f"Entry: {entry.key} {entry.title}\nFootnotes:\n{notes}"
+        prompt = (
+            f"{self.base_prompt}\n\n"
+            f"Literature entry:\n{entry.key} {entry.title}\n"
+            f"Footnotes:\n{notes}"
+        )
         logger.debug("Built prompt for entry %s: %s", entry.key, prompt)
         return prompt

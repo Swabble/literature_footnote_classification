@@ -26,10 +26,32 @@ Beim Einlesen erhalten alle Literatureinträge einen Schlüssel in der Form `L00
    python -m venv .venv
    source .venv/bin/activate
    ```
+
 3. Benötigte Pakete installieren:
    ```bash
    pip install -r requirements.txt
    ```
+
+## Konfiguration
+Im Projektverzeichnis befindet sich eine Datei `config.json` mit den Einstellungen für das LLM. Beispielinhalt:
+
+```json
+{
+  "api_key": "YOUR_API_KEY",
+  "model": "gpt-4.1-nano",
+  "max_tokens": 500,
+  "temperature": 0.3,
+  "request_interval": 1.0
+}
+```
+
+Ohne `api_key` wird automatisch der `DummyAPIClient` verwendet.
+Der Parameter `request_interval` gibt die minimale Zeit in Sekunden zwischen zwei
+LLM-Aufrufen an und hilft, "Too Many Requests"-Fehler zu vermeiden.
+
+Der eigentliche Prompt wird aus der Datei `prompt_templates/basic_prompt.txt`
+gelesen und mit den Informationen zu Eintrag und Fußnoten kombiniert. Dort kann
+der Prompttext angepasst werden.
 
 ## Ausführung
 Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`. Die Protokollierung wird zentral durch den `LoggingManager` gesteuert.
