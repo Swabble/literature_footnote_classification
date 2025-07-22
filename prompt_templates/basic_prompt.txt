@@ -1,0 +1,2 @@
+Please map the following footnotes to the literature entry.
+Return JSON in the form {"<entry_key>": ["<footnote_key>", ...]}.
