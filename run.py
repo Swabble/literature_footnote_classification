@@ -1,4 +1,5 @@
 from pathlib import Path
+import logging
 
 from src import (
     load_literature_entries,
@@ -10,6 +11,15 @@ from src import (
 )
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        handlers=[
+            logging.FileHandler("app.log"),
+            logging.StreamHandler(),
+        ],
+    )
+    logging.debug("Application started")
     entries = load_literature_entries(Path("data/literature.json"))
     footnotes = load_footnotes(Path("data/footnotes.html"))
 
@@ -18,4 +28,5 @@ if __name__ == "__main__":
     matcher = Matcher(client, status)
 
     result = matcher.match(entries, footnotes)
+    logging.info("Matching result: %s", result)
     print(result)

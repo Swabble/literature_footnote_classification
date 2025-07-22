@@ -38,6 +38,8 @@ Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein
 python run.py
 ```
 
+Während der Ausführung wird ein detailliertes Protokoll in der Datei `app.log` erzeugt.
+
 Nach dem Lauf befindet sich im aktuellen Verzeichnis eine Datei `status.json`, die Informationen über den zuletzt verarbeiteten Eintrag bzw. Fehler enthalten kann.
 
 ## Tests
