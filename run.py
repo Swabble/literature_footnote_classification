@@ -1,6 +1,8 @@
 from pathlib import Path
 import logging
 
+from src.logging_manager import LoggingManager
+
 from src import (
     load_literature_entries,
     load_footnotes,
@@ -11,14 +13,7 @@ from src import (
 )
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-        handlers=[
-            logging.FileHandler("app.log"),
-            logging.StreamHandler(),
-        ],
-    )
+    LoggingManager(Path("app.log"))
     logging.debug("Application started")
     entries = load_literature_entries(Path("data/literature.json"))
     footnotes = load_footnotes(Path("data/footnotes.html"))

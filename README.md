@@ -32,7 +32,7 @@ Beim Einlesen erhalten alle Literatureinträge einen Schlüssel in der Form `L00
    ```
 
 ## Ausführung
-Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`.
+Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`. Die Protokollierung wird zentral durch den `LoggingManager` gesteuert.
 
 ```bash
 python run.py
