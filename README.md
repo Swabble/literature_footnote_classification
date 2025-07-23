@@ -74,6 +74,8 @@ python run.py
 Während der Ausführung wird ein detailliertes Protokoll in der Datei `app.log` erzeugt.
 
 Nach dem Lauf befindet sich im aktuellen Verzeichnis eine Datei `status.json`, die Informationen über den zuletzt verarbeiteten Eintrag bzw. Fehler enthalten kann.
+Zusätzlich wird unter `data/matched_entries.json` eine Liste aller Literatur-
+einträge mitsamt der zugeordneten Fußnoten abgelegt.
 
 ## Tests
 Der Beispielcode enthält derzeit keine Unit‑Tests, dennoch kann `pytest` ausgeführt werden:

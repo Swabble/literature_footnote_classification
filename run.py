@@ -37,3 +37,25 @@ if __name__ == "__main__":
     result = matcher.match(entries, footnotes)
     logging.info("Matching result: %s", result)
     print(result)
+
+    # Export detailed mapping of entries to footnotes
+    mapping_path = Path("data/matched_entries.json")
+    footnote_lookup = {f.key: f.footnote_id for f in footnotes}
+    export: list[dict] = []
+    for entry in entries:
+        entry_dict = {
+            "segment_id": entry.segment_id,
+            "titel": entry.title,
+            "autor": {
+                "vorname": entry.author_first,
+                "nachname": entry.author_last,
+            },
+            "doi": entry.doi,
+            "url": entry.url,
+            "erscheinungsjahr": entry.year,
+            "key": entry.key,
+        }
+        fnotes = [footnote_lookup[k] for k in result.get(entry.key, []) if k in footnote_lookup]
+        export.append({"entry": entry_dict, "footnotes": fnotes})
+    mapping_path.write_text(json.dumps(export, indent=2), encoding="utf-8")
+    logging.info("Wrote mapping file to %s", mapping_path)
