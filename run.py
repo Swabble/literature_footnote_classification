@@ -30,6 +30,7 @@ if __name__ == "__main__":
         max_tokens=config.get("max_tokens", 500),
         temperature=config.get("temperature", 0.3),
         request_interval=config.get("request_interval", 1.0),
+        responses_dir=Path(config.get("responses_dir", "responses")),
     )
     matcher = Matcher(client, status)
 

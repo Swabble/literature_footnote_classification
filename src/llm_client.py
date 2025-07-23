@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+from pathlib import Path
 from threading import Lock
 from typing import Any, Dict, Optional
 
@@ -21,6 +22,7 @@ class LLMClient:
         max_tokens: int = 500,
         temperature: float = 0.3,
         request_interval: float = 1.0,
+        responses_dir: Path | str = Path("responses"),
     ) -> None:
         self.api_client = api_client
         self.api_key = api_key
@@ -31,11 +33,33 @@ class LLMClient:
         self._last_request_time = 0.0
         self._lock = Lock()
         self._client: Optional[object] = None
+        self.responses_dir = Path(responses_dir)
+        self._prepare_responses_dir()
 
         if self.api_client is None and self.api_key:
             self._initialize_client()
         elif self.api_client is None:
             self.api_client = DummyAPIClient()
+
+    def _save_response(self, name: str, content: str) -> None:
+        """Persist raw or validated LLM output to file."""
+        path = self.responses_dir / name
+        try:
+            path.write_text(content, encoding="utf-8")
+            logger.debug("Saved response to %s", path)
+        except OSError as e:
+            logger.warning("Failed to write response %s: %s", path, e)
+
+    def _prepare_responses_dir(self) -> None:
+        """Create or clear the directory used for storing responses."""
+        if self.responses_dir.exists():
+            for f in self.responses_dir.iterdir():
+                try:
+                    f.unlink()
+                except OSError as e:
+                    logger.warning("Failed to remove %s: %s", f, e)
+        else:
+            self.responses_dir.mkdir(parents=True, exist_ok=True)
 
     def _wait_for_slot(self) -> None:
         """Wait until enough time has passed since the last request."""
@@ -82,23 +106,28 @@ class LLMClient:
         logger.debug("Received response: %s", response)
         return response
 
-    def query(self, prompt: str) -> Dict[str, Any]:
-        """Send prompt twice and verify matching JSON responses.""" 
+    def query(self, prompt: str, name: str = "response") -> Dict[str, Any]:
+        """Send prompt twice, store responses and verify matching JSON."""
         for attempt in range(2):
-            logger.debug("LLM query attempt %d", attempt + 1)
+            logger.debug("LLM query attempt %d for %s", attempt + 1, name)
             res1 = self._send_prompt(prompt)
+            self._save_response(f"{name}_attempt{attempt+1}_1.txt", res1)
             res2 = self._send_prompt(prompt)
+            self._save_response(f"{name}_attempt{attempt+1}_2.txt", res2)
             try:
                 j1 = json.loads(res1)
                 j2 = json.loads(res2)
             except json.JSONDecodeError:
-                logger.warning("Invalid JSON received")
+                logger.warning("Invalid JSON received for %s", name)
                 continue
             if j1 == j2:
-                logger.info("Received matching JSON responses")
+                logger.info("Received matching JSON responses for %s", name)
+                self._save_response(
+                    f"{name}_validated.json", json.dumps(j1, indent=2)
+                )
                 return j1
-            logger.warning("Responses do not match")
-        logger.error("LLM validation failed")
+            logger.warning("Responses do not match for %s", name)
+        logger.error("LLM validation failed for %s", name)
         raise LLMValidationError("Failed to obtain valid identical responses")
 
 class DummyAPIClient:

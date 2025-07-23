@@ -41,13 +41,18 @@ Im Projektverzeichnis befindet sich eine Datei `config.json` mit den Einstellung
   "model": "gpt-4.1-nano",
   "max_tokens": 500,
   "temperature": 0.3,
-  "request_interval": 1.0
-}
+  "request_interval": 1.0,
+  "responses_dir": "responses"
+  }
 ```
 
 Ohne `api_key` wird automatisch der `DummyAPIClient` verwendet.
 Der Parameter `request_interval` gibt die minimale Zeit in Sekunden zwischen zwei
 LLM-Aufrufen an und hilft, "Too Many Requests"-Fehler zu vermeiden.
+
+Alle Antworten des LLM werden in das Verzeichnis `responses/` geschrieben. Dieses
+Verzeichnis wird beim Start automatisch geleert, sodass dort nur die Ergebnisse
+des aktuellen Laufs liegen.
 
 Der eigentliche Prompt wird aus der Datei `prompt_templates/basic_prompt.txt`
 gelesen und mit den Informationen zu Eintrag und Fußnoten kombiniert. Dort kann

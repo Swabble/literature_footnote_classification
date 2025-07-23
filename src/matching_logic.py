@@ -26,8 +26,9 @@ class Matcher:
                 chunk = footnotes[i:i+10]
                 logger.debug("Sending chunk %d-%d for entry %s", i, i + len(chunk) - 1, entry.key)
                 prompt = self._build_prompt(entry, chunk)
+                name = f"{entry.key}_chunk{i//10:03d}"
                 try:
-                    response = self.llm_client.query(prompt)
+                    response = self.llm_client.query(prompt, name=name)
                 except Exception as e:
                     logger.error("LLM query failed: %s", e)
                     self.status.update("error", str(e))
