@@ -1,5 +1,5 @@
 {
-  "api_key": "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",
+  "api_key": "API-KEY",
   "model": "gpt-4.1-nano",
   "max_tokens": 500,
   "temperature": 0.3,
