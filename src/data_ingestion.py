@@ -56,10 +56,17 @@ def load_footnotes(path: Path) -> List[Footnote]:
     soup = BeautifulSoup(html, "html.parser")
     footnotes = []
     for i, div in enumerate(soup.find_all("div"), start=1):
-        if not div.get("id"):
+        footnote_id = div.get("id")
+        if not footnote_id:
             continue
         key = f"F{i:05d}"
-        footnotes.append(Footnote(footnote_id=div["id"], text=div.get_text(strip=True), key=key))
+        footnotes.append(
+            Footnote(
+                footnote_id=footnote_id,
+                text=footnote_id,
+                key=key,
+            )
+        )
         logger.debug("Loaded footnote %s", key)
     logger.info("Loaded %d footnotes", len(footnotes))
     return footnotes

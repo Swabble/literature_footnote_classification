@@ -26,10 +26,43 @@ Beim Einlesen erhalten alle Literatureinträge einen Schlüssel in der Form `L00
    python -m venv .venv
    source .venv/bin/activate
    ```
+
 3. Benötigte Pakete installieren:
    ```bash
    pip install -r requirements.txt
    ```
+
+## Konfiguration
+Im Projektverzeichnis befindet sich eine Datei `config.json` mit den Einstellungen für das LLM. Beispielinhalt:
+
+```json
+{
+  "api_key": "YOUR_API_KEY",
+  "model": "gpt-4.1-nano",
+  "max_tokens": 500,
+  "temperature": 0.3,
+  "request_interval": 1.0,
+  "responses_dir": "responses"
+  }
+```
+
+Ohne `api_key` wird automatisch der `DummyAPIClient` verwendet.
+Der Parameter `request_interval` gibt die minimale Zeit in Sekunden zwischen zwei
+LLM-Aufrufen an und hilft, "Too Many Requests"-Fehler zu vermeiden.
+
+Alle Antworten des LLM werden in das Verzeichnis `responses/` geschrieben. Dieses
+Verzeichnis wird beim Start automatisch geleert, sodass dort nur die Ergebnisse
+des aktuellen Laufs liegen.
+
+Der eigentliche Prompt wird aus der Datei `prompt_templates/basic_prompt.txt`
+gelesen und mit den Informationen zu Eintrag und Fußnoten kombiniert. Dort kann
+der Prompttext angepasst werden.\
+Tritt ein Verweis mehrfach auf, nutzt das Programm zusätzlich
+`prompt_templates/disambiguation_prompt.txt`, um das LLM zu bitten, den
+korrekten Eintrag zu bestimmen. Auch hier darf ausschließlich ein gültiges
+JSON-Objekt ausgegeben werden.
+Schlägt die Auflösung fehl, wird die betreffende Fußnote aus allen Zuordnungen
+entfernt.
 
 ## Ausführung
 Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`. Die Protokollierung wird zentral durch den `LoggingManager` gesteuert.
@@ -41,6 +74,8 @@ python run.py
 Während der Ausführung wird ein detailliertes Protokoll in der Datei `app.log` erzeugt.
 
 Nach dem Lauf befindet sich im aktuellen Verzeichnis eine Datei `status.json`, die Informationen über den zuletzt verarbeiteten Eintrag bzw. Fehler enthalten kann.
+Zusätzlich wird unter `data/matched_entries.json` eine Liste aller Literatur-
+einträge mitsamt der zugeordneten Fußnoten abgelegt.
 
 ## Tests
 Der Beispielcode enthält derzeit keine Unit‑Tests, dennoch kann `pytest` ausgeführt werden:
