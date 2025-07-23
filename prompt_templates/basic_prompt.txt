@@ -1,4 +1,31 @@
-Please map the following footnotes to the literature entry.
-Return **only** a valid JSON object in the form
-{"<entry_key>": ["<footnote_key>", ...]}.
-Do not include any explanations or additional text.
+You are given a list of literature entries and a list of footnotes.
+
+Your task is to match only those footnotes to a literature entry that fulfill both of the following strict conditions:
+
+The surname of the author in the literature entry must match exactly the author name mentioned in the footnote.
+
+If the footnote uses “et al.”, only the first listed surname must match exactly the literature entry author’s surname.
+
+If the literature entry has only one author and the footnote lists multiple names (not "et al."), it is not a match.
+
+The publication year must match exactly.
+
+You must internally check each footnote-literature pair for:
+
+Exact surname match (no partial or fuzzy match).
+
+Exact year match.
+
+Only if both are true, include the footnote in the result.
+
+Do not use content similarity, context clues, or assumptions.
+
+Return only the final result as a valid JSON object in this format:
+
+json
+Kopieren
+Bearbeiten
+{
+  "<entry_key>": ["<footnote_key>", ...]
+}
+Do not include any explanation, reasoning steps, tables, or additional text — return the JSON object only.
