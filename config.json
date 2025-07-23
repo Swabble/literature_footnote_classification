@@ -1,0 +1,8 @@
+{
+  "api_key": "YOUR_API_KEY",
+  "model": "gpt-4.1-nano",
+  "max_tokens": 500,
+  "temperature": 0.3,
+  "request_interval": 1.0,
+  "responses_dir": "responses"
+}
