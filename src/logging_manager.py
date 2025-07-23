@@ -5,7 +5,7 @@ from pathlib import Path
 class LoggingManager:
     """Configure application-wide logging."""
 
-    def __init__(self, path: Path, level: int = logging.DEBUG) -> None:
+    def __init__(self, path: Path, level: int = logging.INFO) -> None:
         self.path = path
         self.level = level
         self._configure()
