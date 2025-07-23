@@ -61,6 +61,8 @@ Tritt ein Verweis mehrfach auf, nutzt das Programm zusätzlich
 `prompt_templates/disambiguation_prompt.txt`, um das LLM zu bitten, den
 korrekten Eintrag zu bestimmen. Auch hier darf ausschließlich ein gültiges
 JSON-Objekt ausgegeben werden.
+Schlägt die Auflösung fehl, wird die betreffende Fußnote aus allen Zuordnungen
+entfernt.
 
 ## Ausführung
 Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`. Die Protokollierung wird zentral durch den `LoggingManager` gesteuert.

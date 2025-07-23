@@ -90,17 +90,25 @@ class Matcher:
             candidate_entries = [entry_lookup[k] for k in ekeys if k in entry_lookup]
             prompt = self._build_disambiguation_prompt(footnote, candidate_entries)
             name = f"{fkey}_disamb"
+
             try:
                 response = self.llm_client.query(prompt, name=name)
+                chosen = response.get(fkey)
             except Exception as e:
                 logger.error("Disambiguation query failed: %s", e)
+                chosen = None
+
+            if not chosen or chosen not in ekeys:
+                if chosen and chosen not in ekeys:
+                    logger.warning(
+                        "LLM returned invalid entry %s for footnote %s", chosen, fkey
+                    )
+                # remove footnote from all entries if disambiguation fails
+                for ekey in ekeys:
+                    if fkey in matches.get(ekey, []):
+                        matches[ekey].remove(fkey)
                 continue
-            chosen = response.get(fkey)
-            if chosen not in ekeys:
-                logger.warning(
-                    "LLM returned invalid entry %s for footnote %s", chosen, fkey
-                )
-                continue
+
             for ekey in ekeys:
                 if ekey != chosen and fkey in matches.get(ekey, []):
                     matches[ekey].remove(fkey)

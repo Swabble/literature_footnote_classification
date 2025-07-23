@@ -1,6 +1,5 @@
 status.json
 __pycache__/
 app.log
-venv/
-config.json
+.venv
 responses/
