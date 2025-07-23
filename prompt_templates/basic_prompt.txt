@@ -2,25 +2,31 @@ You are given a list of literature entries and a list of footnotes.
 
 Your task is to match only those footnotes to a literature entry that fulfill both of the following strict conditions:
 
-The surname of the author in the literature entry must match exactly the author name mentioned in the footnote.
+The surname of the author in the literature entry must match exactly the author mentioned in the footnote.
 
-If the footnote uses “et al.”, only the first listed surname must match exactly the literature entry author’s surname.
+If the footnote uses “et al.”, only the first listed surname must match the literature entry author’s surname exactly.
 
-If the literature entry has only one author and the footnote lists multiple names (not "et al."), it is not a match.
+If the literature entry has only one author and the footnote contains multiple names (not “et al.”), it is not a match.
 
 The publication year must match exactly.
 
-You must internally check each footnote-literature pair for:
+⚠️ Do not match footnotes based on:
 
-Exact surname match (no partial or fuzzy match).
+Topic similarity
 
-Exact year match.
+Keyword overlap
 
-Only if both are true, include the footnote in the result.
+Semantic relevance
 
-Do not use content similarity, context clues, or assumptions.
+Contextual fit
 
-Return only the final result as a valid JSON object in this format:
+Guesswork
+
+❗ If the author surname and year do not both match exactly, the footnote must not be assigned to any entry.
+❗ If there is any uncertainty, exclude the footnote.
+❗ If no footnotes match a literature entry, return an empty list for that entry.
+
+✅ Return only a valid JSON object in the following format:
 
 json
 Kopieren
@@ -28,4 +34,5 @@ Bearbeiten
 {
   "<entry_key>": ["<footnote_key>", ...]
 }
-Do not include any explanation, reasoning steps, tables, or additional text — return the JSON object only.
+🚫 Do not include any explanation, reasoning steps, titles, comments, or additional text.
+Your response must be a pure JSON object only.
