@@ -17,8 +17,8 @@ class LLMClient:
         self,
         api_client: Optional[object] = None,
         api_key: Optional[str] = None,
-        model: str = "gpt-4.1-nano",
-        max_tokens: int = 500,
+        model: str = "gpt-4o",
+        max_tokens: int = 10000000,
         temperature: float = 0.3,
         request_interval: float = 1.0,
     ) -> None:
