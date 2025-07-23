@@ -1,0 +1,62 @@
+[
+  {
+    "entry": {
+      "segment_id": "seg-1",
+      "titel": "A Comparison of Natural Language Understanding Platforms for Chatbots in Software Engineering",
+      "autor": {
+        "vorname": "Ahmad",
+        "nachname": "Abdellatif"
+      },
+      "doi": "10.1109/TSE.2021.3078384",
+      "url": "https://ieeexplore.ieee.org/document/9426404/",
+      "erscheinungsjahr": 2022,
+      "key": "L00001"
+    },
+    "footnotes": []
+  },
+  {
+    "entry": {
+      "segment_id": "seg-2",
+      "titel": "Rule-Based Expert Systems",
+      "autor": {
+        "vorname": "Ajith",
+        "nachname": "Abraham"
+      },
+      "doi": "10.1002/0471497398.mm422",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/0471497398.mm422",
+      "erscheinungsjahr": 2005,
+      "key": "L00002"
+    },
+    "footnotes": []
+  },
+  {
+    "entry": {
+      "segment_id": "seg-3",
+      "titel": "Agentic AI: Autonomous Intelligence for Complex Goals\u2014A Comprehensive Survey",
+      "autor": {
+        "vorname": "Deepak Bhaskar",
+        "nachname": "Acharya"
+      },
+      "doi": "10.1109/ACCESS.2025.3532853",
+      "url": "https://ieeexplore.ieee.org/abstract/document/10849561",
+      "erscheinungsjahr": 2025,
+      "key": "L00003"
+    },
+    "footnotes": []
+  },
+  {
+    "entry": {
+      "segment_id": "seg-4",
+      "titel": "History of generative Artificial Intelligence (AI) chatbots: past, present, and future development",
+      "autor": {
+        "vorname": "Md",
+        "nachname": "Al-Amin"
+      },
+      "doi": "10.48550/arXiv.2402.05122",
+      "url": "http://arxiv.org/abs/2402.05122",
+      "erscheinungsjahr": 2024,
+      "key": "L00004"
+    },
+    "footnotes": []
+  }
+]

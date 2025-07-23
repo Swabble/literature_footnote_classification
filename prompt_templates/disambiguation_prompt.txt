@@ -1,4 +1,5 @@
-A footnote appears in multiple literature entries.
-Choose the entry it truly belongs to.
-Return **only** a JSON object of the form {"<footnote_key>": "<entry_key>"}.
-Do not include explanations or additional text.
+Eine Fußnote erscheint in mehreren Literaturangaben. Wähle den Eintrag, zu dem sie tatsächlich gehört. Gib ausschließlich ein JSON-Objekt im Format {"<footnote_key>": "<entry_key>"} zurück.
+
+Es dürfen keine Erklärungen, kein zusätzlicher Text, keine Formatierungen oder Codeblöcke enthalten sein – nur das reine JSON-Objekt.
+
+Hier ist der Kontext:

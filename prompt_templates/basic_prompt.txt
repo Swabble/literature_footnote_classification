@@ -26,12 +26,11 @@ If either the author surname or the year does not match, you must not assign the
 If you are uncertain about a match, you must exclude it.
 If no footnotes match, return an empty list for that entry.
 
-Output only a valid JSON object in the following format:
+Output only a valid JSON object, in the following format:
 
-json
-Kopieren
-Bearbeiten
+
 {
   "<entry_key>": ["<footnote_key>", ...]
 }
-Do not include explanations, notes, reasoning, or any additional text. Return only the JSON object.
+
+Do not include explanations, notes, reasoning, fenced code block, or any additional text. Return only the JSON object.
