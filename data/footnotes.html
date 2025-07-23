@@ -34,3 +34,2328 @@
 <div id="Vgl. Xu, Vasilescu, Neubig 2022, S. 26 f." class="original_text">
  , so fehlt ihnen die direkte Integration in die Entwicklungsumgebung
 </div>
+<div id="Vgl. Solanke 2024, S. 247" class="original_text">
+ . Der Anspruch im
+ Softwareentwicklungsprozess wird mit fortlaufender Zeit immer komplexer, während gleichzei-
+ tig schneller gearbeitet werden muss. Folglich ist es im Interesse von Softwareentwicklern und
+ Softwareentwicklerinnen, so viel Zeit und Arbeit wie möglich zu sparen. Hierbei unterstützen
+ Code-Completion-Systeme. Sie sollen dabei helfen, die Qualität des Codes zu verbessern, die Ef-
+ fizienz zu steigern und die Wartbarkeit zu erhöhen
+</div>
+<div id="Vgl. Treude, Gerosa 2025, S. 2 f." class="original_text">
+ . Durch die erleichterte Arbeit befindet sich
+ die Rolle von Entwicklern ebenfalls im Wandel. Es wird weniger getippt und mehr kuratiert
+</div>
+<div id="Vgl. Al-Kharusi et al. 2024, S. 2-12" class="original_text">
+ .
+ Allerdings haben Code-Completion-Systeme auch Eigenschaften, die sie für Unternehmen pro-
+ blematisch machen. Der Datenschutz ist hierbei ein zentrales Thema, da Quellcode als sensible
+ Daten betrachtet wird und sich darin oftmals weitere sensible Informationen befinden. Es ist nicht
+ ohne Weiteres möglich, diese Daten an Drittanbieter zu übermitteln, da diese die gesammelten
+ Daten für ihre oder fremde Zwecke wie zum Beispiel dem Training ihrer Modelle verwenden
+ 1 Einleitung
+ könnten
+</div>
+<div id="Vgl. Schaaf, Wiedenroth, Wagner 2021, S. 11-15" class="original_text">
+ . Somit stellt dies ein Datenleck dar, das für Unternehmen nicht tragbar ist. Ein zweites
+ Problem ist die Erklärbarkeit und Nachvollziehbarkeit der Systeme. Dies entspricht dem soge-
+ nannten Black-Box-Charakter vieler KI-Modelle
+</div>
+<div id="Vgl. Vake et al. 2025, S. 1 f." class="original_text">
+ . Das bedeutet, dass nur das Eingangs- und
+ Ausgangsverhalten der Modelle sichtbar ist, jedoch nicht nachvollzogen werden kann, wie genau
+ das Modell zu seinem Ergebnis gekommen ist. Das gilt im besonderen Maße für Systeme, die von
+ Drittanbietern bereitgestellt werden.
+ Daraus ergibt sich für Unternehmen das Interesse, die Kontrolle über das System und damit auch
+ über die verarbeiteten Informationen zu maximieren.
+ Ein wichtiger Ansatz ist damit der Einsatz von Open-Source Plattformen und Modellen, sodass
+ eine eigene und unabhängige Implementierung des Systems möglich ist
+</div>
+ . Dadurch entsteht die
+ Möglichkeit, sowohl die Modelle, als auch die Plattform an die eigenen Anforderungen anzupassen
+ und bestimmte Einstellungen zu konfigurieren.
+ Die S-Management Services GmbH (S-MS) stellt sich der Herausforderung für ihre internen Kun-
+ den ein Code-Completion-System zu entwickeln und hat dazu bereits die Plattform Refact.ai in
+ Verwendung. Damit existiert eine Einbindung eines Plugins in JetBrains Integrated Development
+ Environments (IDEs), das die nötigen Daten von der IDE abgreift und an das Backend weiterlei-
+ tet. Dieses Backend kommuniziert dann mit dem KI-Modell, das die Vervollständigung vornimmt
+ und das Ergebnis zurücksendet. Der Entwickler oder die Entwicklerin erhält das Ergebnis dann
+ als Vorschlag, der angenommen oder abgelehnt werden kann. Das KI-Modell wird derzeit auf
+ einem AWS -Server mit strikten Datenschutzvorgaben betrieben.
+ Diese Lösung erwies sich im Laufe der Zeit als unzureichend: Sie entspricht nicht den Anforde-
+ rungen und ist daher nicht in der Lage, die gewünschten Ergebnisse zu liefern.
+<h2>1.2 Ziel der Arbeit</h2>
+ Das Ziel der Arbeit ist es, ein methodisch fundiertes Konzept zur Evaluation und Verbesserung
+ der aktuellen Code-Completion-Lösung zu entwickeln. Dabei sollen Ursachen für bestehende
+ Defizite identifiziert und geeignete Alternativen oder Optimierungen erarbeitet werden. Die Er-
+ gebnisse münden in einen Prototyp, der abschließend evaluiert und im Hinblick auf zukünftige
+ Entwicklungen reflektiert wird.
+ Konkret soll identifiziert werden, welche Faktoren zum Misserfolg der aktuellen Lösung geführt
+ haben. Die identifizierten Schwachstellen werden dann genauer untersucht. So soll ermittelt wer-
+ den, ob es sinnvolle Alternativen gibt oder ob Anpassungen zu verbesserter Qualität führen. Die
+ gesammelten Erkenntnisse bilden dann die Grundlage für die Entwicklung eines Prototyps, der
+ ebenfalls auf seine Eignung auf die Anforderungen des Unternehmens getestet wird. Zuletzt kann
+ 1 Einleitung
+ so ein Ausblick gegeben werden, welche Schritte noch notwendig sind und welche Forschungsfra-
+ gen für zukünftige Arbeiten relevant sein könnten.
+<h2>1.3 Aufbau der Arbeit</h2>
+ In dieser Sektion wird die inhaltliche Struktur der Arbeit erläutert. Die Gliederung ist ausgerich-
+ tet am Ziel, sowohl die nötigen theoretischen Grundlagen zu schaffen, als auch eine praxisnahe
+ Umsetzung des Projekts durchzuführen.
+ Da es sich bei der Thematik dieser Arbeit um ein umfangreiches und breit gefächertes Gebiet
+ handelt, ist es notwendig, den Lesern und Leserinnen eine detaillierte theoretische Grundlage zu
+ schaffen. Diese umfasst sowohl die Definition zentraler Konzepte als auch die Erläuterung der
+ Arbeitsweise, nach der die Arbeit durchgeführt wird.
+ Es handelt sich hierbei um eine Arbeit, die parallel eine praktische Umsetzung beinhaltet. Folglich
+ werden auch Konzeptionen der Wirtschaftsinformatik behandelt, die für die praktische Umset-
+ zung von Bedeutung sind.
+ Um dieser Vielfalt gerecht zu werden, ist es notwendig, die Arbeit in zwei grundlegende Teile zu
+ gliedern. Der erste Teil befasst sich mit den theoretischen Hintergründen und Voraussetzungen
+ der Arbeit. Hierzu gehören die Kapitel von 2 (Marktentwicklung und technologische Trends von
+ Chatbots und Code-Completion-Systemen) bis 7 (Evaluationsverfahren für KI-Modelle). Neben
+ den konzeptionellen Grundlagen werden auch vergangene und aktuelle Entwicklungen im Be-
+ reich KI-gestützter Chatbots und Code-Completion-Systeme geschildert. Darunter fallen zudem
+ die rechtlichen Aspekte und der Datenschutz, die für die Arbeit von Bedeutung sind. Darüber
+ hinaus werden relevante Modelltypen vorgestellt sowie die Funktionsweise von Plattformen, ihren
+ Limitationen und möglichen Evaluationsverfahren.
+ Der zweite Teil hingegen umfasst die Kapitel von 8 (Marktforschung und Unternehmensanfor-
+ derungen) bis 13 (Reflexion und Ausblick) und befasst sich mit der praktischen Umsetzung des
+ Projektes anhand der Konzepte aus dem ersten Teil. Ziel dieses Teils ist die schrittweise Ent-
+ wicklung eines unternehmensspezifischen Code-Completion-Systems — von der Konzeption über
+ die Implementierung bis zur Evaluation der Ergebnisse. Abschließend wird eine Reflexion der
+ Erkenntnisse und der Durchführung der Arbeit vorgenommen, um einen Ausblick auf zukünfti-
+ ge Entwicklungen zu geben. Dieser Teil beginnt mit der Marktforschung und einer Analyse des
+ Ist-Zustandes. Durch die klare Trennung zwischen theoretischem Fundament und praktischer
+ Umsetzung wird eine konsistente Leserführung gewährleistet. Anschließend folgt der Aufbau ei-
+ nes Soll-Zustandes durch die Auswahl und Anpassung geeigneter Modelle und Plattformen.
+ Um einen Überblick zu schaffen, gibt die folgende Übersicht die einzelnen Kapitel und deren
+ Inhalte wieder:
+ Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ Es werden wichtige historische Ereignisse beschrieben und deren Einfluss auf die allgemeine
+ 3
+ 1 Einleitung
+ Entwicklung bis hin zu modernen Chatbots und Code-Completion-Systemen erläutert. Ein
+ besonderes Augenmerk wird auf die kürzlichen Entwicklungen gelegt, die den Durchbruch
+ solcher Systeme in der heutigen Zeit ermöglicht haben.
+ Relevanz und Zielgruppen von Code-Completion-Systemen
+ Die Relevanz von Code-Completion-Systemen wird hier beschrieben. Erläutert werden hier-
+ zu die Zielgruppen und übliche Einsatzkontexte. Zudem wird zwischen Code-Completion-
+ Systemen und allgemeinen Chatbots differenziert, die in dieser Arbeit eine untergeordnete
+ Rolle spielen.
+ Datenschutz, regulatorische und rechtliche Aspekte
+ Oft werden sensible Daten in Code-Completion-Systemen verarbeitet. Eine missbräuchliche
+ Verwendung oder Weitergabe dieser Daten kann schwerwiegende Folgen für das Unterneh-
+ men und seine Kunden haben. Daher wurden vom Gesetzgeber Regelungen getroffen, um
+ den Umgang mit solchen Daten zu regeln. In diesem Kapitel werden zum einen die be-
+ sagten Regelungen beschrieben und zum anderen weitere Herausforderungen, Risiken und
+ mögliche Strategien zur Risikominimierung erläutert.
+ Methoden der Projektkonzeptionierung
+ In diesem Kapitel werden jene Methoden zur Projektkonzeptionierung beschrieben, die für
+ die Durchführung der Arbeit benötigt werden. Unter anderem wird auf die Vorgehenswei-
+ se zur Analyse von Ist- und Soll-Zuständen eingegangen, zum anderen das Vorgehen zur
+ Realisierung eines Prototypen des Produktes.
+ Analyseverfahren von Plattformen
+ Die ausgewählten Plattformen müssen anhand ihrer Eignung für den Unternehmenskon-
+ text analysiert werden. Um dies anhand von objektiven Kriterien festzustellen, werden in
+ diesem Kapitel Analyseverfahren beschrieben, die in den Kapiteln 9 (Analyse der aktuellen
+ Plattform Refact.ai) und 10 (Analyse alternativer Plattformen) zur Anwendung kommen.
+ Evaluationsverfahren für KI-Modelle
+ Ähnlich wie bei den Analyseverfahren für Plattformen, werden auch Verfahren zur Eva-
+ luation von KI-Modellen benötigt, um deren Eignung für den Unternehmenskontext zu
+ bestimmen. Sie finden im Kapitel 11 (Evaluation vielversprechender Modelle) Anwendung.
+ Insbesondere die Frage nach der Qualität der Evaluation ist von Bedeutung, da viele öf-
+ fentliche Benchmarks und Leaderboards nur begrenzte Aussagekraft und Glaubwürdigkeit
+ genießen, besonders im Unternehmenskontext.
+ Marktforschung und Unternehmensanforderungen
+ Die Marktforschung markiert den Beginn des praxisorientierten Teils der Arbeit. Hier
+ wird zunächst umfassend erhoben, welche Anfoderungen der Markt an Code-Completion-
+ Systeme stellt und welche Plattformen und Modelle momentan zur Verfügung stehen. Es
+ kann erst dann ein systematischer Vergleich stattfinden.
+ 4
+ 1 Einleitung
+ Analyse der aktuellen Plattform Refact.ai
+ Das Produkt nutzt zu Beginn dieser Arbeit die Plattform RefactAi. Dabei soll der ak-
+ tuelle Ist-Zustand beschrieben werden. Im Fokus stehen die vorhandenen Funktionen so-
+ wie die Stärken der Plattform. Gleichzeitig werden mögliche Schwächen und Kritikpunkte
+ aufgezeigt. Es soll festgestellt werden, weshalb das Unternehmen einen Bedarf an einer
+ Anpassung des Systems hat und welche Anforderungen nicht erfüllt werden.
+ Analyse alternativer Plattformen
+ Analog zu Kapitel 9 wird in diesem Kapitel die Soll-Analyse durchgeführt. Nachdem ei-
+ ne Auswahl an Kandidaten getroffen wurde, werden diese Plattformen wie die RefactAi-
+ Plattform analysiert. Ziel ist es, die Unterschiede und Gemeinsamkeiten der Plattformen
+ klar herauszustellen und zu sammeln. Anschließend werden die Ergebnisse auf die Anfor-
+ derungen angewendet und eine Entscheidung getroffen. Die neue Plattform bildet dann die
+ Basis für die weitere Entwicklung.
+ Evaluation vielversprechender Modelle
+ Nachdem der Prototyp erstellt wurde, wird die Lösung anhand von Evaluationsverfahren
+ getestet. Ziel ist es, die Auswahl der KI-Modelle zu prüfen. So kann sichergestellt werden,
+ dass die Modelle den maximalen Nutzen für die Kunden bieten und maximale Wirtschaft-
+ lichkeit für das Unternehmen erzielt wird.
+ Ergebnisse und Entscheidung
+ Die neue Lösung wird in diesem Kapitel vorgestellt. Alle wichtigen Informationen werden
+ erneut aufgegriffen und zusammengefasst. Die Ergebnisse der Evaluationen und dem Erfolg
+ der Anpassung werden hier zusammengefasst.
+ Reflexion und Ausblick
+ Damit eine fortlaufende Verbesserung stattfinden kann, wird in diesem Kapitel die Lö-
+ sung auf mögliche Schwächen untersucht und gegebenenfalls werden Verbesserungen vor-
+ geschlagen. Außerdem wird die allgemeine Umsetzung der Arbeit sowie der Projektverlauf
+ reflektiert. Zuletzt wird ein Ausblick auf das weitere Vorgehen gegeben. Es wird voraus-
+ schauend auf mögliche nächste Schritte und Entwicklungen eingegangen, die sowohl für das
+ Unternehmen, als auch für die Gesellschaft von Bedeutung sein könnten.
+<h2>1.4 Methodik</h2>
+<div id="Vgl. Hevner et al. 2004" class="original_text">
+ In der vorliegenden Arbeit wird anwendungsorientiert geforscht. Ziel ist es, eine bestehende Code-
+ Completion-Lösung im Unternehmenskontext zu evaluieren und gezielt zu verbessern. Anschlie-
+ ßend wird ein darauf basierender Prototyp entwickelt. Methodisch wird dabei ein Design Science
+ Research (DSR)-Ansatz verfolgt, ein in der Wirtschaftsinformatik etabliertes Rahmenwerk zur
+ schrittweisen Entwicklung und Bewertung von sogenannten Artefakten. Dieser Ansatz eignet sich
+ besonders für praxisnahe Forschungsprojekte, die sowohl technische Artefakte, als auch organi-
+ satorische Aspekte berücksichtigen. Obwohl sich dieses Rahmenwerk eher aus der Praxis entwi-
+ 5
+ 1 Einleitung
+ ckelt hat, als dass es direkt erfunden wurde, so haben Alan Hevner et al. im Jahre 2004 einen
+ theoretischen Grundstein gelegt, der auch in dieser Arbeit den Grundstein für die methodische
+ Herangehensweise bildet
+</div>
+ .
+ Angewandt auf dieses Projekt kann der iterative Arbeitsprozess nach Hevner et al. in drei Phasen
+ unterteilt werden:
+ 1. Problemanalyse und Zieldefinition:
+ Zuerst wird eine Schwachstellenanalyse auf Basis einer Ist-Analyse der bestehenden Re-
+ fact.ai Lösung durchgeführt. Es werden Schwachstellen basierend auf technischen Aspek-
+ ten, bereits dokumentierten Einschränkungen und Rückmeldungen interner Kunden iden-
+ tifiziert.
+ 2. Artefaktentwicklung und Anpassung:
+ Nachdem Defizite identifiziert wurden, wird erarbeitet, wie diese behoben werden können.
+ Daraufhin wird ein anpassbarer Prototyp entwickelt auf einer speziell eingerichteten Te-
+ stumgebung. So können Veränderungen und Alternativen ausprobiert werden, ohne die
+ Entwicklung am Hauptsystem zu stören. Verschiedene Backend-Komponenten, wie die KI-
+ Modelle können schnell und problemlos getauscht werden.
+ 3. Evaluation durch Nutzerfeedback:
+ Im Mittelpunkt steht in dieser Phase das Feedback von ausgewählten Testern und Teste-
+ rinnen, die den Prototypen erhalten haben und in realitätsnahen Szenarien testen. Durch
+ ein Feedback-Formular wird zu jeder Veränderung eine Rückmeldung zum Nutzererlebnis
+ und der wahrgenommenen Qualität des Vorschlags eingeholt. Darüber hinaus werden se-
+ kundär auch technische Metriken von bestehenden Benchmarks herangezogen, jedoch steht
+ die Nutzerperspektive im Vordergrund.
+ Es werden für die Bearbeitung der Forschungsfrage abseits des DSR-Ansatzes keine weiteren
+ externen Normen oder Standards verwendet, aber es wird im Laufe der Arbeit auf etablierte
+ Kriterien der Softwarequalität geachtet. Die Testumgebung muss mit begrenzen Ressourcen aus-
+ kommen, sodass statt geeigneteren GPUs lediglich eine Nvidia A10G-GPU zur Verfügung steht
+ mit 24GB VRAM. Das führt zu Einschränkungen in der Auswahl der Modelle, die im Praxisteil
+ verwendet werden können.
+ Der Praxisbezug der Arbeit verfolgt insgesamt ein explorativ-evaluiertes Vorgehen. Zwar sind
+ die zu erwartenden Ergebnisse spezifisch auf die S-MS ausgericht, jedoch steht es nicht außer
+ Frage, dass diese für ähnliche Einsatzszenarien wichtige Hinweise und Erkenntnisse in anderen
+ Organisationen liefern können. Das gilt insbesondere in Bezug auf den Datenschutz und lokal
+ betreibbare Lösungen.
+<h1>2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen</h1>
+<div id="Vgl. Aslam 2023, S. 70" class="original_text">
+ Durch die immer weiter beschleunigende Entwicklung von KI-gestützten Assistenzsystemen in
+ den letzten Jahren hat sich ein neues Kapitel der heutigen Zeit aufgetan
+</div>
+<div id="Vgl. Smutny, Bojko 2024, S. 1" class="original_text">
+ . Vor allem Chat-
+ bots haben sämtliche Bereiche des alltäglichen Lebens und der Arbeit verändert. Auf dieser
+ Basis konnte auch die Entwicklung von Code-Completion-Systemen ins Rollen kommen
+</div>
+ . Die-
+ ses Kapitel zeigt auf, wie historische Meilensteine auf die Entwicklung und Verbreitung von
+ Code-Completion-Systemen, Chatbots sowie weiteren KI-Modellen Einfluss genommen haben.
+ Außerdem wird konkret darauf eingegangen, wie sich der gewöhnliche Chatbot zu einem Code-
+ Completion-System entwickelt hat und in welchen Eigenschaften und Aufgaben sie sich unter-
+ scheiden. Das geschieht aus Sicht der Marktbedürfnisse und der technologischen Trends und
+ Durchbrüche, die den Markt prägen.
+ Das Kapitel hilft dem Leser bzw. der Leserin zu verstehen, woher die aktuellen Ansprüche und
+ Möglichkeiten der Code-Completion-Systeme kommen, sodass die Relevanz und der Nutzen im
+ nachfolgenden Kapitel nachvollzogen werden kann.
+<h2>2.1 Die Evolution intelligenter Assistenzsysteme</h2>
+<div id="Vgl. Farrow 2019, S. 62 f." class="original_text">
+ Es scheint ein alter menschlicher Traum zu sein, Maschinen mit menschenähnlicher oder gar
+ übermenschlicher Intelligenz zu erschaffen, sogenannter KI
+</div>
+<div id="Vgl. Muggleton 2024, S. 2" class="original_text">
+ . Für die meiste Zeit der Mensch-
+ heitsgeschichte blieb dieser Wunsch unverwirklicht. Die Anfänge der KI liegen erst in den 1950er
+ Jahren
+</div>
+<div id="Vgl. Turing 1950, S. 433 f." class="original_text">
+ , als die ersten theoretischen Grundlagen intelligenter Systeme entwickelt wurden, dar-
+ unter auch der Turing-Test. Darunter ist ein von Alan Turing entwickelter Test zu verstehen, der
+ die Fähigkeit untersucht, ob ein Computer menschliches Kommunikationsverhalten simulieren
+ kann
+</div>
+<div id="Vgl. Natale 2019, S. 9f" class="original_text">
+ . Es stellt einen großen Meilenstein dar, diesen Test zu bestehen, da dann der Computer
+ nicht mehr von einem Menschen zu unterscheiden ist.
+ Zu den bekanntesten frühen Systemen gehört das von Joseph Weizenbaum entwickelte ELIZA,
+ eines der ersten Programme, das heute als Chatbot bezeichnet werden würde
+</div>
+<div id="Vgl. Natale 2019, S. 10 f." class="original_text">
+ . Die womög-
+ lich bekannteste Konfiguration des Systems hatte die Aufgabe, Patienten mit psychologischen
+ Problemen in der Rolle eines Therapeuten zu helfen.
+ Zu dieser Zeit wurde noch keine KI verwendet, stattdessen ist ELIZA ein symbolisches und
+ regelbasiertes Pattern-Matching-System. Das bedeutet, dass das Programm die Eingaben der
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ Nutzerinnen und Nutzer erhält, daraufhin ein Skript ausführt und anschließend eine Antwort
+ generiert. ELIZA arbeitet mit Keywords und Pattern-Matching, um aus einer Eingabe ein im
+ Vorfeld definiertes Satzbaumuster zu erkennen und wichtige Wörter zu extrahieren
+</div>
+<div id="Vgl. Barker et al. 1989, S. 301" class="original_text">
+ .
+ Bei der Ausgabe gibt es dann für jedes identifizierte Pattern eine Liste an Vorlagen mit Platz-
+ haltern. Gibt es mehrere passende Vorlagen für die Ausgabe, wird zufällig einer der Kandidaten
+ ausgewählt. Die Platzhalter werden dann mit den extrahierten Wörtern gefüllt und transformiert,
+ also grammatikalisch angepasst. Darauf folgt dann eine Antwort, die daraufhin den Nutzerinnen
+ und Nutzern präsentiert wird.
+ Obwohl ELIZA nicht tatsächlich versteht, was mit der Eingabe oder Ausgabe gemeint ist, konnte
+ es zu dieser Zeit bereits täuschend echte Gespräche führen. Es war allerdings noch weit davon
+ entfernt, den Turing-Test zu bestehen.
+ Die stark begrenzte oder gar fehlende Lernfähigkeit dieser Programme war eine große technische
+ Limitierung, die für eine lange Zeit nicht überwunden wurde.
+ Die nächsten Schritte in der Entwicklung solcher Systeme waren die in den 1970er- und 1980er-
+ Jahren aufkommenden Expertensysteme. Sie entstanden in einem Umfeld stark geförderter For-
+ schung maschineller Wissensrepräsentationen. Die hohe Nachfrage solcher Forschung kam haupt-
+ sächlich durch militärische und industrielle Problemstellungen wie XCON bei der Digital Equip-
+ ment Corporation
+</div>
+<div id="Vgl. Buchanan, Smith 1988, S. 27, 46" class="original_text">.
+ Bei der Ausgabe gibt es dann für jedes identifizierte Pattern eine Liste an Vorlagen mit Platz-
+ haltern. Gibt es mehrere passende Vorlagen für die Ausgabe, wird zufällig einer der Kandidaten
+ ausgewählt. Die Platzhalter werden dann mit den extrahierten Wörtern gefüllt und transformiert,
+ also grammatikalisch angepasst. Darauf folgt dann eine Antwort, die daraufhin den Nutzerinnen
+ und Nutzern präsentiert wird.
+ Obwohl ELIZA nicht tatsächlich versteht, was mit der Eingabe oder Ausgabe gemeint ist, konnte
+ es zu dieser Zeit bereits täuschend echte Gespräche führen. Es war allerdings noch weit davon
+ entfernt, den Turing-Test zu bestehen.
+ Die stark begrenzte oder gar fehlende Lernfähigkeit dieser Programme war eine große technische
+ Limitierung, die für eine lange Zeit nicht überwunden wurde.
+ Die nächsten Schritte in der Entwicklung solcher Systeme waren die in den 1970er- und 1980er-
+ Jahren aufkommenden Expertensysteme. Sie entstanden in einem Umfeld stark geförderter For-
+ schung maschineller Wissensrepräsentationen. Die hohe Nachfrage solcher Forschung kam haupt-
+ sächlich durch militärische und industrielle Problemstellungen wie XCON bei der Digital Equip-
+ ment Corporation oder MYCIN in der Medizin</div>
+<div id="Vgl. Abraham 2005, S. 10 f." class="original_text">
+ . Auch sie sind regelbasiert und symbolisch,
+ aber im Gegensatz zu ELIZA beruhen die Antworten nicht auf festgelegten Mustern, sondern auf
+ einer Wissensdatenbank. Expertensysteme sind in der Lage, mit WENN-DANN-Regeln logische
+ Schlussfolgerungen zu ziehen. Solche logischen Schlüsse werden dann miteinander verkettet, um
+ komplexe Probleme zu lösen. Darüber hinaus konnte nachvollzogen werden, wie die Ergebnisse
+ zustande kamen, denn jede logische Schlussfolgerung wurde durch die zugrunde liegenden Regeln
+ nachvollziehbar erklärt
+</div>
+<div id="Vgl. Buchanan, Smith 1988, S. 35, 38" class="original_text">
+ . Trotzdem blieb das Problem der begrenzten Lernfähigkeit bestehen
+ und mit ansteigender Komplexität der manuell angefertigten Wissensdatenbanken stieg auch die
+ benötigte Rechenleistung exponentiell an
+</div>
+<div id="Vgl. Hubert, Dreyfus 1986, S. 96, 98" class="original_text">
+ . Ein weiteres zentrales Defizit war die Unfähigkeit,
+ aus Erfahrung zu lernen, wie heutige datengetriebene Ansätze es können
+</div>
+<div id="Vgl. Danowitz et al. 2012, S. 1" class="original_text">
+ .
+ Der nächste große Schritt geschah nach der Jahrtausendwende dank einer massiven Zunahme
+ der verfügbaren Rechenleistung
+</div>
+<div id="Vgl. Danowitz et al. 2012, S. 9 ff." class="original_text">
+ . Grund für den Anstieg waren die Taktfrequenzsteigerungen
+ der Prozessoren in den frühen 2000er Jahren
+</div>
+<div id="Vgl. Hamilton 2009, S. 1 f." class="original_text">. Grund für den Anstieg waren die Taktfrequenzsteigerungen
+ der Prozessoren in den frühen 2000er Jahren sowie das Aufkommen spezialisierter Server</div>
+<div id="Vgl. Sutter, Larus 2005, S. 54 f." class="original_text">
+ .
+ Ab Mitte der 2000er Jahre ermöglichten Mehrkernprozessoren zusätzlich die Parallelisierung im
+ großen Stil
+</div>
+<div id="Vgl. Nickolls et al. 2008, S. 41-45" class="original_text">
+ . Zudem konnten mit der Vorstellung von CUDA im Jahr 2006 auch Grafikkar-
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ ten zunehmend für die Berechnung von KI-Algorithmen genutzt werden
+</div>
+<div id="Vgl. Hinton et al. 2012, S. 82 ff." class="original_text">
+ . Parallel dazu legte
+ Geoffrey Hinton mit dem Revival von Deep Neural Networks (DNNs) (tiefen neuronalen Net-
+ zen) den Grundstein für das Deep Learning
+</div>
+<div id="Vgl. Jordan, Mitchell 2015, S. 255" class="original_text">
+ , das klassische symbolische Ansätze zunehmend
+ verdrängte. Es war zudem eine Zeit, in der das Internet bereits weit verbreitet war. Zeitgleich
+ stieg die Menge an öffentlich zugänglichen digitalen Textdaten durch Foren, Wikis und andere
+ Online-Quellen, die als Trainingsdaten für KI-Modelle genutzt werden konnten, dramatisch an.
+ Durch das Internet konnte Zugriff auf große Datenmengen ohne Ortsbeschränkungen ermöglicht
+ werden, was ein enormer Erfolgsfaktor von datengetriebenen Systemen war. Dadurch erlebten die
+ 2000er Jahre einen Umstieg von symbolischer zu datengetriebener KI und markieren damit den
+ Beginn von Machine Learning als dominierenden KI-Ansatz
+</div>
+<div id="Vgl. Al-Amin et al. 2024, S. 9 ff." class="original_text">
+ . Solche Modelle konnten weitaus
+ mehr Aufgaben lösen als ihre regelbasierten Vorgänger. So konnten beispielsweise Klassifikations-
+ probleme für Texte gelöst werden oder Dialogsysteme in Call-Centern Anwendung finden. Ein
+ Resultat daraus waren Spamfilter in E-Mail-Programmen mit deutlich gesteigerter Leistungsfä-
+ higkeit. Zwar stellten diese Fortschritte einen großen Schritt in der Entwicklung dar, dennoch
+ blieben die meisten Chatbots in dieser Zeit weiterhin regelbasiert.
+ Das erklärt, warum die zu dieser Übergangszeit populären Chatbots wie Artificial Linguistic
+ Internet Computer Entity (A.L.I.C.E) und SmarterChild selbst ohne diese Fortschritte große
+ Relevanz hatten
+</div>
+<div id="Vgl. Deryugina 2010, S. 144" class="original_text">
+ .
+ Obwohl dies eine große Verbesserung darstellte, reichte es nicht aus, um Chatbots maßgeblich zu
+ verbessern. Diese arbeiteten weiterhin überwiegend regelbasiert. Ein beispielhafter Chatbot aus
+ dieser Zeit ist A.L.I.C.E. Dieser Chatbot wurde zwar im Jahr 1995 veröffentlicht, wurde aber
+ erst 1998 bis 2001 wirklich bekannt. Er gewann drei Mal den Loebner Prize, was die Popularität
+ des Systems steigerte
+</div>
+<div id="Vgl. Wallace 2009, S. 1f, 5" class="original_text">
+ . Der Loebner Prize basiert auf einer stark vereinfachten Form des Turing-
+ Tests und war ein jährlicher Wettbewerb, bei dem Chatbots gegeneinander antraten
+</div>
+<div id="Vgl. Wallace 2009, S. 1" class="original_text">
+ .
+ Der Unterschied zu früheren Systemen wie ELIZA und den Expertensystemen ist, dass A.L.I.C.E
+ durch das Internet massentauglich und Open-Source war. So konnte A.L.I.C.E von einer großen
+ Community weiterentwickelt und Experimente mit dem System durchgeführt werden
+</div>
+<div id="Vgl. Singh, Joesph, Jabbar 2019, S. 2" class="original_text">
+ . Community-
+ Entwickler konnten eigene Regeln bauen und so ganze Persönlichkeiten erschaffen, dank eines
+ eigenen XML-Dialekts, der AIML (Artificial Intelligence Markup Language). Der A.L.I.C.E-
+ Chatbot markierte den Höhepunkt der regelbasierten Chatbots
+</div>
+<div id="Vgl. Bangalore, Johnston 2003, S. 221, 224" class="original_text">
+ .
+ Das Ende der regelbasierten Systeme lässt sich mit ihrer fehlenden semantischen Tiefe begrün-
+ den. Diese Tiefe ist notwendig, um Bedeutung in Sprache angemessen zu erfassen. Aufgrund
+ dieser Einschränkung sind regelbasierte Systeme nicht in der Lage, bei komplexen Konversatio-
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ nen sinnvolle Antworten zu geben
+</div>
+<div id="Vgl. Levitan 2015" class="original_text">
+ . Aufgrund dessen stieg der Druck auf die Entwickler von
+ Chatbots, ihre Systeme weiterzuentwickeln und neue Ansätze zu finden. So gewannen ab Mitte
+ der 2000er Jahre die datengetriebenen Methoden deutlich an Bedeutung.
+ Wenige Jahre später entstanden die ersten Chatbots, die nicht ausschließlich regelbasiert ar-
+ beiteten. So hat zum Beispiel das Unternehmen ActiveBuddy (heute Colloquis) im Jahr 2001
+ den frühen Vertreter dieser Chatbots SmarterChild veröffentlicht. SmarterChild war populär auf
+ Plattformen wie dem AOL Instant Messenger und dem MSN Messenger
+</div>
+<div id="Vgl. Sultan 2022, S. 21-24" class="original_text">
+ . Neben den regelba-
+ sierten Elementen, wie sie auch bei ELIZA und A.L.I.C.E vorkommen, arbeitete SmarterChild
+ vermutlich mit einfachen heuristischen Verfahren
+</div>
+<div id="Vgl. Wetstein 2017, S. 26, 62 ff." class="original_text">
+ , die an n-gram-basierte Wahrscheinlichkeiten
+ erinnerten
+</div>
+<div id="Vgl. Al-Amin et al. 2024, S. 8f" class="original_text">
+ . Diese Methoden ermöglichten es dem System, aus einer großen Datenbank vorde-
+ finierter Antworten, die am besten passende auszuwählen — auch unter Einbeziehung des un-
+ mittelbaren Kontexts
+</div>
+<div id="Vgl. Tsikora 2023, S. 11-15" class="original_text">
+ . Dies markierte einen frühen Schritt in Richtung eines kontextsensitiven
+ Verhaltens, das als Vorläufer moderner Natural Language Processing (NLP)-Systeme betrach-
+ tet werden kann
+</div>
+<div id="Vgl. Sultan 2022, S. 8f" class="original_text">
+ . Dadurch wirkten die Antworten im Vergleich zu früheren Chatbots deutlich
+ natürlicher und dynamischer. Nennbare Schwächen sind jedoch die Unfähigkeit, ein echtes Ver-
+ ständnis der Konversation zu entwickeln, und der fehlende Erhalt des Kontexts über frühere Sätze
+ hinaus
+</div>
+<div id="Vgl. Silberling 2023" class="original_text">
+ . Trotz dieser Schwächen stellt SmarterChild einen Meilenstein in der Nutzerakzeptanz
+ dar
+</div>
+<div id="Vgl. Jampala et al. 2024, S. 1333 f." class="original_text">
+ . Auf diese etablierten Nutzergewohnheiten bauten nachfolgende Systeme wie Siri (2011)
+ und Google Now (2012) auf — die ersten virtuellen Assistenten, die auf Spracherkennung und
+ NLP basieren
+</div>
+<div id="Vgl. Canbek, Mutlu 2016, S. 596 f." class="original_text">
+ . Siri selbst entstand aus dem DARPA-finanzierten CALO-Projekt
+</div>
+<div id="Vgl. Hirschberg, Manning 2015, S. 261" class="original_text">
+ .
+ Die Grundlagen für datengetriebene, lernfähige Systeme steckten noch in den Kinderschuhen.
+ Das änderte sich mit den ersten NLP-Tools mit Machine Learning (ML)-Unterbau. Die Stanford
+ NLP Group begann ab dem Jahr 2006 mit dem Entwickeln essenzieller Tools, die bis heute
+ von bedeutender Relevanz sind
+</div>
+<div id="Vgl. The Stanford Natural Language Processing Group 2025" class="original_text">
+ . Darunter gehören Preprocessing-Tools wie dem Stanford POS
+ Tagger
+</div>
+<div id="Vgl. Moraes, Valiati, Gavião Neto 2013, S. 621 f., 624" class="original_text">
+ , dem Stanford NER (Named Entity Recognizer) sowie dem Stanford Parser (Statistical
+ Parser). Diese weit verbreiteten Open-Source NLP-Tools verhalfen zu sauberen und testbaren
+ Modellen, robusten Baselines, sowie der Vergleichbarkeit von Modellen über Datensätze hinweg.
+ Darauf folgend wurden einige wichtige Modellarchitekturen entwickelt. Bereits ab den frühen
+ 2000er Jahren kamen Support Vector Machines (SVMs) verstärkt in der Textverarbeitung zum
+ Einsatz, ab etwa 2007 dominierten sie viele Klassifikationsprobleme
+</div>
+<div id="Vgl. Naseem et al. 2021, S. 21 f." class="original_text">
+ . Obwohl das Konzept der
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ SVM schon in den 1990er Jahren entwickelt wurde, erlebte sie ihren breiten Durchbruch durch
+ die Verfügbarkeit großer Datenmengen, Rechenleistung und offene Tools. Die SVM trennt Da-
+ Datenpunkten der verschiedenen Klassen maximiert. So entsteht eine klare Definition, die Da-
+ tenpunkte einer bestimmten Klasse zuordnet. Konkret konnte diese Architektur bei Chatbots zur
+ Klassifikation des Intents (Absicht) des Nutzers (Frage, Befehl, Aussage etc.) verwendet werden.
+ Mit den aufkommenden 2010er Jahren rückten allmählich die DNNs in den Fokus der Forschung
+ und Anwendung. 2013 wurde mit der Veröffentlichung von Word2Vec durch ein Team bei Goo-
+ gle eine grundlegende Methode für die Erstellung verteilter Wortrepräsentationen eingeführt
+</div>
+<div id="Vgl. Mikolov et al. 2025, S. 2" class="original_text">
+ .
+ Damit wurde eine der zentralen Technologien für die fortlaufende Entwicklung von NLP gelegt.
+ Word2Vec bereitete den Boden für die Entwicklung von Modellen, die ein Verständnis für den
+ Kontext sowie die Bedeutung von Wörtern im Satz ermöglichen. Erstmals war es möglich, seman-
+ tische Zusammenhänge in Vektoren darzustellen. Dadurch konnte eine mathematische Modellie-
+ rung von Wörtern und deren Bedeutung erfolgen. Ein oft zitiertes Beispiel zur Veranschaulichung
+ dieses Konzepts ist: „König - Mann + Frau = Königin“
+</div>
+<div id="Vgl. Bahdanau, Cho, Bengio 2014, S. 1-4" class="original_text">
+ .
+ Darauf aufbauend entstanden weitere Embedding-Modellkonzeptionen wie GloVe (Global Vec-
+ tors for Word Representation) (2014), fastText (2016) und ELMo (Embeddings from Language
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ die Relevanz von Beziehungen zwischen Wörtern in einem Satz explizit zu gewichten. Dadurch
+ kann der Kontext über deutlich längere Sequenzen hinweg effektiv erfasst werden. Das Sequence-
+ to-Sequence (Seq2Seq)-Modell mit Attention wurde 2015 von Bahdanau et al. eingeführt
+</div>
+<div id="Vgl. Puspitaningrum 2021, S. 271 f." class="original_text">
+ . Es
+ kombiniert die Encoder-Decoder-Architektur mit einem Aufmerksamkeitsmechanismus, wodurch
+ Übersetzungen und andere sequenzielle Aufgaben deutlich verbessert wurden
+</div>
+<div id="Vgl. Vaswani et al. 2017, S. 1 f." class="original_text">
+ .
+ Die Reaktion auf den Attention-Mechanismus war die bahnbrechende Einführung des Transfor-
+ mer -Modells von Google im Jahr 2017. In der Arbeit Attention is All You Need von Vaswani
+ et al. wurde die Architektur definiert. Sie basiert auf dem Encoder-Decoder-Prinzip, verzichtet
+ dabei allerdings vollständig auf rekurrente Strukturen und nutzt anstatt dessen ausschließlich
+ Attention-Mechanismen und Feed-Forward DNNs. Das erlaubt ihnen im Gegensatz zu ihren
+ Vorgängern eine parallele Verarbeitung von Daten. Das verkürzt die Trainingszeit massiv und
+ erlaubt die Verarbeitung von größeren Datenmengen
+</div>
+<div id="Vgl. Patwardhan, Marrone, Sansone 2023, S. 1 f." class="original_text">
+ . Bis heute setzen Transformer-Modelle
+ die Messlatte für viele Bereiche des ML und insbesondere des NLP immer höher und höher
+</div>
+<div id="Vgl. Keshamoni 2023, S. 448-252" class="original_text">
+ .
+ Auf diesem Grundstein entstanden bedeutende Modelle, die die Chatbots revolutionierten. Ei-
+ nige Durchbrüche stellen die BERT (Bidirectional Encoder Representations from Transformers)
+ Architektur von Google (2018) sowie die Generative Pre-trained Transformer (GPT)-2 Archi-
+ tektur von OpenAI (2019) dar
+</div>
+<div id="Vgl. OpenAI 2025" class="original_text">
+ . Heute existieren viele Varianten von Modellen, die auf dieser
+ Transformer-Architektur beruhen, sowohl proprietär, als auch Open Source. Zum heutigen State-
+ of-the-Art Repertoire gehört das global leistungsfähigste Modell GPT-4.5 von OpenAI
+</div>
+<div id="Vgl. Anthropic 2025" class="original_text">
+ , dazu
+ Claude 3.7 Sonnet von Anthropic
+</div>
+<div id="Vgl. Google DeepMind 2025" class="original_text">
+ , Gemini 2.5 Pro Experimental von Google DeepMind
+</div>
+<div id="Vgl. Qwen 2025" class="original_text">
+ ,
+ Qwen 2.5-Max von Alibaba
+</div>
+<div id="Vgl. Meta 2025" class="original_text">,
+ Qwen 2.5-Max von Alibaba und LLaMA 4 Behemoth von Meta AI</div>
+<div id="Vgl. Zhong et al. 2024, S. 3" class="original_text">
+ .
+ Diese Modelle sind nicht nur bemerkenswert kompetent darin natürlich wirkende Gespräche zu
+ führen, sondern zeigen auch eine beachtliche Problemlösungsfähigkeit. So sind sie oftmals schon
+ in der Lage Fachexperten der Mathematik, Informatik und Naturwissenschaften in spezialisierten
+ Tests zu übertreffen
+</div>
+ . Dies verdeutlicht das Potenzial von modernen Chatbots als Assistenzsys-
+ teme in diversen Bereichen zu fungieren. Damit verändert sich unweigerlich die Art und Weise,
+ wie wir Menschen am Arbeitsplatz und im Alltag arbeiten und damit auch die Gesellschaft als
+ Ganzes.
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+<h2>2.2 Die Entwicklung von Code-Completion-Systemen im Kontext dialogorientierter KI</h2>
+<div id="Vgl. Jampala et al. 2024, S. 1333 f." class="original_text">
+ Dialogorientierte Assistenzsysteme wurden durch Siri in mobilen Apple Geräten und Google
+ Now in Android-Geräten erstmals flächendeckend eingesetzt. Beide nutzten zunächst einfache
+ NLP-Architekturen und regelbasierte Algorithmen, um Antworten auf Anfragen zu generieren
+ oder bestimmte Aktionen auszuführen
+</div>
+<div id="Vgl. Canbek, Mutlu 2016, S. 598 f." class="original_text">
+ . Ihre Fähigkeiten waren jedoch durch die vordefinierten
+ Aktionsmöglichkeiten beschränkt. Sie waren damit nur wirklich hilfreich, um die Bedienung des
+ Geräts selbst zu erleichtern oder einfache Fragen zu beantworten. Bei komplexeren Aufgaben
+ konnten diese Systeme keine Hilfe leisten, weshalb sie noch nicht als wirklich intelligent ange-
+ sehen werden konnten. Dass es sich um eine Maschine handelt, wird bei der Benutzung schnell
+ deutlich
+</div>
+<div id="Vgl. Schmidt, Alt, Zimmermann 2021, S. 4026-4030" class="original_text">
+ .
+ Aufgrund der vielen Umfelder, in denen solche Assistenzsysteme theoretisch eingesetzt werden
+ könnten, liegt es nahe, dass es nicht unbedingt sinnvoll ist, ein System für alle Bereiche zu
+ entwickeln. Vielmehr könnte es hilfreich sein, ein System für eine spezifische Aufgabendomäne
+ zu entwickeln, sodass mehr Fachwissen, Aktionsmöglichkeiten und Integration in bestehende
+ Systeme möglich ist
+</div>
+<div id="Vgl. Melo et al. 2020, S. 1, 7" class="original_text">
+ .
+ Im Bereich der Softwareentwicklung stellen allgemeine Chatbots bereits eine ideale Grundlage
+ dar, da sie mittlerweile in der Lage sind, Kontext hinter den Wörtern der Anfrage zu erkennen
+ und zu verstehen
+</div>
+<div id="Vgl. Maletic, Marcus 2001, S. 103" class="original_text">
+ . Diese Fähigkeit ist zentral in einem logikbasierten Bereich wie der Softwa-
+ reentwicklung. Ein präzises Verständnis von Projektstrukturen, Syntax und Semantik sind in
+ diesem Fall unverzichtbar
+</div>
+<div id="Vgl. Daniel Ajiga et al. 2024, S. 1897 ff." class="original_text">
+ . Allerdings besteht dennoch das Problem, dass diese Systeme nicht
+ fokussiert auf technische Kontexte trainiert wurden.
+ Das Potenzial solcher spezialisierten KI-gestützter Systeme für Entwickler haben Unternehmen
+ längst erkannt
+</div>
+<div id="Vgl. Hassan 2024, S. 12-14" class="original_text">
+ . Es liegt schließlich im Interesse von IT-Unternehmen, die Effizienz des Ent-
+ wicklungsprozesses zu maximieren, um so Ressourcen zu sparen und gleichzeitig die Qualität
+ durch Automatisierung alltäglicher Aufgaben zu verbessern. Eine erste Demonstration dieses
+ Potenzials in der Praxis waren diverse Tools wie Kite und TabNine
+</div>
+<div id="Vgl. Dewey 2024, S. 10" class="original_text">
+ . Im Gegensatz zu allge-
+ mein trainierten Chatbots, wurden diese Modelle gezielt auf Programmierdaten und typische
+ Softwareentwicklungsprobleme trainiert. Sie sind außerdem nicht wie Chatbots für den Dialog
+ konzipiert, sondern für die Vervollständigung von Code am Cursor in einer IDE.
+ Diese Schritte der Spezialisierung markieren einen Paradigmenwechsel. Der erfolgte Wandel dieser
+ Systeme wurde insbesondere durch die Auffassungsgabe der Transformer-Architektur ins Rollen
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ gebracht
+</div>
+<div id="Vgl. Kantek 2023, S. 26, 31 f." class="original_text">
+ . Ein solches Beispiel stellt GitHub Copilot dar, dem heutigen State-of-the-Art Code-
+ Completion-System. Dahinter steckt die sogenannte Codex -Architektur, die wiederum auf dem
+ GPT-3 Modell von OpenAI basiert
+</div>
+<div id="Vgl. Lajko et al. 2024, S. 34-37" class="original_text">
+ .
+ Die genannten frühen Code-Completion-Systeme basierten auf domänenspezifischen Trainingsda-
+ ten, doch ihre Leistung blieb trotzdem hinter den Erwartungen zurück. Transformer-basierte Mo-
+ delle dagegen erfüllen die Anforderungen deutlich besser. Die Idee des Einsatzes der Transformer-
+ Architektur ergab sich daraus, dass OpenAIs GPT-2 und GPT-3 Modelle auffällig gut darin
+ waren, nicht nur natürliche Sprache zu verarbeiten, sondern auch Code zu generieren
+</div>
+<div id="Vgl. Savelka et al. 2023, S. 2, 10" class="original_text">
+ . Doch
+ es fehlte noch die Tiefe für das Verständnis von Code, sodass dieser sowohl logisch sinnvoll, als
+ auch syntaktisch korrekt ist
+</div>
+<div id="Vgl. Lomshakov et al. 2023, S. 171 f." class="original_text">
+ .
+ Im Jahr 2021 wurde auf GPT-3 ein Fine-Tuning mit GitHub-Repositories durchgeführt und das
+ Modell Codex geboren. Es ist gleichzeitig in der Lage natürliche Sprache und Code zu verstehen
+</div>
+<div id="Vgl. Tipirneni, Zhu, Reddy 2022, S. 2" class="original_text">
+ .
+ Für die Softwareentwicklung stellte dies einen Quantensprung dar.
+ Es ist außerdem zu bemerken, dass sich die Transformer-Architektur oft sogar besser für Code
+ eignet als für natürliche Sprache. Das entspringt der deterministischen Natur von Code, die feste
+ Regeln und standardisierte Strukturen und Benennungen vorgibt
+</div>
+<div id="Vgl. Tipirneni, Zhu, Reddy 2022, S. 8" class="original_text">
+ . Transformer arbeiten nach
+ dem „Next-Token-Prediction“-Prinzip, weshalb diese Deterministik ideal ist
+</div>
+<div id="Vgl. Abdellatif et al. 2022, S. 3087 ff." class="original_text">
+ .
+ Obwohl sich Chatbots und Code-Completion-Systeme in vielen Aspekten ähneln und z. T. auf
+ den gleichen Technologien basieren, sind Code-Completion-Systeme keine bloße Variation von
+ Chatbots. Da sich die Anforderungen, Einsatzstrategie, Interaktionsmuster, sowie der Kontext
+ grundlegend unterscheiden, ist es angebracht, sie als eine eigenständige Kategorie einzustufen
+</div>
+<div id="Vgl. Smutny, Bojko 2024, S. 4" class="original_text">
+ .
+ Chatbots arbeiten in der Regel mit kurzen Dialogen, während es bei Code-Completion-Systemen
+ nicht nur auf die aktuelle Zeile ankommt, sondern meistens auf das gesamte Dokument oder
+ sogar das gesamte Projekt. Jedoch sind Projekte oft sehr groß und vielschichtig. Das erhebt
+ den Anspruch des Systems, ein Code-Search-Tool zu haben, das z. B. mithilfe von Indexierung
+ der IDE den gesamten Code analysiert und die aktuelle Relevanz verschiedener Dokumente und
+ Codeabschnitte festzulegen
+</div>
+<div id="Vgl. Blinn et al. 2024, S. 468 ff." class="original_text">
+ .
+ Code-Completion-Systeme müssen außerdem mit einer großen Menge an statischem Kontext
+ auskommen. Darunter zählen geregelte Strukturen wie Importe oder projektweite Variablen-
+ und Funktionsnamen oder -definitionen
+</div>
+<div id="Vgl. Pinto et al. 2024, S. 82 f." class="original_text">
+ .
+ Bei Code-Completion-Systemen spielt die Reaktionszeit eine wichtige Rolle für das Nutzerinnen-
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ und Nutzererlebnis. Softwareentwicklerinnen und -entwickler sollen in ihrem Workflow nicht
+ durch lange Wartezeiten gestört werden. Für die Akzeptanz des Sytems ist die Reaktionszeit
+ folglich bedeutend wichtiger als bei Chatbots, bei denen oft noch während der Generierung der
+ Antwort mit dem Lesen begonnen werden kann
+</div>
+<div id="Vgl. Desolda et al. 2025, S. 7" class="original_text">
+ .
+ Durch die Integration in IDEs kommen andere Prompts zustande als bei Chatbots, beispiels-
+ weise wird die Cursorposition eingespeist
+</div>
+<div id="Vgl. Li, Youjia, Shi, Zhang, Z. 2024, S. 53078" class="original_text">
+ . Die Prompts sind außerdem keine klar formulierten
+ Texte, sondern lediglich Bruchstücke von Code und unter Umständen mitten in einem syntakti-
+ schen Ausdruck. Auf diese Prompts muss das System gezielt ausgerichtet werden, um sinnvolle
+ Vorschläge zu generieren
+</div>
+<div id="Vgl. Desolda et al. 2025, S. 12-16" class="original_text">
+ .
+ Entwickler und Entwicklerinnen benötigen jedoch nicht nur Code-Vervollständigung, sondern
+ auch Erklärungen und Hilfestellungen. Aus diesem Grund ist es sinnvoll, sowohl Code-Completion-
+ Systeme als auch Chatbots in einem System zu vereinen. Somit entsteht ein hybrides System mit
+ maximalem Kundennutzen
+</div>
+<div id="Vgl. Kantek 2023, S. 31" class="original_text">
+ . Um eine solche hybride Lösung bereitzustellen, benötigt es eine
+ Plattform, die in die IDE integriert werden kann und als Schnittstelle zwischen dem Nutzer und
+ den Modellen fungiert. Es muss in der Lage sein, für beide Modelltypen passende Oberflächen
+ und Funktionalitäten bereitzustellen.
+ Das bis heute leistungsfähigste und populärste Code-Completion-System ist GitHub Copilot.
+ Gleichzeitig ist es aber auch das System, das überhaupt erst für den Durchbruch von Code-
+ Completion-Systemen gesorgt hat. Seine Veröffentlichung im Jahr 2021 beinhaltete eine Kombi-
+ nation des Codex -Modells und einer engen Integration in die Visual Studio Code IDE
+</div>
+<div id="Vgl. Szolderits 2025, S. 23 ff." class="original_text">
+ . Es ist
+ damit nicht nur architekturbedingt leistungsstark, sondern bietet auch die Fähigkeit, in Echtzeit
+ kontextrelevante Vervollständigungen vorzuschlagen. Damit wurde die Messlatte erheblich höher
+ gelegt und der Standard für sämtliche Akzeptanzkriterien wie der Usability oder dem Komfort
+ in der Nutzung gesetzt
+</div>
+<div id="Vgl. Li, Yujia et al. 2022, S. 1 f." class="original_text">
+ .
+ Ein Jahr später demonstrierte Google DeepMind mit ihrem Modell AlphaCode, dass generative
+ Modelle hohe Kompetenz für einfache Codevervollständigungen ausweisen, viel wichtiger aber
+ darüber hinaus auch komplexe algorithmische Aufgaben lösen können
+</div>
+<div id="Vgl. Zhang, M. et al. 2024, S. 297" class="original_text">
+ .
+ Darauf folgten einige Open-Source-Projekte, die es ermöglichten, die zugrunde liegende Techno-
+ logie für die Allgemeinheit zugänglicher zu machen. Somit entstand ein Gegengewicht zu den
+ proprietären Lösungen, die von großen Unternehmen wie Microsoft und Google angeboten wer-
+ den. Heute findet sich auf Plattformen wie HuggingFace eine breite Palette an ML-Modellen aller
+ Art, darunter auch viele Code-Completion-Systeme. So ist es möglich völlig ohne eine Angewie-
+ senheit auf Cloud-Services Code-Completion-Systeme entweder privat oder im Unternehmen zu
+ betreiben.
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ Mit der Zeit verbesserten sich insbesondere zwei Aspekte. Der erste ist die Integration in ver-
+ schiedene IDEs. Somit ist es heute egal, ob nun mit Jetbrains IntelliJ, Visual Studio Code oder
+ einer anderen IDE gearbeitet wird. Die Plattformen werden zunehmend generalisiert, sodass sie
+ in alle gängigen IDEs integriert werden können
+</div>
+ . Die funktionalen Unterschiede sollten dabei
+ möglichst gering bleiben. Das heißt in der Praxis, dass beispielsweise in JetBrains IntelliJ und
+ Visual Studio Code identische Funktionalitäten erwarten werden können. Der zweite Aspekt ist
+ die Optimierung der Reaktionszeit die z. B. durch technische Fortschritte im Caching, Streaming
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+<h2>2.3 Marktanforderungen und Bedarfe von Unternehmen an moderne Code-Completion-Systeme</h2>
+<div id="Vgl. Gao 2023, S. 233 f." class="original_text">
+ Der Markt ist ständig im Wandel, damit auch seine Anforderungen und die Bedürfnisse seiner
+ Akteure. Zu den Beginnen der Code-Completion stand vor allem die Vermeidung von Syntax-
+ fehlern und die Verbesserung des Komforts beim Schreiben von Code im Vordergrund. Dafür
+ reichten simple Modelle auf statistischer Basis aus. Einfache Vervollständigungen von Methoden
+ und Variablen waren möglich, die Entwicklung dieser war dennoch federführend vom Entwickler
+ abhängig. Lösungen wie IntelliSense erfüllten zunächst diese Anforderungen, insofern die Ent-
+ wickler mit Microsoft Visual Studio arbeiteten
+</div>
+<div id="Vgl. Annepaka, Pakray 2025, S. 2977 f., 3010" class="original_text">
+ . Doch immer deutlicher wurde, dass das nur die
+ Spitze des Eisbergs war. Vielmehr geht es darum, einen wirtschaftlichen Erfolg zu erzielen durch
+ eine Produktivitätssteigerung der Entwickler.
+ Als jedoch klar wurde, dass mit der Transformer-Architektur weitaus mehr möglich ist, als nur
+ einfache Syntaxhilfe, sondern dass sogar komplexe Aufgaben teilautonom gelöst werden kön-
+ nen
+</div>
+<div id="Vgl. Annepaka, Pakray 2025, S. 2971 f." class="original_text">
+ , erhob sich die Erwartungshaltung des Marktes drastisch
+</div>
+<div id="Vgl. Choi, Chang 2025, S. 1 f." class="original_text">
+ . Immer mehr Unternehmen
+ haben allerdings auch damit einhergehende Datenschutzbedenken. Viele der leistungsstarken
+ Modelle auf dem Markt sind proprietär oder Cloud-Services
+</div>
+<div id="Vgl. Choi, Chang 2025, S. 2 f." class="original_text">
+ . Code wird aber in der Regel als
+ vertrauliche Information behandelt, die nicht ohne klare vertragliche Regelungen in die Hände
+ Dritter gegeben werden kann. Als Alternative suchen sich daher viele Unternehmen Modelle, die
+ sie im eigenen Rechenzentrum betreiben können. Daten sollen so nicht abgegeben werden und es
+ kann volle Kontrolle über den Informationsfluss und Einstellungen gewährleistet werden
+</div>
+<div id="Vgl. Annepaka, Pakray 2025, S. 3001" class="original_text">
+ .
+ Heute wird oben drauf gefordert, dass Code-Completion-Systeme diese fehlerfreien und sinnvol-
+ len Vorschläge in kürzester Zeit generieren und den Nutzerinnen und Nutzern demonstrieren.
+ Idealerweise soll das innerhalb von Sekundenbruchteilen geschehen, sodass der Schreibfluss der
+ Entwicklerinnen und Entwickler nicht gestört wird.
+ Es gibt einige Branchen mit besonderem Anliegen an Datenschutz und Compliance. Zu solchen
+ hochregulierten Branchen gehören z. B. die Banken- und Versicherungsbranche. Ein Datenleck
+ hätte in diesen nicht nur negative Auswirkungen für das Unternehmen, sondern auch für die
+ Kundinnen und Kunden
+</div>
+<div id="Vgl. Geng 2023, S. 3" class="original_text">
+ . Damit das nicht passiert drängt es nach Nachvollziehbarkeit der
+ Systeme und nach maximaler Systemkontrolle. On-Premise und Private-Cloud Lösungen werden
+ deshalb von diesen Unternehmen bevorzugt, mit denen alle Datenflüsse genau beobachtet und
+ damit transparent werden können
+</div>
+<div id="Vgl. Souza et al. 2024, S. 499 f." class="original_text">
+ .
+ Ein weiterer relevanter Faktor für die Nachfrage an effektiven und effizienten Code-Completion-
+ Systemen ist die aktuelle Lage am Arbeitsmarkt. Die Arbeitsmenge in der Softwareentwicklung
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ steigt ohne Halt, kann aber nicht ausreichend von neuen, qualifizierten Softwareentwicklern und
+ -entwicklerinnen bedient werden
+</div>
+<div id="Vgl. Hassan 2024, S. 15 ff." class="original_text">
+ . Das zwingt die Unternehmen, stattdessen die Mitarbeiter-
+ produktivität statt der Mitarbeiteranzahl zu erhöhen. Solche Systeme tragen maßgeblich dazu
+ bei, dieses Ziel zu erreichen, indem sie Zeit sparen und Anfängern dieses Berufsfeldes in ihrem
+ Lernprozess unterstützen
+</div>
+<div id="Vgl. Celia Dolores Benitez, Montes Serrano 2024, S. 284-287" class="original_text">
+ .
+ Zudem ist es wichtig, dass die verwendeten Plattformen einfach wartbar sind und deployed werden
+ können. Das gilt für alle gängigen Infrastrukturen, etwa containerbasierten Infrastrukturen, mit
+ denen eine zentrale Verwaltung und Skalierung erlaubt wird. Wird schließlich das Unternehmen
+ größer, wächst die Anzahl der Nutzerinnen und Nutzer des Systems, so muss auf die wachsende
+ Nachfrage problemlos reagiert werden können.
+ Insgesamt liegen die Anforderungen des Marktes folglich auf funktionalen Aspekten, wie der
+ Geschwindigkeit und Qualität der Modelle, den rechtlichen und organisatorischen Aspekten der
+ Plattformen, sowie der Integration in Softwareentwicklungsprozesse
+</div>
+ .
+ In dieser Arbeit bilden die Anforderungen des Marktes die Grundlage für die Entscheidungsfin-
+ dung und die Analyse von Plattformen, Modellen, dem Ist- sowie dem Soll-Zustand.
+<h2>2.4 Technologische Trends im Kontext von Code Completion</h2>
+<div id="Vgl. Vake et al. 2025, S. 1-3" class="original_text">
+ In diesem Abschnitt wird genauer untersucht, welche technologischen Trends am aktuellen Markt
+ und in der Forschung zu beobachten sind. Es werden dazu wichtige Fortschritte bei den Code-
+ Completion-Modellen selbst betrachtet, darüber hinaus aber auch deren Integration in bestehen-
+ de Systeme, Personalisierungsmöglichkeiten und weitere Aspekte wie die Ethik. Diese werden im
+ Zusammenhang mit ihren Implikationen für die Entwicklerproduktivität analysiert.
+ Wie sich aus der Historie der Code-Completion-Systeme ableiten lässt (siehe Abschnitt 2.2 Die
+ Entwicklung von Code-Completion-Systemen im Kontext dialogorientierter KI), haben sich Lar-
+ ge Language Models (LLMs), die auf großen Mengen an Code trainiert wurden, als besonders
+ leistungsfähig erwiesen. Sie können heute geschriebenen Code verstehen und Code-Schnipsel,
+ Zeilen oder gar ganze Funktionen vervollständigen.
+ Was zunächst klar wird, ist der immer weitergehende Trend von proprietären zu Open-Source-
+ Modellen. Durch die Natur von Open-Source-Modellen werden diese von einer breiten Masse an
+ Entwicklern und Entwicklerinnen manipuliert und sogar weiterentwickelt. Damit wird eine kon-
+ tinuierliche Verbesserung der KI-Kernmodelle sichergestellt und durch Experimente werden neue
+ Wege der Nutzung und Integration gefunden
+</div>
+<div id="Vgl. Rautiainen 2023, S. 6-13" class="original_text">
+ . Ein wichtiger Trend ist heute nicht nur die In-
+ tegration in die IDE allein, sondern in das gesamte Ökosystem der Softwareentwicklung. So wird
+ die Integration mit anderen Entwicklungswerkzeugen sowie -plattformen immer nahtloser und
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ tiefer. Darunter gehört unter anderem die Integration mit Git oder anderen Versionierungssys-
+ temen, sowie mit Continuous Integration/Continuous Delivery (CI/CD) Pipelines
+</div>
+<div id="Vgl. For Good AI Inc. 2025" class="original_text">
+ . Ein gutes
+ Beispiel für ein tiefes Level der Integration mit dem gesamten Ökosystem ist Zencoder. Es kann
+ weitere Aufgaben übernehmen als nur die Vervollständigung von Code. Unter diesen Aufgaben
+ fallen das Management von Unit Tests, Reviews und Feedback zum Code (Sicherheit, Qualität,
+ Best-Practices), sowie die Docstring-Generierung und die Websuche. Das Tool ist außerdem tief
+ mit Jira integriert, sodass die Codebase direkt mit den Tickets verknüpft werden kann, die Jira
+ verwaltet
+</div>
+<div id="Vgl. tabnine 2025" class="original_text">
+ . Somit kann KI in den gesamten Workflow der Entwickler und Entwicklerinnen inte-
+ griert werden und positive Einflüsse auf die Entwicklerproduktivität, aber auch auf die Developer
+ Experience (DX) haben.
+ Genau so individuell wie einzelne Entwickler und Entwicklerinnen, Abteilungen oder ganze Un-
+ ternehmen in ihrem Codierungsstil sind, so facettenreich sind auch die dementsprechenden An-
+ forderungen an die Code-Completion-Systeme, sich an den Codierungsstil und die Präferenzen
+ der Nutzerinnen und Nutzer anzupassen. Die Modelle lernen zu verstehen, welche Muster und
+ Konventionen in einem Projekt zu finden sind und verändern ihre Vorschläge dementsprechend.
+ So können die Vorschläge nicht nur syntaktisch qualitativ hochwertig sein, sondern auch im
+ stilistischen Sinne konsistent mit dem bestehenden Code sein. Diese Anpassung führt zu einer
+ höheren Akzeptanz der Vorschläge. Um diese Lernfähigkeit zu ermöglichen, bieten verschiedene
+ Tools wie z. B. Tabnine das Feature an, ein lokales Training der eingesetzten Modelle auf Basis
+ der eigenen Codebase durchzuführen
+</div>
+<div id="Vgl. Liang et al. 2024, S. 1 ff." class="original_text">
+ .
+ Durch Technologien wie Retrieval-Augmented Generation (RAG) können darüber hinaus immer
+ besser kontextbezogene Vorschläge generiert werden. Das funktioniert, indem das System das ge-
+ samte Projekt analysiert und auf Basis der aktuellen Cursorposition die Relevanz verschiedener
+ Dokumente und Codeabschnitte festlegt
+</div>
+<div id="Vgl. Oyekunle Claudius Oyeniran et al. 2022, S. 115-118" class="original_text">
+ . Mit der Zeit finden Entwickler und Entwicklerin-
+ nen solcher Systeme immer bessere Möglichkeiten, um die Genauigkeit solcher Algorithmen zu
+ erhöhen.
+ Ein fundamentales Problem, das sich über das gesamte Gebiet der KI zieht, ist die Verzerrung
+ (Bias) in den Modellen. Problematisch daran ist, dass diese zu Diskriminierung, Vorurteilen
+ oder unwissenschaftlichen Ergebnissen führen können. Letzteres ist besonders kritisch im Bereich
+ der Softwareentwicklung
+</div>
+<div id="Vgl. Stalnaker et al. 2025, S. 25 f." class="original_text">
+ . Um Verzerrungen zu erkennen und einzudämmen, wird zunehmend
+ Forschung betrieben und neue Technologien entwickelt.
+ Umstritten ist ebenfalls die Frage nach geistigem Eigentum. Da Code-Completion-Systeme auf
+ öffentlich verfügbaren Codedaten trainiert werden, kann nicht ausgeschlossen werden, dass einige
+ vom System generierten Code direkte Kopien von diesen Daten sind
+</div>
+<div id="Vgl. Stalnaker et al. 2025, S. 3 f., 31–33" class="original_text">
+ . Es fehlt dabei jede Infor-
+ mation zur Lizensierung und damit auch zur Erlaubnis der Nutzung. Sollte es dazu kommen, dass
+ 2 Marktentwicklung und technologische Trends von Chatbots und Code-Completion-Systemen
+ Code ohne eine solche Erlaubnis wiederverwendet wird, kann das ernste rechtliche Konsequenzen
+ mit sich ziehen, was für Unternehmen ein großes Risiko darstellt
+</div>
+<div id="Vgl. Liao 2025" class="original_text">
+ . Daher drängen Unternehmen
+ mit großem Interesse nach Tools oder Modellen, die im Vorfeld oder nachträglich solche Risiken
+ vermeiden können. Für dieses Vorhaben werden klare Richtlinien und Best-Practices etabliert,
+ sodass eine rechtliche Absicherung kontrolliert werden kann. Dieses Problem löst beispielsweise
+ GitHub Copilot mit seinem Code Referencing Feature. Hierbei werden bei Vorschlägen gleich
+ die Quellen angegeben und erwähnt, dass der entsprechende Code aus öffentlich zugänglichen
+ Repositories stammt
+</div>
+<div id="Vgl. Acharya, Kuppan, Divya 2025, S. 18912" class="original_text">
+ .
+ Beim Betrachten der Entwicklung in der heutigen Zeit, ist ein deutlicher Trend zu „Agentic AI“
+ (Agentischer KI) erkennbar. Das bedeutet einen Wandel von passiver Unterstützung zu aktiver
+ Mitarbeit und -gestaltung bei komplexen Entwicklungsaufgaben
+</div>
+<div id="Vgl. Isidor and the VS Code team 2025" class="original_text">
+ . Exemplarisch experimentiert
+ GitHub Copilot mit einem „Agentenmodus“, in dem das System die Codebase selbstständig ana-
+ lysiert, relevante Dokumente liest, sie editiert und sogar mit dem Terminal und Test interagiert.
+ Ausgehend davon, kann es auf Kompilierfehler und Informationen von Linting-Tools reagieren
+ und den Code entsprechend iterativ anpassen, bis die Aufgabe fehlerfrei abgeschlossen ist. Ge-
+ plant sind für die Zukunft weitere Funktionalitäten wie unter anderem die Fähigkeit bestimmte
+ Änderungen rückgängig zu machen oder Erweiterungen zu installieren.
+</div>
+<div id="Vgl. Wu et al. 2022, S. 368 f." class="original_text">
+ .
+ Nicht nur sollen Modelle extern fortlaufend verbessert werden, sondern auch intern durch mensch-
+ liches Feedback der Nutzerinnen und Nutzer. Deswegen wird heutzutage ein Feedback-Loop ein-
+ gebaut, sodass die Modelle aus der Projekthistorie und deren Einfluss auf den Code lernen kön-
+ nen
+</div>
+ . Von Nutzerinnen und Nutzern werden dazu Code-Reviews abgegeben und so spezifische
+ Bedürfnisse erfasst.
+ Zusammenfassend ergibt sich aus der Recherche heutiger Entwicklungen und Trends, dass nicht
+ nur ein passiver Unterstützer, sondern ein aktiver Partner bei der Softwareentwicklung angestrebt
+ wird. Das führt jedoch zu mehr Verantwortung und damit auch zu mehr Aufmerksamkeit und
+ Sorgfalt bei der Entwicklung und Nutzung solcher Systeme.
+<h1>3 Relevanz und Zielgruppen von Code-Completion-Systemen</h1>
+<h2>3.1 Relevanz in der heutigen Softwareentwicklung</h2>
+<div id="Vgl. Solanke 2024, S. 234 f., 245" class="original_text">
+ Besonders in den vergangenen Jahren, mit dem Boom der Transformer-Modelle, hat sich durch
+ den Durchbruch zunächst die Code-Completion als „nice-to-have“ etabliert. Inzwischen ist jedoch
+ klar, dass sie keineswegs mehr nur eine nette Spielerei darstellt, sondern in den Vordergrund der
+ Anforderungen von Unternehmen sowie Entwicklerinnen und Entwicklern gerückt ist. Es wandelt
+ sich regelrecht die Rolle der oder des Entwickelnden selbst — weg vom Tippen und immer mehr
+ zum Orchestrieren der Softwareentwicklung. Von der Code-Completion werden zum Teil schon
+ heute Routineaufgaben übernommen; es wird die Qualität und Effizienz der Softwareentwicklung
+ verbessert und der Entwickler oder die Entwicklerin konzentriert sich mehr auf die kreativen und
+ komplexen Aufgaben. Durch die Automatisierung repetitiver Aufgaben und im Hinblick auf den
+ Fachkräftemangel werden Code-Completion-Systeme daher unentbehrlich. Unternehmen, die die-
+ se Technologie nicht einsetzen, könnten voraussichtlich im Wettbewerb des Marktes zurückfallen.
+ Hinzu kommt, dass die Softwareentwicklung mit der Zeit nur komplexer und umfangreicher wird,
+ was für einzelne Entwickler und Entwicklerinnen nicht mehr allein zu bewältigen ist. Für eine
+ einzelne entwickelnde Person ist es nicht länger tragbar, dieses Volumen an Wissen zu beherr-
+ schen und bewältigen
+</div>
+ . Code-Completion ist somit ein „must-have“ in modernen Projekten und
+ IT-Unternehmen.
+<h2>3.2 Potenziale für Unternehmen</h2>
+<div id="Vgl. Nettur et al. 2025, S. 6 ff." class="original_text">
+ Wie bereits im vorangegangenen Abschnitt beschrieben, leisten Code-Completion-Systeme einen
+ entscheidenden Beitrag zur Steigerung der Produktivität und Codequalität, indem sie Routi-
+ neaufgaben übernehmen und sich an den Trainingsdaten orientieren, wodurch gängige Coding
+ Conventions, sichere Bibliotheken und Best Practices berücksichtigt werden. Insbesondere bei
+ der Einhaltung von Sicherheitsstandards, sowie beim Wissens- und Dokumentationsmanagement
+ bieten solche Systeme einen signifikanten Mehrwert
+</div>
+<div id="Vgl. Li, Yichen et al. 2024, S. 72 f." class="original_text">
+ . Gegebenenfalls können nachträglich auch
+ Fine-Tunings des Codes mit spezifischen Secure-Coding-Standards durchgeführt werden. So wird
+ die Codequalität zusätzlich erhöht. Bei komplexen Plattformen ist es auch denkbar, das verwen-
+ dete Linter-System in die Code-Completion zu integrieren. Das führt zu Echtzeit-Feedback, das
+ in die Vorschläge einfließt
+</div>
+<div id="Vgl. Pettersson 2025, S. 18 f., 47" class="original_text">
+ .
+ Die Entwicklerproduktivität wird außerdem durch eine schnellere Einarbeitung in neue Themen
+ und Technologien erhöht. Das System agiert hierbei als Orientierungshilfe, die in komplexen
+ 3 Relevanz und Zielgruppen von Code-Completion-Systemen
+ Gebieten einen besonderen Mehrwert bietet. Menschliche Fehler wie Tippfehler, Syntaxfehler
+ oder Leichtsinnsfehler werden vom System nicht gemacht, da sich diese nicht oder kaum in den
+ Trainingsdaten wiederfinden. Zeitaufwendige Fehlersuchen und Debuggings werden so massiv
+ reduziert.
+ Nicht zu vernachlässigen ist auch der Nutzen für das Unternehmen durch erhöhte Mitarbeiter-
+ zufriedenheit, die mit einem guten Code-Completion-System einhergeht
+</div>
+ . Es ist zu erwarten,
+ dass diese Technologie zum Standard in der Branche wird; Unternehmen ohne ein solches System
+ werden einen negativen Eindruck auf potenzielle und bestehende Mitarbeiter hinterlassen.
+<h2>3.3 Zielgruppen und Einsatzkontexte</h2>
+<div id="Vgl. Podduturi 2025, S. 2 ff." class="original_text">
+ Eine Vielzahl an Gruppen kann an der Einführung eines Code-Completion-Systems interessiert
+ sein. Entwickler und Entwicklerinnen, die die tatsächlichen Anwenderinnen und Anwender eines
+ solchen System sind, profitieren wohl am meisten durch die Erleichterung ihrer eigenen Arbeit.
+ Unter ihnen befinden sich auch Junior-Entwickler und -Entwicklerinnen sowie Auszubildende,
+ die mithilfe der Vervollständigungen die Grundlagen des Programmierens erlernen können. Z.
+ B. wird der Syntax und die miteingehende Semantik der Programmiersprache vermittelt, sodass
+ sie schnell eingeprägt werden können. Durch die vielen Vorschläge, die sie im Laufe ihres Ein-
+ satzes sehen, erhalten Anfängerinnen und Anfänger auch eine große Hilfe beim Einstieg in die
+ lösungsbasierte Denkweise eines Entwickler oder einer Entwicklerin.
+ Das DevOps Mindset, das seit den 2010er Jahren immer fester in den Alltag der Entwickler
+ und Entwicklerinnen eingebaut wird, wird ebenfalls von diesen Systemen unterstützt. Das ge-
+ schieht, indem Automatisierungsskripte und automatisierte Tests schneller und zuverlässiger er-
+ stellt werden können. So erhöht sich die Testabdeckung und die Geschwindigkeit des gesamten
+ Deployment-Prozesses.
+ Wurde ein bestimmter Code committed, so ist es in modernen Unternehmen üblich, dass mindes-
+ tens eine weitere Person den eingereichten Code überprüft. Das wird auch Code Review genannt.
+ Diejenigen, die den Code überprüfen, könnten mithilfe eines Code-Completion-Systems in ihrer
+ Genauigkeit und ihrem Verständnis des Codes unterstützt werden. So werden möglicherweise
+ auch Fehler oder Schwächen entdeckt, die für das menschliche Auge unscheinbar oder nicht er-
+ kennbar sind. Davon profitieren insbesondere Branchen mit hohen Sicherheitsanforderungen, wie
+ in diesem Fall die Sparkassen.
+ Ein weiterer Einsatzkontext ist die Migration von alten Systemen auf moderne Infrastruktu-
+ ren und Technologien, sowie deren Refactoring. Als Beispiel kann genannt werden, dass oftmals
+ alte Programmiersprachen wie COBOL oder Fortran in alten Systemen genutzt werden, die
+ heutzutage nur noch wenige Entwickler und Entwicklerinnen beherrschen und bei welchen die
+ Dokumentation oftmals vollständig fehlt oder minimal eingeführt wurde
+</div>
+ . Unter den jungen
+ 3 Relevanz und Zielgruppen von Code-Completion-Systemen
+ Kollegen und Kolleginnen ist es nicht länger üblich, solche Sprachen überhaupt zu erlernen und
+ die spezifische Ausbildung zu solchen Sprachen könnte ein großer Kostenfaktor für Unternehmen
+ sein. Mit solchen Systemen können jedoch alle in der Lage sein, auch diesen alten Code zu verste-
+ hen und in einen neuen Kontext zu übersetzen. Gleichzeitig wird aufgeführt, wie die veralteten
+ Strukturen, Muster etc. heute umgesetzt werden würden.
+ Das gleiche Prinzip kann auch für modernen Code angewendet werden, jedoch von neuen Team-
+ mitgliedern, die sich in die bestehende Codebasis einarbeiten müssen. Sie sparen sich so viel
+ Zeit und sie vermeiden eventuell auftretende Interpretationsfehler, die beim Menschen natürlich
+ vorkommen können. Die Kollegen und Kolleginnen müssen auch weniger Zeit für Onboarding-
+ Prozesse aufwenden. Fachspezifisches und kontextspezifisches Wissen kann einfacher und zeitef-
+ fizienter innerhalb des Teams propagiert werden. Darunter z. B. regulatorische und interne Stan-
+ dards, die eingehalten werden sollen.
+ 23
+<h1>4 Datenschutz, regulatorische und rechtliche Aspekte</h1>
+ Das Kapitel Datenschutz, regulatorische und rechtliche Aspekte beschäftigt sich mit relevanten
+ Datenschutzaspekten, sowie rechtlichen Vorgaben, die für IT-Dienstleister im Umgang mit per-
+ sonenbezogenen Daten von Bedeutung sind. Es wird erläutert, welche Rahmenbedingungen für
+ herkömmliche IT-Dienstleister gelten und welche spezifischen Anforderungen im Umgang mit
+ Kunden des öffentlichen Sektors gelten.
+<h2>4.1 Einleitung und Problemaufriss</h2>
+<div id="Vgl. Qazi 2022, S. 1-5" class="original_text">
+ Das Thema Datenschutz ist zentral bei Code-Completion-Systemen. Das liegt daran, dass Pro-
+ duktivcode direkt extrahiert und an das System übertragen wird, wo er dann weiterverarbeitet
+ wird. Quellcode beinhaltet eine Reihe sensibler Informationen wie z. B. interne Schnittstellen,
+ die Geschäftslogik, Zugangsdaten oder spezifische Konfigurationen und Application Program-
+ ming Interface (API)-Schlüssel
+</div>
+<div id="Vgl. Horlboge et al. 2022, S. 1 ff." class="original_text">
+ . Es ist von höchster Bedeutung, dass diese Informationen nicht
+ an unbefugte Dritte gelangen, da sonst ernste Sicherheitsprobleme und rechtliche Konsequenzen
+ drohen.
+ Obwohl Quellcode nicht unbedingt direkt personenbezogene Daten enthält, so kann er trotzdem
+ Rückschlüsse zulassen auf Personen oder Organisationen, die mit dem Code arbeiten
+</div>
+ . Es muss
+ daher ein Umfeld geschaffen werden, in dem volle Kontrolle und Transparenz über den Datenfluss
+ bestehen, und keine Schwachstellen in der Datenverarbeitung auftreten können. Einige Problem-
+ stellungen sind die Blackbox-Problematik von LLMs und Cloud-Computing-Umgebungen sowie
+ die Frage der Datenübertragung an interne oder externe Server.
+<h2>4.2 Grundlagen des Datenschutzes im Kontext von Softwareentwicklung</h2>
+<div id="Vgl. Art. 5 Abs. 1 lit. b DSGVO" class="original_text">
+ Innerhalb der Europäischen Union gilt die Datenschutz-Grundverordnung (DSGVO) als zentra-
+ le Rechtsnorm für Datenschutzangelegenheiten. In ihr werden die Grundbedingungen geregelt,
+ unter welchen personenbezogene Daten verarbeitet werden dürfen. Sie regelt darüber hinaus,
+ welche Pflichten bei den Datenverarbeitern bestehen.
+ Im Kontext dieser Arbeit sind insbesondere folgende Artikel der DSGVO von Bedeutung: Art. 6
+ (Rechtmäßigkeit der Verarbeitung), Art. 32 (Sicherheit der Verarbeitung) und Art. 35 (Datenschutz-
+ Folgenabschätzung).
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ Art. 6 DSGVO — Rechtmäßigkeit der Verarbeitung
+ Hier werden die Bedingungen festgelegt, unter welchen eine Verarbeitung von personenbezogenen
+ Daten rechtens ist. Die Zulässigkeit wird bedingt durch sechs Rechtsgrundlagen, diese sind:
+ 1. Eine Einwilligung der betroffenen Personen muss vorliegen.
+ 2. Die Verarbeitung ist erforderlich zur Erfüllung eines Vertrages mit der betroffenen Person.
+ 3. Weitere rechtliche Verpflichtungen müssen erfüllt werden.
+ 4. Eine Verarbeitung ist zwingend notwendig, um lebenswichtige Interessen einer natürlichen
+ Person zu schützen.
+ 5. Es liegt ein berechtigtes öffentliches Interesse vor oder die Ausübung öffentlicher Gewalt
+ ist erforderlich.
+ 6. Unter Abwägung kann ein berechtigtes Interesse der verantwortlichen Partei eine Verarbei-
+ tung rechtfertigen.
+ Hier wird das Prinzip der Zweckbindung klar formuliert
+</div>
+<div id="Vgl. Art. 6 Abs. 4 DSGVO" class="original_text">
+ . Es besagt, dass die Verarbeitung
+ personenbezogener Daten nur dann erfolgen darf, wenn dies zu dem Zweck erfolgt, für den sie
+ ursprünglich erhoben wurden. Möchte man die selben Daten später für einen anderen Zweck
+ verwenden, so muss vorerst geprüft werden, ob der neue Zweck mit dem ursprünglichen ver-
+ einbar ist. Für diese Prüfung werden in der DSGVO Kriterien genannt
+</div>
+<div id="Vgl. Art. 32 Abs. 1 und 2 DSGVO" class="original_text">
+ . Besteht nach einer
+ Prüfung keine Vereinbarkeit, so ist eine neue explizite Einwilligung zwingend erforderlich. Jede
+ Verarbeitung, die nicht auf mindestens eine dieser Grundlagen zurückgreift, ist unzulässig und
+ stellt einen Verstoß gegen die DSGVO dar.
+ Art. 32 DSGVO — Sicherheit der Verarbeitung
+ Artikel 32 verpflichtet die Verantwortlichen und die Auftragsverarbeiter, geeignete technische so-
+ wie organisatorische Maßnahmen zu treffen. Das Ziel dieser Maßnahmen ist es, die Vertraulichkeit
+ von Daten zu schützen, sowie die Integrität und Verfügbarkeit der Daten zu gewährleisten.
+ So ist die Pseudonymisierung und die Verschlüsselung von personenbezogenen Daten bei der
+ Übertragung, Speicherung und Verarbeitung eine der zutreffenden Maßnahmen. Es gehört dazu
+ auch die sichere Speicherung von Daten im Falle eines Ausfalles der Systeme. Die Wiederherstel-
+ lung z. B. durch Backup-Systeme kann hier als Maßnahme genannt werden. Es muss außerdem
+ regelmäßig geprüft werden, ob alle Maßnahmen weiterhin den Anforderungen der DSGVO ent-
+ sprechen und ob sie funktionstüchtig sind.
+ Es gilt generell der risikobasierte Ansatz, der besagt, dass die durchgeführten Maßnahmen dem
+ Risiko der Verletzung der Rechte und Freiheiten betroffener Personen angemessen sein müssen.
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ Das bedeutet vereinfacht, je höher das Risiko ist, desto strenger müssen die eingesetzten Maß-
+ nahmen sein.
+</div>
+<div id="Vgl. Art. 35 Abs. 1, 2, 3 und 7 DSGVO" class="original_text">
+ Art. 35 DSGVO — Datenschutz-Folgenabschätzung
+ Eine sogenannte Datenschutz-Folgenabschätzung (DSFA) ist erforderlich im Falle eines hohen
+ voraussichtlichen Risikos für die Rechte natürlicher Personen bei der Verarbeitung. Typische
+ Fälle solcher hohen Risiken sind z. B. der Einsatz neuer IT-Technologien, automatisierte Ent-
+ scheidungssysteme, Profiling oder die systematische Überwachung verschiedener Bereiche. In die-
+ ser Arbeit wird mit einer Art Blackbox-System gearbeitet, sodass dies möglicherweise eine DSFA
+ erforderlich macht. Dazu trägt auch bei, dass eventuell ein externer Dienstleister in Erwägung
+ gezogen und sensibler Quellcode verarbeitet wird.
+ Eine DSFA ist im Grunde eine Risikoanalyse derjenigen Risiken und Folgen, die einer Person
+ durch den Einsatz einer Technologie oder eines Systems entstehen können. Damit ist sie eine
+ Vorabprüfung und ein wichtiges Instrument, um die Einhaltung der DSGVO zu gewährleisten.
+ Die DSFA beinhaltet eine vollständige Beschreibung der geplanten Vorgänge, in der die Daten
+ verarbeitet werden sollen. Dann wird festgestellt, wie notwendig diese Form der Verarbeitung
+ tatsächlich ist und in welchem Verhältnis sie zu den Rechten der betroffenen Personen steht. Es
+ folgt so eine Risikobewertung, die entscheidet, welche geplanten Maßnahmen zur Risikominde-
+ rung eingesetzt werden müssen.
+ Zudem besagt dieser Artikel, dass in diesem Fall ein Datenschutzbeauftragter oder eine Daten-
+ schutzbeauftragte einbezogen werden muss. Besteht trotz der implementierten Risikominimie-
+ rungsmaßnahmen ein hohes Restrisiko, so muss eine Aufsichtsbehörde konsultiert werden.
+</div>
+<div id="Vgl. § 26 Abs. 2 BDSG" class="original_text">
+ BDSG — Ergänzungen zur DSGVO im deutschen Recht
+ Im deutschen Geltungsbereich der DSGVO ergänzt sie das Bundesdatenschutzgesetz (BDSG). Sie
+ konkretisiert die Vorgaben der DSGVO, wo sie den Mitgliedstaaten einen Gestaltungsspielraum
+ lässt. Aufgrund dieser Klarstellungen ist sie für deutsche Unternehmen von Bedeutung bei der
+ Datenverarbeitung oder für Datenschutzbeauftragte.
+ In dieser Arbeit relevant ist die dadurch strengere Regelung der Rolle der Datenschutzbeauftrag-
+ ten. So sind diese nicht nur verantwortlich für die Einhaltung von Datenschutzvorgaben, sondern
+ darüber hinaus auch für die Beratung. Die Datenschutzbeauftragten müssen daher frühzeitig
+ in die Prozesse deutscher Unternehmen einbezogen werden. Im Fall dieser Arbeit, einer sensi-
+ blen Code-Completion-Lösung, ist eine solche Einbindung verpflichtend und muss dokumentiert
+ werden.
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ Das BDSG regelt erweiterte Rechenschaftspflichten. So sind im Vergleich zur DSGVO die Do-
+ kumentation und der Verantwortungsnachweis schärfer formuliert. Das gilt insbesondere für die
+ Datenverarbeitung mit hohem Risikofaktor.
+ Der Paragraph 26 des BDSG erlaubt im Gegensatz zur DSGVO die Datenverarbeitung ausschließ-
+ lich, wenn sie erforderlich ist für das Beschäftigungsverhältnis. Damit sind allerdings freiwillige
+ Interessen der Verantwortlichen nicht ausreichend. Laut Absatz 2 des Paragraphen muss eine
+ freiwillige Einwilligung der Handlung daher klar belegbar sein
+</div>
+<div id="§ 3 Abs. 1 LDSG BW" class="original_text">
+ . Es darf also keine Zwangslage
+ bestehen; es darf kein Nachteil entstehen, wenn keine Einwilligung gegeben wird.
+ Im Beschäftigungskontext regelt das BDSG nach § 26 Abs. 2, dass eine erneute freiwillige Ein-
+ willigung zwingend erforderlich ist, wenn personenbezogene Daten zu einem anderen Zweck ver-
+ arbeitet werden sollen als ursprünglich angegeben. Diese Regelung gilt insbesondere für perso-
+ nenbezogene Daten von Beschäftigten und darf nicht pauschal auf andere Szenarien übertragen
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ die Wahrung der Interessen betroffener Personen mit angemessenen und spezifischen Maßnah-
+ men zu sorgen
+</div>
+<div id="§ 3 Abs. 1 S. 3 Nr. 1, 4, 9 LDSG BW" class="original_text">
+ . Um dem gerecht zu werden, müssen die Sparkassen von ihren Dienstleistern
+ die gleichwertige Einhaltung der Datenschutzvorgaben verlangen
+</div>
+<div id="Vgl. § 4 Abs. 1 LDSG BW" class="original_text">
+ .
+ Im dritten Abschnitt der LDSG BW werden Lockerungen gegenüber der DSGVO vorgenommen,
+ die nur für öffentliche Stellen gelten. Demnach besteht für öffentliche Stellen eine beschränkte
+ Pflicht, die betroffenen Personen über die Verarbeitung ihrer Daten zu informieren
+</div>
+<div id="Vgl. § 8 Abs. 1 Nr. 1 LDSG BW" class="original_text">
+ .
+ Konkret besteht keine Pflicht zur Informierung. . .
+ 1. . . . im Falle öffentlicher Sicherheitsgefährdungen bzw. der Benachteiligung von Bund oder
+ Ländern
+</div>
+<div id="Vgl. § 8 Abs. 1 Nr. 2 LDSG BW" class="original_text">
+ ,
+ 2. . . . zur Verhütung oder Verfolgung von Ordnungswidrigkeiten und Straftaten
+</div>
+<div id="Vgl. § 8 Abs. 1 Nr. 3 LDSG BW" class="original_text">
+ ,
+ 3. . . . wenn zivilrechtliche Ansprüche beeinträchtigt werden
+</div>
+<div id="Vgl. § 8 Abs. 1 Nr. 4 LDSG BW" class="original_text">
+ ,
+ 4. . . . wenn eine Offenlegung gesetzlich untersagt ist oder dem Schutz der betroffenen Person
+ bzw. der Rechte und Freiheiten Dritter entgegensteht
+</div>
+<div id="Vgl. § 8 Abs. 1 Nr. 5 LDSG BW" class="original_text">
+ , oder
+ 5. . . . sollte die Information Forschungszwecke unmöglich machen oder erheblich erschwe-
+ ren
+</div>
+<div id="Vgl. Art. 15 DSGVO" class="original_text">
+ .
+ Neben der Einschränkung der Informationspflicht ist auch das Auskunftsrecht eingeschränkt. Das
+ bedeutet, dass Personen nicht wie nach der DSGVO ein Recht haben zu erfahren, welche persön-
+ lichen Daten über sie gespeichert werden
+</div>
+<div id="Vgl. § 9 Abs. 1 S. 1 LDSG BW" class="original_text">
+ . Stattdessen ist diese Auskunft nicht verpflichtend,
+ wenn dadurch die allgemeine Sicherheit, laufende Strafermittlungen oder rechtliche Ansprüche
+ gefährdet werden
+</div>
+<div id="Vgl. Art. 17 DSGVO" class="original_text">
+ . Zuletzt wird in Baden-Württemberg auch das Recht auf Vergessenwerden
+ der DSGVO
+</div>
+<div id="Vgl. § 10 Abs. 1 LDSG BW" class="original_text">
+ eingeschränkt. Öffentliche Stellen sind nicht verpflichtet, personenbezogene Da-
+ ten zu löschen, sondern sind teilweise sogar dazu verpflichtet, diese Daten aufzubewahren. Solche
+ Daten werden aufbewahrt, wenn dies ein Landesarchivgesetz oder andere gesetzliche Dokumen-
+ tationspflichten vorgeben
+</div>
+<div id="Vgl. § 10 Abs. 2 LDSG BW" class="original_text">
+ . Sie werden ebenfalls aufbewahrt, wenn das Löschen die betroffene
+ Person schaden würde
+</div>
+<div id="Vgl. § 10 Abs. 3 LDSG BW" class="original_text">
+ oder wenn die Daten nichtautomatisiert sind und daher nicht oder nur
+ unter hohem Aufwand gelöscht werden können.
+</div>
+<div id="Vgl. § 15 Abs. 5 LDSG BW" class="original_text">
+ .
+ Nach Paragraph 15 des LDSG BW ist es untersagt mithilfe der Daten eine Überwachung von
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ Mitarbeitenden durchzuführen, solange kein Strafverdacht vorliegt
+</div>
+<div id="Vgl. § 15 Abs. 7 LDSG BW" class="original_text">
+ . Es dürfen während der
+ Evaluierungen ohne weiteres keine Leistungsprofile erstellt werden oder in einer anderen Weise
+ das konkrete Arbeitsverhalten der Mitarbeitenden zu extrahieren, analysieren oder bewerten, da
+ dies gegen die Datenschutzvorgaben verstoßen würde
+</div>
+<div id="Vgl. § 15 Abs. 8, § 74, § 75 Abs. 4 Nr. 13 LDSG BW" class="original_text">
+ . Wenn es dennoch notwendig ist, z. B.
+ Logs von Mitarbeitereffizienz oder Ähnlichem zu erstellen, so muss vorher die Einbindung des
+ Personalrats erfolgen. Es gilt die Mitbestimmungspflicht der Mitarbeitenden
+</div>
+ .
+ Allerdings darf nicht außer Acht gelassen werden, dass ein Dienstleister wie die S-MS meist öf-
+ fentliche Stellen (hier Sparkassen) aller Bundesländer bedient und damit im Detail alle bundes-
+ landspezifischen LDSGs beachten muss. Es reicht also nicht aus, wenn ausschließlich das LDSG
+ eines Bundeslandes beachtet wird, da sonst rechtliche Ungereimtheiten entstehen können.
+<h2>4.3 Datenschutztechnische Risiken bei Code-Completion-Systemen</h2>
+<div id="Vgl. Sheggam, Zhang, X. 2024, S. 1 f., 6" class="original_text">
+ Beim Arbeiten mit Code-Completion-Systemen sind vielerlei technische und rechtliche Risiken
+ aus Sicht des Datenschutzes anzutreffen. Es ist wichtig, sich über diese Risiken bewusst zu sein
+ und diese mit entsprechenden Maßnahmen zu minimieren, um die rechtliche Einhaltung von
+ Datenschutzvorgaben zu gewährleisten.
+ Es wird erneut betont, dass es sich bei Quellcode, besonders Produktivcode, um sensible Daten
+ handelt, die verarbeitet werden. Sie müssen unter allen Umständen vor unbefugtem Zugriff ge-
+ schützt werden. Das Risiko besteht zu jeder Zeit, dass eine unbeabsichtigte Offenlegung solcher
+ Daten an Dritte erfolgt. Wenn externe Dienstleister, Server oder Modelle verwendet werden, be-
+ steht hier eine große Gefahr, da die Kontrolle über den Datenflusses verloren wird
+</div>
+<div id="Vgl. Ylitalo 2024, S. 40 f." class="original_text">
+ . Ohne klare
+ vertragliche Absprache und angemessene Schutzmaßnahmen, kann dieses Risiko aus Unterneh-
+ mensperspektive nicht in Kauf genommen werden. Eine Weitergabe an Dritte ist jedoch nicht
+ grundsätzlich dadurch auszuschließen und ist möglicherweise sogar notwendig oder sinnvoll im
+ Kontext von Code-Completion-Systemen. Wenn es möglich ist, sollte darauf Wert gelegt werden,
+ die Weitergabe an Dritte grundlegend zu vermeiden, solange kein triftiger Grund dafür besteht.
+ Doch auch wenn die Daten vollständig im internen Netzwerk bleiben, bestehen große Risiken.
+ Selbst im lokalen Bereich werden Daten durch verschiedene Speichermethoden und -orte verar-
+ beitet. Es kann daher zu versehentlichen Speicherungen in Caches, Backups, Logs oder anderen
+ Diagnosedaten kommen. Eine Speicherung unter diesen Bedingungen ist womöglich nicht Daten-
+ schutzkonform und kann daher einen Verstoß gegen die Datenschutzvorgaben der Europäischen
+ Union, des Bundes oder der Länder darstellen.
+ Admins oder andere befugte Mitarbeitende könnten solche Daten in Logs o.ä. einsehen, ohne dass
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ dies bemerkt wird. Es erfordert somit eine technische als auch organisatorische Schutzmaßnahme
+ gegen einen solchen Zugriff durch Mitarbeitende.
+ Ähnlich kann es auch zu unbeabsichtigten Übertragungen an Dritte durch unbewusste Telemetrie
+ bei SaaS - oder PaaS -Lösungen kommen oder durch Trainingsdaten-Feedback von Plattformen im
+ Umgang mit LLMs oder genereller KI
+</div>
+ . Sensible Inhalte können so Teil von Trainingsprozessen
+ anderer Unternehmen werden und damit langfristig in andere Systeme gelangen oder Informatio-
+ nen über das eigene Unternehmen preisgeben. Umgekehrt können auch Code-Fragmente fremder
+ Unternehmen versehentlich ohne Einwilligung und Lizenzierung in das eigene System gelangen.
+ Hierbei handelt es sich um Urheberrechtsverletzungen und es kann zu unklaren Eigentumsver-
+ hältnissen kommen. Das stellt ein großes Compliance-Risiko dar und kann zu schwerwiegenden
+ rechtlichen Konsequenzen führen.
+ Wie im Abschnitt 4.2 ausgeführt, muss akribisch darauf geachtet werden, dass die vorliegende
+ Einwilligung nicht für andere Zwecke als ausdrücklich vereinbart missbraucht wird. Ein solcher
+ Verstoß kann bei Code-Completion-Systemen schnell vorliegen, unter anderem beim Training
+ von Modellen oder deren Einbeziehung in andere Systeme.
+<h2>4.4 Interne vs. externe Server und deren rechtliche Bewertung</h2>
+<div id="Vgl. Gerichtshof der Europäischen Union 2020" class="original_text">
+ Die Wahl der Serverinfrastruktur ist entscheidend für die datenschutzrechtliche Bewertung des
+ Artefaktes. Es wird ein besonderes Augenmerk auf die Hosting-Variante gelegt, die zur Verar-
+ beitung von Daten verwendet wird. Im Idealfall werden alle Daten gar nicht an externe Server
+ übertragen, wenn es das interne Netzwerk zulässt. So müssen sich keine Gedanken über die sorg-
+ fältige Einhaltung von Rechtsgrundlagen über mehrere Vertragspartner hinweg gemacht werden,
+ deren Vertrauen jederzeit in Frage gestellt werden kann.
+ Lässt sich dennoch nicht vermeiden auch externe Server einzubinden, so gibt es auch hier eine
+ Reihe von Aspekten, die das Sicherheitsniveau bestimmen. Es ist sinnvoll, solche Server bzw.
+ Dienstleister zu wählen, die im gleichen Rechtsraum agieren wie das eigene Unternehmen. Das
+ gilt für alle Ebenen der Datenschutzverordnungen, insbesondere allerdings für die DSGVO, da
+ sie die allgemeinen Grundlangen festlegt.
+ Mit einem Nicht-EU-Land zu arbeiten, sollte daher, soweit möglich, vermieden werden. Innerhalb
+ der EU-Staaten gestaltet sich die Rechtslage deutlich einfacher und kontrollierter, denn hier sind
+ staatliche Aufsichtsbehörden eingeschaltet, die die Einhaltung der Datenschutzvorgaben überwa-
+ chen. Es empfiehlt sich außerdem, aufgrund von Latenzzeiten und der Stabilität der politischen
+ Beziehung der Standorte, geographisch nahgelegene Server zu verwenden.
+ Der Europäische Gerichtshof hat, als gutes Beispiel dafür, am 16.07.2020 das Urteil „Schrems
+ II“ gefällt. Zur Folge hatte das, dass das Privacy Shield-Abkommen zwischen den USA und der
+ 4 Datenschutz, regulatorische und rechtliche Aspekte
+ EU ungültig wurde
+</div>
+<div id="Vgl. European Data Protection Board (EDPB) 2020, S. 24 f." class="original_text">
+ . Seitdem ist es erheblich schwieriger, den Datenaustausch mit den USA
+ zu legitimieren, da in den USA zumeist keine gleichwertigen Datenschutzvorgaben in Kraft sind.
+ Ohne strenge zusätzliche Schutzmaßnahmen wie der End-to-End-Verschlüsselung, Anonymisie-
+ rung oder andere Transportverschlüsselungen, ist eine Datenübertragung in die USA nicht mehr
+ zulässig
+</div>
+ . Da die USA ein Big Player im Bereich der Cloud-Services und der KI sind, hat dieses
+ Urteil eine weitreichende Folge auf die gesamte Branche.
+<h1>5 Methoden der Projektkonzeptionierung</h1>
+<h2>5.1 Ziel und Bedeutung der Konzeptionierung</h2>
+ Zunächst soll die Frage geklärt werden, warum eine Konzeptionierung notwendig ist und warum
+ sie sauber gestaltet werden sollte.
+ Damit die Gefahr vermieden wird, am Bedarf der Entwickler und Entwicklerinnen vorbeizu-
+ entwickeln, ist es sinnvoll, vor Beginn der Entwicklung ein klares Zielbild zu formulieren. Mit
+ einem solchen Zielbild ist die Vorstellung des Soll-Zustandes gemeint, das die Erwartungen und
+ Anforderungen an das System erfüllt. Es bietet einen Referenzpunkt, an dem sich alle weiteren
+ Schritte in der Arbeit orientieren können. Anschließend muss aus diesem Zielbild eine technische
+ Konzeption als Brücke zwischen Theorie und Praxis abgeleitet werden. Damit ergibt sich der
+ klare Weg hin zum fertigen Produkt, mit einzelnen Schritten und portionierten Zielen.
+ Es gilt grundsätzlich, dass jede klare Planung mögliche Mehraufwände reduziert, die durch Miss-
+ verständnisse oder technische Inkompatibilitäten entstehen können. Dazu gehört es auch, durch
+ die Planung eine Flexibilität zu schaffen, sollten später Änderungen von Rahmenbedingungen
+ oder Methoden notwendig werden. So wird sichergestellt, dass die vorhandenen Ressourcen ef-
+ fizient genutzt werden und nicht an redundanten Aufgaben verloren gehen. Das bedeutet, dass
+ jeder Schritt im Plan so nachvollziehbar und transparent wie möglich gestaltet werden sollte.
+ Jede Entscheidung sollte daher klar begründet und dokumentiert werden und Strukturen mit
+ eindeutigen Verantwortlichkeiten geschaffen werden. Das hilft, die Entwicklung, Wartung und
+ anschließende Weiterentwicklung stringent zu halten und außerdem zu steuern.
+ Damit Aufgaben und Verantwortlichkeiten in angemessenen Zeiträumen und angemessenem Auf-
+ wand erledigt werden können, muss eine Komplexitätsreduktion stattfinden. Das bedeutet, dass
+ das Gesamtsystem in handhabbare Komponenten zerlegt wird, sodass diese dann modular in ei-
+ nem iterativen Prozess entwickelt werden können. Agile Methoden bieten sich hier an, um diese
+ einzelnen Schritte zu koordinieren und eine Qualitätssicherung zu gewährleisten.
+ Um die Akzeptanz der fertigen Lösung zu garantieren, müssen im Zentrum der Planung die
+ Bedürfnisse der Nutzerinnen und Nutzer stehen. In diesem Fall bedeutet das, dass das System
+ spezifisch auf die Anforderungen von Entwicklern und Entwicklerinnen abgestimmt werden muss.
+ Damit diese auch tatsächlich erfüllt werden, müssen die Entwickler und Entwicklerinnen in den
+ Planungsprozess einbezogen werden und nach Möglichkeiten gesucht werden, wie diese Feedback
+ zum aktuellen Stand der Implementierung geben können.
+ In dieser Arbeit befindet sich bereits eine Lösung, die diese Anforderungen nicht erfüllt. Daher
+ muss zusätzlich geprüft werden, wo konkret die Schwächen der Lösung liegen und nach Feedback
+ der Nutzer und Nutzerinnen gesucht werden. Darüber hinaus ist es auch wichtig, die Planung
+ unter Berücksichtigung verschiedener Perspektiven zu gestalten. Beispiele solcher Perspektiven
+ sind die IT- und Datensicherheits-, die DX-, sowie die Entwicklungsperspektive.
+ 32
+ 5 Methoden der Projektkonzeptionierung
+ Genauer werden nun die potenziellen Gefahren einer unzureichenden Planung beschrieben, um
+ die Relevanz der Konzeptionierung zu unterstreichen.
+ Niedrige Nutzerakzeptanz
+ Die Nutzer bzw. die Nutzerinnen bestimmen über den Erfolg des Systems. Wenn es dazu
+ kommt, dass die Lösung nicht nach ihren Bedürfnissen entwickelt wird, so könnte diese
+ abgelehnt werden. Das führt zum Versagen des Projektes und damit zu enormer Ressour-
+ cenverschwendung sowie Frustrationspotenzial oder sogar Imageschäden, wenn die Enttäu-
+ schung auf die Organisation übertragen wird.
+ Fehlfokus bei der Entwicklung
+ Wurden Anforderungen und Ziele nicht klar definiert oder schlecht kommuniziert, so kann
+ es dazu kommen, dass Features entwickelt werden, die nicht den Bedürfnissen der Nutzer
+ und Nutzerinnen entsprechen. Das führt zu einer niedrigen Nutzerakzeptanz.
+ Ressourcenverschwendung
+ Ressourcen wie Zeit, Geld und Arbeitszeit können durch mangelnde Planung und Priori-
+ sierung redundant eingesetzt werden, was zu unnötigen Kosten führt.
+ Technische Inkonsistenzen
+ Die Gefahr von Inkompatibilitäten wird befeuert durch unklare technische Vorgaben sowie
+ der schlechten Abstimmung zwischen Arbeitsgruppen oder gar der vollständig isolierten
+ Entwicklung. Das führt zu Mehraufwänden, die behoben werden müssen und damit zu
+ Ressourcenverschwendung.
+ Projektverzögerungen
+ Wird unsauber konzeptioniert, können unrealistische Zeitpläne entstehen. Das geschieht
+ entweder durch eine unterschätzte Komplexität der Aufgaben oder durch eine unzureichen-
+ de Risikobetrachtung. So können zeitliche Engpässe entstehen, die zu verzögerten Abgaben
+ oder zu verminderter Qualität führen.
+ Fehlende Vergleichbarkeit
+ Im Falle einer nicht ausreichend detaillierten Definition der Anforderungen und Ziele, fehlt
+ später die Grundlage für eine Messung des Projekterfolges. Dadurch kann das Projekt nicht
+ mit anderen Lösungen verglichen werden. Daher sind konsistente Metriken und Standards
+ notwendig; ansonsten ist eine objektive Bewertung nicht möglich und es können keine
+ Lernprozesse für zukünftige Projekte stattfinden.
+ Sicherheits- und Datenschutzlücken
+ Eine oberflächliche Planung könnte einige Sicherheitslücken übersehen, woraufhin nicht auf
+ diese im Vorfeld reagiert werden kann. Das führt zu Missbrauch von sensiblen Daten oder
+ zur Gefährdung des Systems durch externe Angriffe.
+ Entscheidungslücken
+ Durch unzureichende Planung kommt es zu unklaren Verantwortlichkeiten oder zum Über-
+ 33
+ 5 Methoden der Projektkonzeptionierung
+ blicksverlust über das gesamte Projekt. Dadurch können wichtige Fragen verloren gehen
+ und damit nicht rechtzeitig beantwortet werden. So entstehen weitere Unklarheiten sowie
+ Kontrollverlust im Projekt.
+ Fehlende Wiederverwendbarkeit
+ Damit das Projekt nicht nur auf kurze Sicht, sondern auch auf lange Sicht nützlich ist, muss
+ eine gute Modularisierung und Dokumentation sichergestellt werden. Ist das nicht der Fall,
+ so lässt sich das Projekt möglicherweise kaum oder gar nicht in zukünftigen Vorhaben
+ einsetzen.
+ Die Konzeption in dieser Arbeit hilft dabei, die identifizierten Anforderungen der Nutzer und Nut-
+ zerinnen in ein konkretes technisches Lösungskonzept zu übersetzen. Es wird dazu eine Schwach-
+ punktanalyse durchgeführt und die Limitierungen der bestehenden Refact.ai-Lösung adressiert
+ und gezielt Verbesserungspunkte herausgearbeitet. Mithilfe der Konzeptionierung kann außerdem
+ eine Grundlage für die Evaluierbarkeit der Lösung geschaffen werden. Nur mit einem klar defi-
+ nierten Zielsystem können auch systematische Bewertungen stattfinden. Transparenz ist dabei
+ ein wichtiger Aspekt, der eine Grundlage für die wissenschaftliche Nachvollziehbarkeit schafft.
+ Das Ziel der Verknüpfung von Theorie und Praxis wird durch die Konzeptionierung greifbar
+ gemacht. Es stellt sicher, dass die theoretischen Erkenntnisse nachvollziehbar und sinnvoll in
+ die praktische Umsetzung einfließen können. Iterativ soll durch die Konzeptionierung Feedback
+ in das Design des Projektes einfließen, um schrittweise die gegebenen Ziele zu erreichen. Dazu
+ wird eine gute Skalierbarkeit, Wartbarkeit sowie Modularität der Lösung angestrebt durch eine
+ entsprechende Vorbereitung.
+ Zuletzt sind auch die unternehmensspezifischen Anforderungen anhand einer klaren Planung
+ zu berücksichtigen. Insbesondere die strengen Datenschutzvorgaben der S-MS müssen in der
+ Konzeptionierung berücksichtigt werden.
+ Anschließend lässt sich festhalten, dass eine saubere Konzeptionierung als Bindeglied zwischen
+ der Theorie und der konkreten Umsetzung im Projekt dient. Sie hilft dabei technische, methodi-
+ sche und organisatorische Entscheidungen fundiert treffen zu können. In dieser Arbeit wird eine
+ Konzeptionierung durchgeführt, um die Komplexität eines Code-Completion-Systems zu bändi-
+ gen und die Gefahr von Chaos und Missverständnissen zu minimieren. Abgestimmt soll sie an
+ den Besonderheiten der S-MS sein, eine Bewertung und Reflexion ermöglichen und nachhaltige
+ Verbesserungen ermöglichen. Es wird darauf abgezielt, einen Prototypen zu entwickeln, der sich
+ aus dem Prozess heraus ergibt.
+<h2>5.2 Methodisches Rahmenwerk: Design Science Research (DSR)</h2>
+<div id="Vgl. Hevner et al. 2004, S. 83" class="original_text">
+ In der Wirtschaftsinformatik ist eine wichtige und weit verbreitete Methode die des DSR. Dabei
+ handelt es sich um ein forschungsorientiertes Gestaltungsverfahren, das darauf abzielt, Artefak-
+ te wie Systeme, Modelle oder Methoden zu entwickeln, die in der Praxis anwendbar sind. In
+ 34
+ 5 Methoden der Projektkonzeptionierung
+ dieser Arbeit beinhaltet ist das zu erstellende Artefakt ein Code-Completion-System. Mit DSR
+ wird dieses entwickelt, implementiert und anschließend evaluiert. Demnach handelt es sich um
+ einen typischen Anwendungsfall für DSR, da es sich um eine praktische Lösung handelt, die auf
+ theoretischen Erkenntnissen basiert.
+ DSR wird von Hevner et al. (2004) als Prozess mit sieben Leitlinien definiert, die den gesamten
+ Forschungsprozess leiten. Diese werden in deren Arbeit „Design Science in Information Systems
+ Research“ wie folgt beschrieben:
+ 1. Design als Artefakt: Die Design-Science-Forschung muss ein funktionsfähiges Artefakt
+ in Form eines Konzepts, Modells, einer Methode oder Instanz hervorbringen.
+ 2. Problemrelevanz: Ziel der Design-Science-Forschung ist es, technologiegestützte Lösun-
+ gen für wichtige und relevante betriebliche Probleme zu entwickeln.
+ 3. Artefaktbewertung: Der Nutzen, die Qualität und die Wirksamkeit eines Design-Artefakts
+ müssen durch gut durchgeführte Evaluationsmethoden rigoros nachgewiesen werden.
+ 4. Forschungsbeitrag: Effektive Design-Science-Forschung muss klare und überprüfbare
+ Beiträge zu Design-Artefakten, Designgrundlagen und/oder Designmethodologien liefern.
+ 5. Forschungsmethodik: Design-Science-Forschung stützt sich auf die Anwendung rigoroser
+ Methoden sowohl bei der Konstruktion als auch bei der Evaluation des Artefakts.
+ 6. Design als Suchprozess: Die Suche nach einem effektiven Artefakt erfordert den Einsatz
+ geeigneter Mittel, um gewünschte Ziele unter Einhaltung der Gegebenheiten im Problem-
+ kontext zu erreichen.
+ 7. Kommunikation der Forschung: Design-Science-Forschung muss sowohl für technolo-
+ gieorientierte als auch für managementorientierte Zielgruppen wirksam präsentiert wer-
+ den.
+</div>
+<div id="Vgl. Hevner et al. 2004, S. 85" class="original_text">
+ .
+ Weiter kann der DSR-Prozess nach Hevner in drei Phasen unterteilt werden:
+ 1. Problemidentifikation und Zieldefinition: Die erste Phase beinhaltet zunächst die
+ Identifikation des Problems, das gelöst werden soll. Anschließend wird daraus ein Ziel de-
+ 5 Methoden der Projektkonzeptionierung
+ Zielen entspricht. Hierfür werden Metriken und Feedback-Schleifen genutzt.
+</div>
+ .
+ Das alles wird explizit unter Berücksichtigung der unternehmensspezifischen Anforderungen
+ 5 Methoden der Projektkonzeptionierung
+ Hier wird ebenfalls entschieden, welche technischen Komponenten konkret verwendet werden
+ sollen und weshalb. Darunter beispielsweise die gewählten Modelle und die gewählte Plattform.
+ Da mit vielen Änderungen (Austausch von Komponenten und Modellen) zu rechnen ist, soll
+ konkret so entworfen werden, dass eine hohe Modularität sowie Flexibilität gewährleistet ist. Das
+ spart Aufwand und erhöht die Kompatibilität. Der Prototyp ist außerdem nur sinnvoll, wenn er
+ später in eine Produktivumgebung integriert werden kann. Das erfordert eine gute Skalierbarkeit,
+ Wartbarkeit und Integrationsfähigkeit. Iterativ soll in dieser Phase aus der initialen Lösung der
+ Prototyp entstehen mit kontinuierlicher Verfeinerung und Verbesserung.
+<h2>5.5 Phase 3: Evaluation mit Fokus auf Nutzerfeedback</h2>
+ Abschließend folgt in der dritten Phase die Evaluation des Ergebnisses der durchgeführten Schrit-
+ te. Es wird der qualitative Evaluationsprozess konkretisiert, in dem verschiedene Testmethoden
+ eingesetzt werden sollen, wie in Phase 1 beschrieben. Für die Beschaffung von direktem Feed-
+ back sollen Fragebögen erstellt werden, die die Tester und Testerinnen nach der Nutzung einer
+ Prototyp-Konfiguration ausfüllen sollen. Damit wird die Nutzerwahrnehmung und -akzeptanz für
+ die aktuelle Einstellung erfasst. Darunter sollen Fragen zur Qualität der Vorschläge, Usability
+ und der Akzeptanz des Systems erstellt werden.
+ Für die technische Evaluation werden zum einen Performance-Tests erstellt und die einzelnen
+ Konfigurationen miteinander verglichen. Zum anderen werden Programmieraufgaben mit aufstei-
+ gender Komplexität erstellt, die zu einem Score führen, der zum Vergleich der Konfigurationen
+ genutzt werden kann.
+ Dies ergibt verschiedene Kriterien, die eine Gesamtbewertung des Prototypen ermöglichen und
+ die Auswahl der besten Konfiguration ermöglichen. Aus dem Ergebnis der Evaluation können
+ dann potenzielle Verbesserungen abgeleitet werden. Dies ist wiederum der erste Schritt in der
+ nachfolgenden DSR-Iteration.
+<h2>5.6 Fazit der Konzeptionierung und DSR-Anwendung</h2>
+ Die Konzeptionierung in diesem Kapitel diente dazu, eine fundierte Grundlage für die spätere
+ praktische Umsetzung zu schaffen. Insbesondere wurde dabei sichergestellt, dass alle entwickel-
+ ten Lösungsideen den Anforderungen der S-MS entsprechen. Zudem wurde sichergestellt, dass
+ technische als auch organisatorische Rahmenbedingungen berücksichtigt werden.
+ Mithilfe der strukturierten DSR-Anwendung wurden die drei Phasen des DSR-Prozesses auf die
+ Fragestellung dieser Arbeit übertragen. Das dadurch entwickelte Vorgehen erlaubt so eine nach-
+ vollziehbare und iterativ-zielgerichtete Gestaltung des geplanten Code-Completion Artefakts.
+ Zentral ist dabei die Idee der Identifikation bestehender technischer Defizite und Limitierungen,
+ die konzeptionell adressiert und im Prototypen korrigiert werden können. Das Artefakt beinhaltet
+ 37
+ 5 Methoden der Projektkonzeptionierung
+ eine kontrollierte Testumgebung, sowie die Planung von Evaluationsprozessen. Sie stellen sicher,
+ dass alle Kriterien, sowohl technische als auch entwicklerorientierte, berücksichtigt werden.
+ Die geschaffene Struktur bietet die Grundlage für die praktische Umsetzung des Lösungsansatzes
+ in den nachfolgenden Praxiskapiteln.
+ 38
+<h1>6 Analyseverfahren von Plattformen</h1>
+<h2>6.1 Zielsetzung der Plattformanalyse</h2>
+ Um herauszufinden, ob eine bestehende oder potenzielle Plattform geeignet für den Einsatz im
+ unternehmensspezifischen Kontext, hier der S-MS, ist. Durch Plattformanalysen sollen objektiv
+ nachvollziehbare Entscheidungsgrundlagen geschaffen werden, um die besten Entscheidungen für
+ den späteren Prototypen zu treffen. Sie liefert die analytische Vorarbeit für spätere Phasen im
+ DSR-Zyklus — die Implementierung und Evaluation des Artefakts.
+ Die Plattformanalyse ist die methodische Grundlage für die Kapitel 9 (Analyse der aktuellen
+ Plattform Refact.ai) und 10 (Analyse alternativer Plattformen). Mit ihr wird sichergestellt, dass
+ keine willkürlichen Entscheidungen getroffen werden, sondern dass ein reproduzierbares Verfah-
+ ren zur Bewertung der Plattformen angewendet wird.
+ Anders als bei der Evaluation von LLM-Modellen, wie in Kapitel 7 (Evaluationsverfahren für
+ KI-Modelle) genauer erläutert wird, stehen keinerlei generierte Vervollständigungen selbst im
+ Fokus, sondern die Gesamtfunktionalität der Systemarchitektur. Zentrale Fragestellungen sind
+ unter anderem die Frage, welche Mechanismen zur Bedienung des Systems bestehen, wie leicht die
+ Integration der Plattform in interne Systeme fällt und wie gut weitere konkrete Bewertungskri-
+ terien erfüllt werden, die im nachfolgenden Abschnitt 6.2 (Bewertungskriterien für Plattformen)
+ festgelegt sind.
+ Relevant für die Plattformanalyse ist die Betrachtung der Bewertungskriterien in einem realisti-
+ schen Unternehmenskontext und nicht ausschließlich in einem akademischen Kontext. So soll die
+ tatsächliche Eignung in der Praxis bewertet werden, nicht die theoretische Eignung.
+<h2>6.2 Bewertungskriterien für Plattformen</h2>
+ Um eine Bewertung vornehmen zu können, müssen vorher aus den Anforderungen an die Platt-
+ formen konkrete Kriterien abgeleitet werden, die dann in der Analyse verwendet werden. Sie
+ dienen dem Zweck sicherzustellen, dass funktionale, rechtliche, organisatorische sowie technische
+ Anforderungen in der Bewertung abgebildet werden.
+ Es folgt eine Übersicht ausgewählter Kriterien, die in dieser Arbeit von Relevanz sind, in der
+ Tabelle 1 (Bewertungskriterien für Plattformen).
+ Diese Kriterien sind abgeleitet aus den Anforderungen, die in Kapitel 2 (Marktentwicklung und
+ technologische Trends von Chatbots und Code-Completion-Systemen), Abschnitt 2.3 und 2.4
+ beschrieben werden. Diese Kriterien allein reichen jedoch noch nicht für eine sinnvolle Bewertung
+ aus; sie müssen zuvor in ein gegenseitiges Verhältnis gesetzt werden.
+ 39
+ 6 Analyseverfahren von Plattformen
+ Kriterium
+ Beschreibung
+ Funktionalität
+ Welche Aufgaben kann die Plattform übernehmen? Gibt es
+ API-Zugänge? Welche Codeformate werden unterstützt?
+ IDE-Kompatibilität
+ Lässt sich das System in genutzte IDEs einbinden? Erkennt es
+ Projektstruktur, Cursorposition, Imports etc.?
+ Datenschutz
+ UX/DX
+ Erweiterbarkeit
+ Integration
+ Skalierbarkeit
+ Werden Daten intern verarbeitet? Gibt es Zugriffsbeschränkungen?
+ Ist der Betrieb DSGVO-konform möglich?
+ Wie leicht lässt sich das System bedienen? Können Nutzer und
+ Nutzerinnen es anpassen? Stört es den Workflow?
+ Ist die Architektur modular? Lässt sich die Plattform anpassen oder
+ erweitern?
+ Funktioniert die Plattform mit Tools wie Git, CI/CD oder Jira?
+ Wie verhält sich das System bei hoher Last oder vielen Nutzern und
+ Nutzerinnen?
+ Performance
+ Wie schnell kommt ein Vorschlag zurück? Gibt es Wartezeiten?
+ Tab. 1: Bewertungskriterien für Plattformen
+<h2>6.3 Kriterienbasierte Bewertungsverfahren</h2>
+ Mit den vorher definierten Kriterien des letzten Abschnitts wurde eine solide Grundlage geschaf-
+ fen, Stärken und Schwächen der Plattformen zu identifizieren. Es fehlt noch eine Möglichkeit,
+ wie die Kriterien gewichtet werden, sodass ihre Wertung nicht willkürlich ist und nur auf einzel-
+ ne Meinungen zurückzuführen ist. Mithilfe von quantifizierbaren Verfahren können Bewertungen
+ vergleichbar und nachvollziehbar gemacht werden. Aus der Summe der gewichteten Kriterien
+ wird ein Gesamtbild der Eignung erzeugt, die dann zu einer Entscheidung verhilft.
+ Eine sinnvolle Möglichkeit der Gewichtung ist die Nutzwertanalyse anhand eines Scoring-Modells.
+ Hierbei erhält jedes Kriterium eine Gewichtung basierend auf den Prioritäten des Unternehmens
+ und eine Bewertungskala, meist ein Punktesystem von 1 bis 5. Die Punkte werden zu einer
+ Gesamtpunktzahl aggregiert und die einzelnen Punkte können in einem Diagramm visualisiert
+ werden. Geeignete Darstellungsformen für die Ergebnisse sind beispielsweise Spider Charts oder
+ Heatmaps. Mit diesen fällt die Interpretation der Ergebnisse leichter und es kann besser verglichen
+ werden. Das Scoring-Modell soll in dieser Arbeit Verwendung finden.
+<h2>6.4 Feature-Mapping</h2>
+ Abseits der rein kriterienbasierten Bewertung liegt es im Interesse des Bewertenden auch die Fülle
+ der Features sowie die Marktposition der Plattformen zu betrachten. Mithilfe dieser Betrachtung
+ kann ein direkter Vergleich mit der bestehenden Plattform im Unternehmen, hier Refact.ai,
+ 40
+ 6 Analyseverfahren von Plattformen
+ stattfinden.
+ Dieses Verfahren wird mithilfe von Feature-Mapping durchgeführt, das ein Abgleich der angebo-
+ tenen, mit den benötigten Funktionalitäten ist. Abseits der Funktionen, die essenziell benötigt
+ werden, können auch solche identifiziert werden, die überflüssig sind bzw. nicht benötigt werden.
+ Damit kann entschieden werden, ob vor der Implementierung der Plattform Anpassungen fällig
+ sind oder ob sie direkt einsetzbar ist.
+ 41
+<h1>7 Evaluationsverfahren für KI-Modelle</h1>
+ Hier werden die theoretischen Grundlagen für die Evaluationsverfahren von LLM-Modellen, spe-
+ zifisch die Code-Completion Aufgabe, gegeben. Es wird darauf eingegangen, was die konkrete
+ Zielsetzung der Evaluationen ist, auf was eingegangen werden soll und wie konkret die Erfüllung
+ der Anforderungen gemessen werden soll.
+<h2>7.1 Zielsetzung der Evaluationsverfahren</h2>
+ In diesem Kapitel wird darauf abgezielt, anhand von Evaluationsverfahren die Bewertung von
+ LLM-Modellen für die Code-Completion Aufgabe systematisch zu fundieren. Sie sollen so hin-
+ sichtlich ihrer Eignung, ihrem Potential als Hilfswerkzeug für Softwareentwicklerinnen und -
+ entwickler, sowie ihrer Erfüllung weiterer Anforderungen bewertet werden. Zur Fundierung der
+ Bewertung werden die Dimensionen und Methoden der Evaluation festgelegt und erläutert, so-
+ dass sie in der Praxis anwendbar sind. Anschließend wird darauf eingegangen, wie die Ergebnisse
+ gewichtet werden und welche Kombinationen gut oder schlecht abschneiden.
+<h2>7.2 Evaluationsdimensionen</h2>
+ Damit überhaupt eine Bewertung stattfinden kann, muss davor festgelegt werden, welche Krite-
+ rien eine Rolle spielen und welcher Natur sie sind. In der Tabelle 2 (Evaluationsdimensionen für
+ die Bewertung von KI-Modellen zur Code Completion) werden die in dieser Arbeit festgelegten
+ Dimensionen für die Code-Completion LLM-Modelle dargestellt.
+<h2>7.3 Evaluationsmethoden für KI-Modelle</h2>
+<div id="Vgl. Reuel et al. 2024, S. 1 ff, 8" class="original_text">
+ Es wird in dieser Arbeit ein Zusammenspiel mehrerer Evaluationsverfahren für die LLM-Modelle
+ betrachtet. Diese sind:
+ A) Qualitatives Nutzerfeedback:
+ Es soll eine Gruppe von Testern des Artefakts gebildet werden, die dieses nutzen und anschlie-
+ ßend einen Fragebogen für jede Test-Iteration ausfüllen. So können subjektive Eindrücke über
+ das Artefakt gesammelt werden, wie „Wie hilfreich war die Vervollständigung?“. Als Antwortmög-
+ lichkeiten werden sowohl Skalen von 1-5, als auch offene Textfelder verwendet, um detaillierte
+ Rückmeldungen zu erhalten
+ B) Taskbasierte Evaluation:
+ Bei dieser Methode sollen die Modelle in einem Programmieraufgaben-Wettbewerb gegeneinander
+ antreten. Die Aufgaben werden aufsteigend schwerer bzw. komplexer. Wenn die Modelle eine
+ 42
+ 7 Evaluationsverfahren für KI-Modelle
+ Evaluationsdimension
+ Aspekte / Unterkriterien
+ Vorschlagsqualität
+ › Stimmt das Ergebnis technisch?
+ › Passt der Vorschlag zur Aufgabe, oder geht er am Ziel vorbei?
+ › Wird der Code kürzer, klarer oder schneller verständlich?
+ Kontextualisierung
+ Wie gut erkennt das System Zusammenhänge im Projekt? Dazu
+ zählen etwa benachbarter Code, Importpfade oder Dateistruktur.
+ Anpassungsfähigkeit
+ Lässt sich das Modell spürbar anpassen, wie Stilvorgaben,
+ projektinterne Namenskonventionen oder Nutzerpräferenzen?
+ Sicherheitsaspekte
+ › Fantasiert das Modell Dinge, die es nicht wissen kann?
+ › Gibt es Verzerrungen, z. B. durch Trainingsdaten?
+ › Produziert es Code, der falsch, gefährlich oder schlampig ist?
+ › Trägt es bei zu Misstrauen, Fehlern oder Blackbox-Gefühl?
+ Performance
+ › Wie lange dauert es, bis etwas erscheint?
+ › Rechnet das Modell effizient oder frisst es Ressourcen?
+ Tab. 2: Evaluationsdimensionen für die Bewertung von KI-Modellen zur Code Completion
+ Aufgabe fehlerfrei gelöst haben, werden entsprechend Punkte vergeben. Am Ende kann so die
+ Gesamtpunktzahl verglichen werden. Zudem können weitere Metriken wie der Zeitaufwand, die
+ Fehlerquote und die subjektive Qualität der Lösung mit einbezogen werden.
+ C) Benchmarkdaten und Metriken:
+ Diese Methode kann hilfreich sein, um die Modelle direkt zu vergleichen, allerdings muss die
+ Gefahr im Bewusstsein gehalten werden, dass Modelle spezifisch auf öffentlich verfügbare Bench-
+ marks overfittet werden können. Das führt dazu, dass die Modelle scheinbar besser abschneiden,
+ als sie es in Realsituationen würden. Daher ist es zumindest wichtig, mehrere Benchmarks mit
+ verschiedenen Metriken zu betrachten. Diese Metriken sollten ebenfalls kritisch untersucht wer-
+ den
+</div>
+ .
+<h2>7.4 Kombination und Gewichtung der Ergebnisse</h2>
+ Beim Arbeiten mit mehreren Evaluationsverfahren ist es notwendig, diese zu kombinieren und
+ gewichten, um daraus möglichst zutreffende Aussagen zu treffen. Wichtig ist, dass die Gewich-
+ tungskriterien klar begründet werden und nicht willkürlich sind. Der finale Score wird ausgehend
+ dieser gewichteten Kriterien in einer Ergebnisdarstellung wie einem Spider-diagramm oder einem
+ aggregierten Score dargestellt. Ausgehend davon kann dann eine Entscheidung für das Projekt
+ 7 Evaluationsverfahren für KI-Modelle
+ getroffen, implementiert und getestet werden.
+<h2>7.5 Fazit</h2>
+ Zusammengefasst soll durch eine Kombination mehrerer Evaluationsverfahren eine fundierte Ent-
+ scheidung getroffen werden, welches LLM-Modell am besten für das Artefakt geeignet ist. Eine
+ einzelne Evaluationsmethode könnte Ausreißer im Datensatz nicht erfassen und würde so zu ei-
+ ner Fehlentscheidung führen. So eine Vielfalt der Perspektiven kann sowohl technische als auch
+ menschliche Faktoren gleichzeitig berücksichtigen und schafft eine umfassendere Grundlage für
+ die Entscheidungsfindung. Mithilfe des Design Science Research Ansatzes wird aus dieser Eva-
+ luation eine iterative Verbesserung des Artefaktes durchgeführt. Der Prozess wird so lange wie-
+ derholt, bis die Anforderungen der Nutzer und Nutzerinnen, sowie die weiteren Anforderungen
+ des Betriebs erfüllt sind. Diese Arbeit gibt damit lediglich den Startschuss und beinhaltet die
+ erste Iteration dieses Prozesses, der allerdings darüber hinaus weiterhin verfolgt wird. Es handelt
+ sich somit also keineswegs um eine einmalige Messung bzw. Durchführung.
+ 44
+<h1>8 Marktforschung und Unternehmensanforderungen</h1>
+<h2>8.1 Ziel der Marktforschung</h2>
+ Anhand einer umfassenden Marktforschung soll ein systematischer Überblick über die aktu-
+ ell verfügbaren Plattformen und Code-Completion-Modelle geschaffen werden. Damit soll eine
+ Grundlage für nachfolgende Analysen und Vergleiche geschaffen werden, um so anhand von
+ festgelegten Unternehmensprioritäten und -anforderungen diejenigen zu identifizieren, die das
+ größten Potenzial für die S-MS haben. Dann kann mit der Produktion des Prototypen begonnen
+ werden.
+ Die Plattform- und Modellrecherche werden getrennt durchgeführt, die Ergebnisse in Feature-
+ Tabellen zusammengefasst und diese werden dann in diesem Kapitel kurz diskutiert. Für die
+ Suche nach geeigneten Produkten und ihren Eigenschaften wird eine dezentralisierte Recher-
+ che durchgeführt, wobei die Daten von verschiedenen Quellen zusammengetragen werden. Durch
+ diese Parallelarbeit und Einbeziehung mehrerer Personen erfolgt die Recherche schneller und um-
+ fassender. Außerdem wird die Gefahr von Fehlinformationen durch Dopplungen und mündliche
+ Diskussion reduziert.
+ Mit diesen Feature-Tabellen wird in den nachfolgenden Kapiteln weiter gearbeitet.
+<h2>8.2 Vorstellung der analysierten Plattformen</h2>
+ Im Anhang dieser Arbeit befinden sich die Feature-Tabellen für die gefundenen Plattformen, zu
+ denen nun jeweils eine Vorstellung gegeben wird. Es handelt sich konkret um die Tabellen 3 bis
+ 8.
+ Refact.AI
+ Refact.AI ist die Plattform, die zur Zeit der Erstellung dieser Arbeit von der S-MS für ihre
+ Code-Completion-Lösung verwendet wird. Sie stellt die Basis für alle weiteren Vergleiche dar
+ und auf sie wird spezifisch eingegangen in der Ist-Analyse im Kapitel 9. Die Hauptkomponenten
+ von Refact.AI sind Open Source, weshalb sie für lokale Implementierungen geeignet ist. Obwohl
+ es möglich ist, diese Plattform in Form eines Plugins in JetBrains IDEs und Visual Studio Code
+ zu integrieren, hat sich dies in der Vergangenheit als schwierig und arbeitsaufwendig herausge-
+ stellt. Über die lokale Installation hinaus stellt Refact.AI auch Cloud-Services zur Verfügung für
+ Unternehmen, sodass eine einfache Integration möglich ist auf Kosten der Flexibilität, Kontrolle
+ und Anpassbarkeit.
+ 45
+ 8 Marktforschung und Unternehmensanforderungen
+ Amazon CodeWhisperer
+ Bei Amazon CodeWhisperer handelt es sich um eine Cloud-basierte AWS Lösung, die mithilfe
+ des AWS Toolkits in verschiedene IDEs und andere AWS-Dienste integriert werden kann. Diese
+ Plattform ist proprietär und nicht Open Source. Dadurch ist es nicht möglich, lokale Instal-
+ lationen und Anpassungen vorzunehmen. Dazu besteht eine Abhängigkeit von einem externen
+ Unternehmen. Es ist jedoch tief in das Ökosystem von AWS integriert, weshalb sich die Nutzung
+ mit anderen AWS-Diensten anbietet.
+ Continue.dev
+ Continue.dev ist eine Open-Source-Plattform, die aufgrund ihrer MIT-Lizenzierung kostenlos lo-
+ kal installiert und beliebig angepasst werden kann. Sie wird mithilfe eines Plugins in die IDEs
+ integriert und benötigt kein schwerwiegendes Setup. Sie kommuniziert direkt über eine API mit
+ dem LLM-Backend. Auch Continue.dev bietet eine Cloud-Variante für kleine Teams oder Unter-
+ nehmen an, sodass die Pflege und Wartung nicht selbst übernommen werden muss. Mit Conti-
+ nue.dev können Inline-Vervollständigungen und Chats mit unterschiedlichen LLMs durchgeführt
+ werden.
+ Codeium (Windsurf)
+ Obwohl Codeium ursprünglich ein Open-Source-Projekt war, ist es heute eine proprietäre Platt-
+ form und unter dem Namen „Windsurf“ bekannt. Dieses ist nach eigenen Angaben für mehr als
+ 40 IDEss verfügbar und es wird eine eigene IDE mit voller Integration und weiteren Funktionen
+ angeboten. Mit einer kostenlosen Version ist es nur limitiert nutzbar, da jeder Prompt eine be-
+ stimmte Anzahl von Credits kostet, die monatlich aufgeladen werden. Viele Features sind zudem
+ nicht aktiviert. Mit bezahlten Plänen werden diese Credits aufgeladen und Features freigeschal-
+ tet. Eine Anbindung lokaler LLMss ist nicht möglich.
+ CodeT5
+ Es handelt sich um CodeT5 und CodeT5+ genaugenommen um ein eigenes vortrainiertes LLM
+ und nur bedingt um eine Plattform. Dieses Modell kann jedoch direkt lokal in die IDE integriert
+ werden und ist Open Source. Eine zentrale Verwaltung und Wartung wird nicht direkt unterstützt
+ und für eine Server-Installation sind vermutlich zusätzliche Schritte notwendig. Da es sich nicht
+ direkt um eine Plattform handelt, können keine anderen Modelle genutzt werden.
+ GitHub Copilot
+ Dieses Produkt ist eine Zusammenarbeit zwischen GitHub, OpenAI, sowie Microsoft und ist eine
+ proprietäre Lösung. Die Integration ist vertieft in Visual Studio Code, einer IDE von Microsoft,
+ und ist als Plugin verfügbar. Auch für andere IDEs ist es verfügbar, jedoch nicht so tief integriert.
+ 46
+ 8 Marktforschung und Unternehmensanforderungen
+ Es basiert auf dem Codex-Modell von OpenAI, das wiederum auf GPT-3.5 basiert. Keine anderen
+ Modelle können verwendet werden und eine lokale Installation ist ebenfalls ohne Weiteres ausge-
+ schlossen. Stattdessen muss für die Verwendung ein kostenpflichtiges Abonnement abgeschlossen
+ werden. Ausschließlich die Enterprise-Variante bietet eine kontrollierte Self-Hosting-Option an,
+ die eingeschränkt in ihrer Anpassbarkeit ist. Es bietet sowohl Inline-Vervollständigungen als auch
+ eine Chatfunktion mit anderen Modellen von OpenAI an. Diese Lösung gilt als eine der besten
+ und am weitesten verbreiteten Lösungen auf dem Markt.
+ Sourcegraph Cody
+ Als Teil einer ganzen Reihe von Sourcegraph-Produkten ist Cody eine proprietäre Lösung, die
+ zwar keine echten Code-Completion-Funktionen anbietet, jedoch eine Chat-Funktion in die IDE
+ integriert. Damit ist es möglich herkömmliche Chat-LLMs zu verwenden, um den Code zu edi-
+ tieren oder Vorschläge zu erhalten. Mit einem Knopf kann der Code dann angewendet werden.
+ Obwohl zwar viele Modelle ausgewählt werden können, je nach Abonnement-Plan, bleibt die
+ Anpassbarkeit und Kontrolle sehr niedrig, da der Code nicht bearbeitet werden kann und keine
+ eigenen Modelle angebunden werden können. Die Plattform bietet neben der Plugin-Integration
+ auch eine Weboberfläche und CLI-Tools an.
+ Replit Ghostwriter
+ Replit bietet mit Ghostwriter eine proprietäre Lösung an, die tief in die eigene Replit-Toolbox
+ integriert ist und ist vollständig Cloud-basiert. Da Replit eine eigene Web-basierte IDE ist, ist
+ eine lokale Installation nicht möglich und es gibt keine Plugins zur Integration in andere IDEs.
+ Die Nutzung ist damit nur über diese eigene Umgebung möglich und nur unter kostenpflichtigem
+ Abonnement nutzbar.
+ Tabnine
+ Tabnine bietet erst ab ihrem Enterprise-Plan eine on-premise Lösung an und ist damit mit hohen
+ Kosten eines Abonnements verbunden. Die Software ist jedoch weiterhin nicht Open Source
+ und kann nicht angepasst werden. Die darin verwendeten Modelle sind ebenfalls proprietär und
+ können nicht durch eigene Modelle ersetzt werden.
+ Visual Studio IntelliCode
+ Zwar ist Visual Studio IntelliCode eine veraltete und proprietäre Lösung, jedoch kann sie heute
+ weiterhin in Visual Studio und Visual Studio Code verwendet werden. Es nutzt keine moderne
+ LLMs und scheitert bei kreativen oder komplexen Aufgaben, zumal es nicht möglich ist, andere
+ Modelle zu verwenden. Auch der Betrieb auf einem eigenen Server ist nicht möglich und es ist
+ nicht anpassbar.
+ 47
+ 8 Marktforschung und Unternehmensanforderungen
+ Zencoder
+ Auch Zencoder ist eine proprietäre Lösung, die keine Self-Hosting-Option vorsieht. Diese Lö-
+ sung konzentriert sich auf die Automatisierung von generellen Entwicklungsaufgaben, wie der
+ Erstellung von Unit Tests. Es wird ein Chat Assistent sowie eine Inline-Vervollständigung mit
+ vorgegebenen Modellen angeboten. Kleine Teams können diese Lösung kostenlos nutzen, jedoch
+ fallen für Unternehmen Kosten an, abhängig von der Anzahl der Nutzerinnen und Nutzer, sowie
+ dem gewählten Plan. Es wird als Plugin in die IDEs integriert und ist nicht Open Source.
+<h2>8.3 Vorstellung der Marktsituation für Code-Completion-Modelle</h2>
+<div id="Vgl. DeepSeek-AI et al. 2024, S. 5" class="original_text">
+ Unter den verfügbaren Modellen auf dem aktuellen Markt sind sowohl viele proprietäre als auch
+ Open Source Modelle zu finden. Da es eine unabdingbare Voraussetzung ist, dass sowohl die
+ Plattform als auch die Modelle lokal betrieben werden können, fallen daher Cloud-basierte Lö-
+ sungen aus der Auswahl. Es bleiben so lediglich die Open Source Modelle übrig, die dann auf
+ einem eigenen Backend mit REST-APIs wie vLLM oder TGI betrieben werden können.
+ Aus der Marktforschung haben sich viele Modelle als potenziell geeignet herausgestellt. Die große
+ Auswahl an Modellen wurde deshalb schrittweise durch bestimmte Kriterien eingegrenzt. Das ers-
+ te Kriterium ist die Modellgröße. Da die Modelle nur auf einem Server mit begrenzten Ressourcen,
+ nämlich 24GB VRAM, betrieben werden können, kommen nur jene Modelle in Frage, die unter
+ dieser Grenze in Betrieb genommen werden können. Um zu berechnen, wie viel Speicherplatz
+ ein Modell verbraucht, muss die Anzahl der Parameter des Modells mit dem Speicherbedarf des
+ Präzisionsformats multipliziert werden.
+ Speicherbedarf (in Bytes) =
+ Anzahl der Parameter × Bits pro Parameter
+ 8
+ Es ergibt sich beispielsweise für ein Modell mit zwei Milliarden Parameter für jede Präzision der
+ folgende Speicherbedarf wie in Tabelle 9 dargestellt.
+ Jedoch ist in diesem Fall der maximale Speicherbedarf gegeben, jedoch die Anzahl der Parameter
+ gesucht. Daher ergibt sich die Formel:
+ Anzahl der Parameter =
+ Speicherbedarf (in Bytes) × 8
+ Bits pro Parameter
+ In der Tabelle 10 im Anhang werden nun die maximalen Anzahlen der Parameter für die ver-
+ schiedenen Präzisionsformate dargestellt, sodass sie jeweils unter 24GB VRAM bleiben.
+ Es ist zu beachten, dass dies jedoch nur der theoretische Bedarf ist und nicht das volle und
+ tatsächliche Bild wiedergibt. In der Realität wird darüber hinaus noch Speicherplatz für die
+ Kontextlänge, sowie Attention- und Cache-Mechanismen benötigt. Das können je nach Kontext-
+ länge mehrere GB sein.
+ 48
+ 8 Marktforschung und Unternehmensanforderungen
+ Bei den Quantisierungsformaten werden neben den Parametern noch zusätzliche Metadaten be-
+ nötigt, die in jeden Layer bzw. Block gespeichert werden müssen, sodass die Funktionalität
+ erhalten bleibt. Auch das erfordert eine große Menge an Speicherplatz, die nicht in der Tabel-
+ le dargestellt ist. Obwohl es gewissen Einstellungsspielraum gibt, ist die Fragmentierung der
+ Speicherblöcke ein Grund dafür, dass der vorhandene VRAM nicht vollständig genutzt werden
+ kann.
+ Aus diesen und weiteren nicht genannten Gründen kann das theoretische Maximum nicht ohne
+ Weiteres hingenommen werden. Am Ende hilft lediglich der praktische Test durch trial-and-error,
+ ob ein Modell tatsächlich auf dem Server betrieben werden kann. Dennoch kann die Tabelle 10 im
+ Anhang als grobe Orientierungshilfe nützlich sein, besonders bei den unquantisierten Formaten,
+ da diese noch näher an den theoretischen Werten sind.
+ Auf dem lokalen Testserver konnte ein 24-Milliarden-Parameter-Modell mithilfe von 4-Bit-AWQ-
+ Quantisierung gestartet werden. Es nutzt dabei 21,48 GB VRAM. Obwohl das Modell so prak-
+ tisch in Betrieb genommen werden kann, bleibt wenig VRAM übrig für die Kontextlänge sowie
+ die Attention- und Cache-Mechanismen. Das kann dazu führen, dass das Modell bei einer Anfra-
+ ge mit langer Kontextlänge wegen Speicherplatzmangel abstürzt. Ein 22-Milliarden-Parameter-
+ Modell mit gleicher Quantisierung nutzte mit 21,45 GB nahe zu gleich viel Speicherplatz, obwohl
+ es 2 Milliarden Parameter weniger hat. Daran zeigt sich klar, dass jedes Modell individuelle
+ Eigenschaften hat und die tatsächliche Speicherbelastung stark von den theoretischen Werten
+ abweichen kann.
+ Mit etwa 22 bis 24 Milliarden Parametern ist jedoch klar eine Grenze erreicht, sodass alle größeren
+ Modelle aus der Auswahl fallen.
+ Um eine faire Vergleichbarkeit zu schaffen, werden in diesem Projekt alle Modelle, auch die
+ kleineren, mit 4-Bit-AWQ-Quantisierung betrieben. In der Praxis kann jedoch die Quantisierung
+ bei kleinen Modellen weggelassen werden; so erhöht sich zusätzlich ihre Leistung. Dafür benötigen
+ sie jedoch mehr Speicherplatz. Es gilt daher abzuwägen, wie hoch die Anfragenlast im Vergleich
+ zur erwünschten Leistung ist.
+ Ein weiteres Eingrenzungskriterium ist die Leistung der Modelle in öffentlichen Benchmarks.
+ Allerdings ist hier Vorsicht geboten, denn solche Benchmarks können nicht immer die reale
+ Leistungsfähigkeit der Modelle abbilden. Ohne konkrete Beweise muss daher davon ausgegan-
+ gen werden, dass die aufgelisteten Modelle spezifisch auf Evaluationskriterien wie IFEval, BBH,
+ MATH, HumanEval oder weitere trainiert wurden. In einem kompetitiven Markt muss ein solches
+ Verhalten erwartet werden.
+ Mit diesen Aspekten im Hinterkopf konnten einige Modelle ausgewählt werden, die ein hohes
+ Potenzial aufweisen.
+ 49
+ 8 Marktforschung und Unternehmensanforderungen
+ Qwen/Qwen2.5-Coder-[14B/7B]-Instruct-AWQ
+ Dieses Modell wird sowohl in der 14B- als auch in der 7B-Variante betrachtet. Es handelt sich
+ um eine eigenständige Qwen-Architektur von Alibaba Cloud, das von GPT-4 Features inspiriert
+ wurde. Es weist ein langes Kontextfenster von 128k Tokens auf und wurde spezifisch auf Code-
+ und Mathematik-Aufgaben trainiert.
+ casperhausen/mistral-small-24b-instruct-2501-awq
+ Bei diesem Modell von Mistral AI handelt es sich um eine eigene Mistral-Architektur, die ver-
+ wandt mit der LLaMA-Architektur ist. Zu seinen Besonderheiten zählen die Sliding Window
+ Attention und die Multi-Query Attention. Im Vergleich zum klassischen Transformer ist es ef-
+ fizienter und schneller. Es ist besonders gut darin viel Leistung bei wenig VRAM-Verbrauch
+ zu liefern. Es handelt sich dabei um kein Modell, das spezifisch für Code-Completion trainiert
+ wurde. Stattdessen handelt es sich um ein Chat-Modell, das in der S-MS bereits für ein anderes
+ Projekt verwendet wird. Es soll genauer betrachtet werden, da so verglichen werden kann, ob sich
+ ein eigenständiges Code-Completion-Modell lohnt oder ob stattdessen das Chat-Modell direkt
+ verwendet werden kann.
+ TechxGenus/DeepSeek-Coder-V2-Lite-Instruct-AWQ
+ DeepSeek AI hat ein Mixture-of-Experts-Ansatz verfolgt und ein Modell geschaffen das spe-
+ zialisiert ist auf Code und ein langes Kontextfenster von 128k Tokens hat. Obwohl dieses 15,7
+ Milliarden Parameter hat, werden während der Inferenz tatsächlich nur 2,4 Milliarden Parameter
+ aktiv verwendet
+</div>
+ .
+ solidrust/Codestral-22B-v0.1-hf-AWQ
+ Codestral ist ein Fork von Mistral AIs eigener Mistral-Basis, jedoch sind die genauen Details
+ nicht bekannt. Dieser ist im Gegensatz zu den Basismodellen von Mistral AI spezifisch auf Code
+ optimiert.
+<h2>8.4 Unternehmensanforderungen und -prioritäten</h2>
+ Wegen der sensiblen Daten, die in der S-MS verarbeitet werden, steht die Datensicherheit an
+ oberster Stelle. Die Quellcodedaten und eventuell miteingebettete kundenspezifische Daten dür-
+ fen keineswegs an Dritte weitergegeben werden. Daraus leitet sich eine Affinität zu on-premise
+ Lösungen gegenüber Cloud-Services ab für dieses Projekt.
+ Die eingesetzten Modelle und Plattformen müssen bestimmte technische Anforderungen erfüllen.
+ Dazu zählt eine schnelle Reaktionszeit, sowie die Gewährleistung hoher Qualität der Vervollstän-
+ 8 Marktforschung und Unternehmensanforderungen
+ digungen. Gleichzeitig sind rechtliche Risiken möglichst minimal zu halten. Es wird spezifisch
+ gesucht nach einer Plattform, die Inline Code-Completion anbietet und mit der es möglich ist
+ eigene Modelle anzubinden. Erwünscht ist auch eine Chat-Funktion. Dadurch können die bereits
+ vorhandenen Chat-Modelle im Betrieb ebenfalls verwendet werden. Außerdem sollte eine aus-
+ reichende Kontextlänge gegeben sein, sodass relevante Ausschnitte aus dem gesamten Projekt
+ entnommen werden können.
+ Gewünscht, aber optional ist die Möglichkeit, dass das ausgewählte Modell auf die eigenen Daten
+ trainiert werden kann.
+ Organisatorisch sollen die Plattformen und Modelle eine leichte Wartung und Skalierbarkeit
+ anbieten. Eine Integration in bestehende DevOps-Prozesse ist aktuell nicht notwendig.
+ 51
+<h1>9 Analyse der aktuellen Plattform Refact.ai</h1>
+ Dieses Kapitel analysiert die Code-Completion-Plattform Refact.ai anhand definierter Kriterien.
+ Ziel des Kapitels ist es, die Stärken und insbesondere die Schwächen dieser Plattform zu iden-
+ tifizieren. So soll damit die Grundlage für den späteren Vergleich mit alternativen Plattformen
+ und damit auch für die Konzeptionierung einer neuen Lösung geschaffen werden. Alle Informa-
+ tionen stammen aus öffentlich zugänglichen Quellen und beinhalten den Funktionsumfang, die
+ technische Architektur und Aspekte zu Datenschutz und Integration.
+ Aus den gesammelten Daten wurde eine Feature-Matrix erstellt, die im Anhang in Tabelle 11
+ zu finden ist. Im zweiten Teil dieses Kapitels werden konkret die bestehenden Schwächen zusam-
+ mengefasst, die den Anreiz geschaffen haben, eine alternative Plattform zu finden.
+ Funktionalität
+ Refact.ai liefert eine Reihe an Funktionen wie die Code-Vervollständigung, einen integrierten KI-
+ Chat, automatisierte Code-Refactorings, Bugfixing, Dokumentationserstellung sowie Codegene-
+ rierung aus Textbeschreibungen. Die Kommunikation läuft über eine eingebaute REST-API und
+ On-Premise-Installationen sind ebenfalls möglich. Darüber hinaus wird eine Agenten-Funktion
+ angeboten, die ganze Entwicklungsaufgaben autonom erarbeiten kann.
+ IDE-Kompatibilität
+ Mithilfe eines Plugins kann die Refact.ai-Plattform in viele beliebte IDEs eingebunden werden,
+ darunter auch JetBrains IDEs und Visual Studio Code. Sie erkennt die Projektstruktur, so-
+ wie Abstract Syntax Trees — das sind strukturierte, vereinfachte Darstellungen des Codes als
+ Baum. Zum Kontext werden außerdem die Cursorposition und eingefügte Bibliothek-Importe
+ hinzugezogen. Die Kontextanalyse erfolgt über eine Vektor-Datenbank. Sie ermöglicht es rele-
+ vante Informationen über das gesamte Projekt hinweg effizient in die Vorschläge einzubeziehen.
+ Datenschutz
+ Die Plattform sichert den Datenschutz durch drei Privacy-Level. Auf Level 2 können externe Zu-
+ griffe auf lokale Dateien und auf externe Dienste erfolgen. So kann eine maximale Funktionalität
+ erreicht werden. Bei Level 1 wird die externe Kommunikation verboten. Nur interne Modelle oder
+ ein Self-Hosted Refact.ai-Server können verwendet werden. Damit bleibt der Code vollständig
+ im eigenen Netzwerk und ist somit DSGVO-konform. Auf der sichersten Stufe 0 wird selbst der
+ Zugriff auf lokale Dateien verboten und die Kommunikation auf lokale Dienste wird ebenfalls
+ verboten. Damit sind zwar die meisten Features inaktiv, darunter auch die Code-Completion,
+ jedoch wird so maximale Sicherheit geschaffen. Sollte dies gewünscht sein, können generell auch
+ 52
+ 9 Analyse der aktuellen Plattform Refact.ai
+ Zugriffsbeschränkungen und Datei-Exklusionen konfiguriert werden, um sensible Bereiche gezielt
+ zu schützen.
+ User Experience und Developer Experience
+ Es wird eine unkomplizierte Integration der Plattform mittels eines Plugins in die IDEs ange-
+ boten. Die Bedienung wird mit Bedienelementen und dedizierten Fenstern schnell und einfach
+ gehalten. Darunter fallen Funktionen wie ein Chat-Fenster, Kontextmenüs und Autocomplete-
+ Dropdowns. Die Vorschläge erscheinen direkt an der Cursorposition und können per Hotkeys
+ oder Mausklicks abgelehnt oder akzeptiert werden. Durch ein Menü können andere unterstützte
+ Modelle ausgewählt werden (z. B. GPT-4, Claude oder eigene Refact-Modelle); Eine Einbindung
+ eigener Modell-Backends ist nicht vorgesehen. Für die Inline-Code-Completion gibt es Modi wie
+ Explain, Bugfix oder Refactor, die eine zielgerichtete Bearbeitung bzw. Hilfestellung für ausge-
+ wählte Codebereiche ermöglichen.
+ Erweiterbarkeit
+ Refact.ai bietet über Open-Source-Komponenten, wie etwa die IDE-Plugins, Anpassungs- und
+ Erweiterungsmöglichkeiten an. Die Kernplattform inklusive der verwendeten Modelle und Ser-
+ verkomponenten ist jedoch proprietär. Es besteht die native Möglichkeit ein Fine-Tuning auf der
+ eigenen Codebasis vorzunehmen. Dies ist jedoch nur in der Enterprise-Variante möglich. Zudem
+ stehen eine API und eine CLI zur Verfügung, um die Plattform auch außerhalb einer IDE zu
+ verwenden und beispielsweise in eigene Workflows einzubinden. Eine direkte, native Einbindung
+ in CI/CD-Pipelines wird zwar nicht angeboten, jedoch könnte dies über API- oder CLI-basierte
+ Lösungen technisch realisiert werden.
+ Integration in bestehende Tool-Landschaften
+ Über die Agenten-Funktionalität kann Refact.ai mit weiteren Werkzeugen interagieren, darunter
+ beispielsweise GitHub und GitLab, verschiedene Datenbanken, Docker oder auch der Chrome-
+ Browser. Diese Integrationen erfolgen über sogenannte Tool-Adapter innerhalb des Agenten, wel-
+ che die Kommunikation mit externen Systemen ermöglichen. Mithilfe dieser Anbindungen lassen
+ sich Build-, Test- und Deployment-Prozesse automatisieren sowie End-to-End-Tests durchfüh-
+ ren. Kritische Aktionen, die Änderungen an der Codebasis betreffen, erfordern dabei die explizite
+ Bestätigung durch den Nutzer, um Fehlkonfigurationen oder unbeabsichtigte Änderungen zu ver-
+ meiden.
+ Skalierbarkeit
+ Durch die On-Premise-Installationsfähigkeit können horizontale Skalierungen, also über mehrere
+ GPUs und Instanzen, vorgenommen werden. Damit eignet sich die Plattform sowohl für klei-
+ ne Teams als auch für große Unternehmen. Die Kontextverarbeitung erfolgt über eine Vektor-
+ 53
+ 9 Analyse der aktuellen Plattform Refact.ai
+ Datenbank mit semantischer Suche, die relevante Informationen aus dem Projekt effizient be-
+ reitstellt. Dieses Vorgehen entspricht in ihrer Methodik den Mechanismen des RAG-Ansatzes.
+ Performance
+ Nach Angaben von Refact.ai können durch Caching-Mechanismen sowie ein stringentes Kontext-
+ Management sowohl eine Vervollständigung, als auch ein KI-gestützter Chat nahezu in Echtzeit
+ erfolgen. Die Voraussetzung dafür ist, dass das eingesetzte Modell selbt eine geringe Latenz un-
+ terstützt. Die Plattform beschreibt eine hohe Reaktionsgeschwindigkeit auch bei größeren Pro-
+ jekten und Anfragen. Unabhängige Benchmarks zur Bestätigung dieser Performance-Angaben
+ liegen jedoch nicht vor.
+ Besondere Merkmale
+ Refact.ai bietet besondere Features an, wie zum Beispiel die Agenten-Funktionalität, die Mög-
+ lichkeit des Fine-Tunings auf die eigene Codebasis sowie die eigene Modellwahl und -anbindung.
+ Dies unterscheidet die Plattform von vielen anderen Lösungen die es aktuell auf dem Markt gibt.
+<h2>9.1 Schwächenanalyse der bestehenden Plattform Refact.ai</h2>
+ Aus der Recherche und Analyse der Refact.ai-Plattform ergeben sich einige Schwächen, die aus
+ der Perspektive der S-MS zu Ungereimtheiten führen. Diese Limitationen werden nun im Fol-
+ genden zusammengefasst.
+ Limitierte Anpassbarkeit und Modellabhängigkeit
+ Ein großes Problem mit der aktuellen Plattform ist die nicht ausreichende Flexibilität, insbe-
+ sondere bei der Auswahl und Integration von LLM-Modellen. Obwohl einige Modelle direkt von
+ Refact.ai zur Verfügung gestellt werden, bleibt die Anbindung alternativer oder sogar eigener
+ Modelle nativ ausgeschlossen. Es bedarf erheblicher Umwege und Konfigurationsaufwände, um
+ andere Modelle zu integrieren. Durch solche elementaren Eingriffe in die Codebasis der Platt-
+ form, erhöht sich der Wartungsaufwand und die Gefahr von Bugs. Es wird eine „Bring Your Own
+ LLM“ Strategie angestrebt, die nicht vorgesehen ist. Daraus resultiert eine Abhängigkeit des
+ Unternehmens von bestimmten Modellanbietern, was die Preisgestaltung, Kontrolle und Daten-
+ schutzfragen betrifft. Besonders wegen den hohen Datenschutzanforderungen ist die Plattform
+ auf lange Sicht nicht tragbar.
+ Eingeschränkte Erweiterbarkeit und Integrationen
+ Da Teile der Plattform proprietär sind, leidet die Erweiterbarkeit der Plattform. Die On-Premise-
+ Installation sowie eine gewisse Freiheit der Konfiguration sind zwar gegeben, allerdings fehlen
+ 54
+ 9 Analyse der aktuellen Plattform Refact.ai
+ Mechanismen für zukünftige Integrationen in eigene Workflows. Weitere Kontextquellen oder an-
+ derweitige Informationen, wie die Ticket-Daten, können nicht ohne Weiteres eingebunden werden.
+ Die Integration in eigene CI/CD-Pipelines oder Dokumentationen ist ebenfalls nur über Umwege
+ realisierbar, was besonders in komplexen Entwicklungsumgebungen eine Schwäche darstellt.
+ Begrenztes Feintuning und fehlende Modulanpassung
+ Das Fine-Tuning-Feature der Plattform ist ausschließlich der Enterprise-Version vorbehalten. Die
+ Modellanpassung auf die eigene Codebasis kann somit nur unter hohen Kosten erfolgen. Konkrete
+ Einstellungen dabei sind vom Nutzer direkt nicht anpassbar und an das vorgegebene Modell-
+ Setup gebunden. Eigene Prompt-, Retrieval- und Kontextmanagement-Strategien sind durch
+ diese proprietäre Architektur nur begrenzt möglich, oder sogar gar nicht umsetzbar. Insgesamt
+ erschwert dies eine optimale Hilfestellung durch die KI-Assistenz bei internen Standards und
+ Workflows.
+ Agenten-Funktionalität ohne vollständige Toolsteuerung
+ Möchte das Unternehmen die Agenten-Funktionalität nutzen, stößt es in der Praxis schnell an
+ Grenzen- die Tools können nur einfache Operationen innerhalb der Codebasis durchführen. Die
+ Möglichkeit tiefergehende Tools in der Zukunft integrieren zu können, liegt jedoch im Interes-
+ se der S-MS. Beispiele für interessante Einsatzgebiete sind das autonome Einbinden externer
+ APIs, sowie die Shell-Nutzung, sowie Anfragen an verfügbare Datenbanksysteme. Für komplexe
+ Entwicklungsaufgaben sind die verfügbaren Funktionalitäten von Refact.ai möglicherweise nicht
+ ausreichend.
+ Geringe Transparenz und fehlende Open-Source-Basis
+ Es besteht zwar eine volle Einsicht in die Open-Source-Komponenten, doch die Transparenz der
+ Kernplattform und verwendeten Modelle bleibt trüb, da diese proprietär sind. Anpassungen der
+ Kernlogik sind nicht möglich und über die Entscheidungsprozesse der KI gibt es keine Einsicht.
+ So fehlt die Möglichkeit, detaillierte Dokumentationen für Auditierungen zu erstellen und eine
+ langfristige Nachvollziehbarkeit zu schaffen, was besonders im Finanzsektor und bei öffentlichen
+ Auftraggebern wie den Sparkassen problematisch sein kann.
+ 55
+<h1>10 Analyse alternativer Plattformen</h1>
+ Zuvor wurden bereits einige Plattformen recherchiert und jeweils eine Feature-Matrix erstellt.
+ Danach wurde die Ist-Analyse der aktuell genutzten Refact.ai-Plattform durchgeführt. In die-
+ sem Kapitel soll zunächst die Auswahl mithilfe einer Sammlung an Ausschlusskriterien einge-
+ grenzt werden. Anschließend sollen die verbleibenden Plattformen genauer betrachtet und mit
+ der Refact.ai-Plattform verglichen werden.
+<h2>10.1 Präemptiver Ausschluss ungeeigneter Plattformen</h2>
+ Auf den Grundlagen, die im Kapitel 8 (Marktforschung und Unternehmensanforderungen) ge-
+ legt wurden, erfolgt nun die Eingrenzung und Suche nach geeigneten Plattformen. Es werden
+ zunächst die Ausschlusskriterien vorgestellt, diese werden dann auf die recherchierten Plattfor-
+ men angewendet. Dies führt schließlich im nächsten Abschnitt zur genaueren Betrachtung der
+ verbleibenden Plattformen und zur Auswahl der Soll-Plattform.
+ Ausschlusskriterien
+ Aus den Anforderungen an den Datenschutz, der freien Auswahl von Modellen und der Anpass-
+ barkeit der gesamten Lösung ergeben sich die folgenden Ausschlusskriterien:
+ › Self-Hosting/ vollständig lokale Betriebsmöglichkeit
+ › Freie Modellwahl und Unterstützung eigener LLM-Backends
+ › Offene oder überprüfbare Plattformbasis (Open Source oder dokumentierte Transparenz)
+ › Kompatibilität mit gängigen IDEs (mindestens JetBrains und Visual Studio Code)
+ Mithilfe dieser Kriterien soll sichergestellt werden, dass keine Ressourcen an Plattformen ver-
+ schwendet werden, die von Grund auf nicht den Anforderungen entsprechen. Es wird also ausge-
+ schlossen, dass Plattformen in die engere Auswahl kommen, die nicht alle Anforderungen erfüllen.
+ Bewertung der Plattformen
+ Die Tabelle 13 bewertet alle recherchierten Plattformen anhand der Ausschlusskriterien und zieht
+ ein Fazit. Sie ist im Anhang zu finden.
+ Anhand der Tabelle wird deutlich, dass lediglich die Plattform Continue.dev alle, doch die an-
+ deren Plattformen mindestens eines der Kriterien nicht erfüllen. Refact.ai und die Enterprise-
+ Version von GitHub Copilot konnten allerdings einige der Kriterien teilweise oder vollständig
+ erfüllen; Keine Plattform jedoch alle.
+ 56
+ 10 Analyse alternativer Plattformen
+ Damit ist klar, dass im nachfolgenden Abschnitt Continue.dev als einzige Plattform genauer
+ betrachtet und mit Refact.ai direkt verglichen wird.
+<h2>10.2 Verbesserungspotenziale durch Continue.dev (On-Premise)</h2>
+ Continue.dev ist in der Lage, die bestehenden Schwächen der Refact.ai-Plattform anzusprechen.
+ Zu diesen gehört die Anpassbarkeit, Integrationstiefe, Modellflexibilität und auch die Erweiter-
+ barkeit. Nun wird näher erläutert, wie konkret die Potenziale von Continue.dev zur Verbesserung
+ der Lösung im On-Premise-Betrieb führen.
+ Hohe Modellflexibilität und Bring-Your-Own-LLM
+ Da Continue.dev das „Bring Your Own LLM“ Konzept verfolgt, unterstützt es eine Vielzahl an
+ Backends durch eine API-basierte Architektur. Damit können sowohl lokale, als auch cloudba-
+ sierte Modelle angebunden und genutzt werden, was maximale Flexibilität und Anpassbarkeit
+ bietet. Welches Modell nun genutzt werden soll und wo es betrieben wird, liegt damit vollständig
+ unter der Kontrolle des Nutzers.
+ Offene Erweiterbarkeit und Integrationstiefe
+ Aktuell befindet sich Continue.dev auf dem Weg, die Konfigurationsdatei von .json zu .yaml
+ zu ändern. In jedem Fall kann jedoch frei konfiguriert werden. Zudem kann sogar der gesamte
+ Code an sich angepasst werden, da Continue.dev auf einer Open-Source-Basis beruht. So kön-
+ nen auch Hard-Codings umgesetzt und ganze Funktionen entfernt, bearbeitet oder hinzugefügt
+ werden. Es bietet damit die Möglichkeit, die Plattform in interne Werkzeuge wie Ticketsysteme,
+ Datenquellen oder CI/CD-Prozesse mit relativ geringem Arbeitsaufwand anzusprechen.
+ Tiefe Integrationen, Einstellungen und Automatisierungen sind so im Vergleich zu Refact.ai
+ möglich, bei dem dies z. T. nur sehr eingeschränkt möglich ist.
+ Feingranulare Anpassbarkeit von Prompts, Regeln und Workflows
+ Anders als Refact.ai ermöglicht Continue.dev auch die Anpassung der Prompts sowie ihren Re-
+ geln und der Assistenzlogik. Spezifische Guidelines und Konventionen zu definieren ist ebenfalls
+ leicht umsetzbar. Das gilt auch für die Automatisierung von wiederkehrenden Aufgaben des
+ Entwicklungsprozesses.
+ Insgesamt kann Continue.dev in hohem Maße an die Bedürfnisse des Unternehmens angepasst
+ werden.
+ 57
+ 10 Analyse alternativer Plattformen
+ Agent-Funktionalität mit erweiterter Toolsteuerung
+ Continue.dev verfügt über eine integrierte Agenten-Funktionalität. Diese ermöglicht es, auch
+ komplexe Entwicklungsaufgaben durchzuführen und übernimmt durch diese interaktive und au-
+ tonome Nutzung viele Aufgaben, die sonst manuell durchgeführt werden müssten. Es kann dabei
+ Teilschritte selbstständig ausführen und externe Tools sowie eigene Logik nutzen. Aufgaben, wie
+ das Lesen und Schreiben von Dateien, das Suchen im Projekt sowie die Ausführung von Befehlen
+ in der Konsole gehören zu den vielen Möglichkeiten. Damit geht die Plattform weit über die ein-
+ fache Code-Vervollständigung hinaus und tritt in die Rolle des aktiven Entwicklungsassistenten
+ ein.
+ Transparenz und Nachhaltigkeit durch Open-Source-Basis
+ Es ist möglich, den gesamten Code von Continue.dev einzusehen und zu bearbeiten; zudem ist
+ es unter Apache 2.0 lizenziert. Das ist eine wertvolle Eigenschaft, wenn es um die Kontrolle des
+ Datenflusses und um die Auditierbarkeit geht. So können auch bei sicherheitskritischen Umge-
+ bungen die regulatorischen Anforderungen erfüllt werden.
+ Auch die Nachhaltigkeit ist gegeben, da sich das Unternehmen jederzeit dazu entscheiden kann,
+ die Plattform an neue Technologien oder Anforderungen anzupassen.
+ Fazit zur Verbesserung gegenüber Refact.ai
+ Insgesamt werden einige zentrale Schwächen von Refact.ai durch den Einsatz von Continue.dev
+ gelöst und die Lösung entspricht damit den Anforderungen des Unternehmens besser. Die Platt-
+ form geht über die aktuellen Anforderungen hinaus und bietet eine Grundlage für zukünftige
+ Anpassungen und Erweiterungen. Mit der Plattform kann ein einfacher und sicherer On-Premise-
+ Betrieb in Gang gesetzt werden.
+ 58
+<h1>11 Evaluation vielversprechender Modelle</h1>
+<h2>11.1 Zielsetzung der Evaluation</h2>
+ Es soll eine systematische Evaluation erfolgen, sodass eine fundierte Auswahl über den Einsatz
+ geeigneter Code-Completion-Modelle getroffen werden kann. Verschiedene LLM-Modelle unter-
+ scheiden sich primär in ihrer Leistungsfähigkeit und ihrem Kontextverständnis. Darüber hinaus
+ unterscheiden sie sich auch in ihrer Eignung für spezifische Unternehmensanforderungen Fehlent-
+ scheidungen sollen vermieden werden, um die Qualität der angewandten Modelle in der Produk-
+ tivumgebung sicherzustellen Ein Blick auf öffentliche Benchmarks reicht nicht aus, um die reale
+ Leistung der Modelle zu bewerten. Zum einen liegt das an der Möglichkeit, dass Modelle spezi-
+ fisch auf die Benchmarks trainiert werden können und sie damit nicht mehr repräsentativ sind.
+ Zum anderen liegt das daran, dass Benchmarks nicht dem Nutzungsszenario in einem Betrieb
+ entsprechen..
+ Daher ist das Ziel der Evaluation, die Leistungsfähigkeit selbst zu erfassen, insbesondere die
+ Qualität der Vervollständigungen und die Problemlösungskompetenz. Ein weiteres Ziel ist die
+ Erfassung der wahrgenommenen Akzeptanz bei Nutzerinnen und Nutzern der einzelnen Modelle.
+ Dazu werden zunächst zwei Methoden verwendet. Die erste Methode ist die Aufgabenprüfung, in
+ der Modelle Probleme lösen müssen und für ihre Lösungen Punkte erhalten. Die zweite Methode
+ ist eine Nutzerbefragung durch einen Fragebogen nach jedem Einsatz.
+ Diese beiden Methoden sind im Sinne des DSR-Ansatzes Teil eines iterativen Prozesses, bei dem
+ die Ergebnisse der Evaluationsverfahren als Grundlage für nachfolgende Entwicklungsphasen
+ dienen.
+<h2>11.2 Methodik: Prüfung der Modelle durch Code-Challenges</h2>
+ In der ersten Evaluationsmethode wird eine standardisierte Aufgabenprüfung durchgeführt. Alle
+ Modelle müssen die gleichen Aufgaben zu den Programmiersprachen Java, Python und Type-
+ Script lösen. Es gibt aufsteigend fünf Schwierigkeitsgrade, die, entsprechend ihrem Level, eine
+ bestimmte Punktzahl bei korrekter Lösung einbringen.
+ Dazu werden die Aufgaben nacheinander als Aufgabenstellung an die Modelle übermittelt. Ihre
+ Antworten werden dann mit Unit-Tests auf ihre funktionale Richtigkeit getestet. Schlägt der
+ Test fehl, so werden keine Punkte vergeben; bei Erfolg wird die Punktzahl dem Gesamtergebnis
+ hinzugefügt.
+ Am Ende werden die Gesamtpunktzahlen der einzelnen Modelle miteinander verglichen So soll
+ eine realistische Einschätzung der Modellfähigkeiten ermöglicht werden.
+ 59
+ 11 Evaluation vielversprechender Modelle
+<h2>11.3 Methodik: Nutzerfeedback zum Praxiseinsatz</h2>
+ Um unter fairen Rahmenbedingungen Feedback zu allen Modellen zu erhalten, werden die Namen
+ der Modelle den Testerinnen und Testern nicht bekannt gegeben. Sie erhalten einen Prototypen
+ des Continue.dev Systems, das von ihnen über den gesamten Testzeitraum genutzt werden soll.
+ Im Hintergrund wird in festgelegten Intervallen das betriebene Modell auf dem Backendserver ge-
+ wechselt. Zum Schluss jeder Iteration, sollen die Nutzerinnen und Nutzer am Ende jeder Iteration
+ einen Fragebogen zu ihren Erfahrungen ausfüllen.
+ Im geplanten Fragebogen sollen nur wenige Fragen gestellt werden, um eine hohe Rücklaufquote
+ zu gewährleisten. Mögliche Fragen könnten wie folgt aussehen:
+ › Wie hilfreich waren die Vorschläge des Modells? (Skala 1-5)
+ › Wie oft haben Sie die Vorschläge genutzt? (Skala 1-5)
+ › Haben die Vorschläge Ihren Workflow unterstützt oder gestört? (Skala 1-5)
+ Mithilfe des Fragebogens soll die Einschätzung der Nutzerinnen und Nutzer zur Qualität und
+ Nützlichkeit der Vorschläge sowie zur wahrgenommenen Akzeptanz des Modells.
+ Diese zweite Evaluationsmethode wird aus Zeitgründen nicht im Rahmen dieser Arbeit durchge-
+ führt. Sie dient jedoch als Startpunkt und theoretische Grundlage für die spätere Durchführung
+ Die Befragung kann so ohne zeitlichen Druck durchgeführt werden, was eine genauere Analyse
+ der Ergebnisse ermöglichen soll.
+ 60
+<h1>12 Ergebnisse und Entscheidung</h1>
+<h2>12.1 Ergebnisse der Plattformanalyse</h2>
+ Als erster Schritt wurde nach einer umfassenden Sammlung von Informationen eine eingeschränk-
+ te Auswahl von Plattformen getroffen. Die Auswahl erfolgte auf Basis der folgenden vier Inklu-
+ sionskriterien:
+ › Self-Hosting möglich
+ › Freie Modellwahl
+ › Open-Source-Basis
+ › IDE-Kompatibilität mit Visual Studio Code und JetBrains IDEs
+ Durch diese Kriterien wurde klar, dass lediglich eine Plattform als Alternative zu Refact.ai in
+ Frage kommt: Continue.dev. Daraufhin wurde diese Plattform genauer betrachtet und es wurden
+ die relevanten Vorteile gegenüber Refact.ai herausgearbeitet.
+ Beim Vergleich der beiden Plattformen wurde besonders auf die folgenden Punkte geachtet:
+ › Anpassbarkeit und Modellflexibilität
+ › Datenschutz und Auditierbarkeit
+ › Integrationsmöglichkeiten und Erweiterbarkeit
+ Es wurden genau diese Punkte von der S-MS als relevant betrachtet aufgrund ihrer Geschäfts-
+ beziehung mit öffentlichen Stellen und der damit verbundenen Verantwortung für die Daten.
+ Damit dies glatt verläuft, ist eine hohe Anpassbarkeit und Flexibilität der Plattform notwendig.
+ Die Integrationsmöglichkeit und Erweiterbarkeit sind insbesondere wichtig, sodass die Plattform
+ nachhaltig und effizient gewartet werden kann. In allen drei Punkten hat Continue.dev klare
+ Vorteile gegenüber Refact.ai.
+<h2>12.2 Durchführung und vorläufige Ergebnisse der Modellevaluation</h2>
+ Zur Vorarbeit wurden drei Klausuren für die Programmiersprachen Java, Python und TypeScript
+ erstellt. Es wurden jeweils fünf Schwierigkeitsstufen definiert, die von einfach bis anspruchsvoll
+ reichen. Angefangen bei den Java-Aufgaben stellte sich jedoch schnell heraus, dass die Aufgaben
+ insgesamt zu einfach waren, sodass sich im Verlauf der Evaluation kaum eindeutige Leistungs-
+ unterschiede feststellen ließen. Daraufhin wurden die Aufgaben der anderen beiden Sprachen
+ verschärft und anspruchsvoller gestaltet.
+ 61
+ 12 Ergebnisse und Entscheidung
+ Bei der Erstellung der Aufgaben wurde darauf geachtet, dass die Modelle so einfach wie mög-
+ lich getestet werden können. Das beinhaltet die Atomatisierung der Aufgaben, sodass immer
+ nur genau eine Methode bzw. Funktion implementiert werden soll. Zum anderen wurde darauf
+ geachtet, dass die Implementierung genau am Ende oder kurz davor erfolgt. So haben selbst
+ Modelle eine gute Chance, wenn sie nicht in der Lage sind zu verstehen, dass der Code an der
+ aktuellen Cursor-Position eingefügt werden soll. Die Plattform gibt immer den gesamten Inhalt
+ der Dateien an die Modelle weiter, sodass sie zum Teil dachten, dass sie entweder eine neue
+ Aufgabe schreiben oder einen Docstring generieren sollten.
+ Außerdem fiel auf, dass das Codestral-22B-Modell nicht in der Lage war, korrekt mit dem Pro-
+ totypen der Plattform zu kommunizieren. Funktionale Tags wurden daher nicht erkannt und
+ wurden daher fälschlich in den Vorschlag für den Nutzer bzw. die Nutzerin übernommen. Ein
+ aufgezeichnetes Beispiel dieses Problems ist in Abbildung 1 zu sehen.
+ Abb. 1: Beispiel für einen Fehler bei Codestral (Screenshot).
+ In den Abbildungen 2 bis 4 sind die Ergebnisse der Evaluation für die drei Programmiersprachen
+ dargestellt.
+ 62
+ 12 Ergebnisse und Entscheidung
+ Die volle Punktzahl der Java Klausur beträgt 28 Punkte, die Modelle erzielten dabei folgende
+ Ergebnisse:
+ 1. Codestral 22B – 28 Punkte
+ 1. Qwen2.5-Coder-7B – 28 Punkte
+ 2. Qwen2.5-Coder-14B – 24 Punkte
+ 3. Mistral Small 24B – 8 Punkte
+ Die volle Punktzahl der Python Klausur beträgt 43 Punkte, die Modelle erzielten dabei folgende
+ Ergebnisse:
+ 1. Codestral 22B – 33 Punkte
+ 1. Qwen2.5-Coder-14B – 33 Punkte
+ 2. Qwen2.5-Coder-7B – 23 Punkte
+ 3. Mistral Small 24B – 5 Punkte
+ Die volle Punktzahl der TypeScript Klausur beträgt 65 Punkte, die Modelle erzielten dabei
+ folgende Ergebnisse:
+ 1. Codestral 22B – 29 Punkte
+ 2. Qwen2.5-Coder-14B – 28 Punkte
+ 3. Qwen2.5-Coder-7B – 24 Punkte
+ 4. Mistral Small 24B – 2 Punkte
+ Jedoch ist bei diesem Ergebnis zu beachten, dass die Modelle Codestral 22B und Mistral Small
+ 24B externe Nachhilfe erhalten haben. Zwar hatten sie korrekten Code in den Vorschlägen gelie-
+ fert, jedoch mussten oft nachträglich überschüssige Zeilen durch Inkompatibilität mit dem Pro-
+ totypen entfernt werden. Zudem musste oft eine nachfolgende geschlossene geschweifte Klammer
+ entfernt werden, da die Prototypen nicht in der Lage waren, ihre Vorschläge an den richtigen
+ Stellen zu orientieren. Gegebenenfalls wurde außerdem ein Kommentar hinzugefügt, um vorge-
+ schlagene Platzhalter-Return-Anweisungen zu verhindern.
+<h2>12.3 Erkenntnisse und Ableitungen</h2>
+ Aus den vorliegenden Ergebnissen wird deutlich, dass der Einsatz der Continue.dev Plattform in
+ der S-MS sinnvoll ist. Nachdem diese Erkenntnis gewonnen wurde folgte daraus die Entscheidung,
+ einen Prototypen zu entwickeln. Der daraus entstandene Prototyp wurde dann für die Evaluation
+ der Modelle verwendet und war zum Großteil funktionsfähig. Einige Anpassungen wurden jedoch
+ vorgenommen. Außerdem wurden einige Fehler entdeckt, die es noch zu beheben gilt.
+ 63
+ 12 Ergebnisse und Entscheidung
+ In der Evaluation der Modelle schneidet Codestral 22B numerisch am besten ab. Allerdings muss
+ im Hinterkopf behalten werden, dass dieses Modell nicht zuverlässig genutzt werden konnte. Ohne
+ externe Unterstützung wäre die Mehrheit der erzielten Punkte vermutlich nicht erreicht worden.
+ Subjektiv wurde festgestellt, dass Qwen2.5-Coder-14B und Qwen2.5-Coder-7B die souveränsten
+ Vorschläge gemacht haben. Sie erzielten gute Punktzahlen, und ihre Vorschläge mussten nicht
+ nachträglich bearbeitet werden.
+ Daraus ergibt sich die Erkenntnis, dass Qwen2.5-Coder-14B derzeit die beste Wahl darstellt
+ — zumindest solange Codestral 22B noch nicht sauber in den Evaluationsprozess eingebunden
+ werden kann.
+ 64
+<h1>13 Reflexion und Ausblick</h1>
+ In der vorliegenden Arbeit wurde das Ziel verfolgt, ein Code-Completion-System anhand konkre-
+ ter Unternehmensanforderungen zu konzipieren sowie passende Evaluationsverfahren für Platt-
+ formen und Modelle durchzuführen. Auf dieser Grundlage sollte ein Prototyp entwickelt werden,
+ der dann iterativ getestet und verbessert werden sollte. Es handelt sich bei diesem wiederholen-
+ den Prozess um einen Design Science Research-Zyklus. Die erste Iteration wurde in dieser Arbeit
+ bearbeitet.
+ Es folgen nun kritische Reflexionen zur Durchführung und den Ergebnissen. Damit soll eine
+ Perspektive für mögliche Weiterentwicklungen aufgezeigt werden.
+<h2>13.1 Grenzen der Evaluation</h2>
+ Dank der erfolgreichen Evaluation ausgewählter Plattformen und Modelle konnte ein Continue.dev-
+ basierter Prototyp entwickelt und LLM-Modelle getestet werden. Die Umsetzung der Methodik
+ blieb jedoch in Tiefe und Breite eingeschränkt, da die zur Verfügung stehenden Serverressour-
+ cen und das Zeitfenster begrenzt waren. Die Klausuraufgaben für die Modellevaluation geben
+ nur einen Teil der erforderlichen Informationen wieder. Daher konnte zwar kein finales Ergebnis
+ erzielt, aber ein solider Anhaltspunkt gewonnen werden. Allein mit diesen Aufgaben ließ sich
+ der reale Nutzungskontext nur unzureichend abbilden; stattdessen konnten lediglich objektiv
+ beobachtbare Ergebnisse erhoben werden. Wie gut die jeweiligen Modelle in der tatsächlichen
+ Anwendung performen, bleibt somit weiterhin unklar.
+ Die Gestaltung der Klausuren ist verbesserungswürdig, insbesondere bei den Java- und Python-
+ Aufgaben. Hier ergaben sich durch Erfahrung und Reflexion klare Schwächen und Ungereimthei-
+ ten. So waren die Java-Aufgaben zunächst zu einfach gewählt, und rückblickend entsprachen die
+ Python-Aufgaben teilweise nicht den angegebenen Schwierigkeitsgraden. Die erzielte Punktzahl
+ ist demnach in der ersten Iteration kritisch zu betrachten. Eine zukünftige Auswertung könnte
+ zu belastbareren Ergebnissen führen.
+<h2>13.2 Offene technische Perspektiven</h2>
+ Der Verlauf des Projekts zeigte, dass mit den erarbeiteten Modellen eine grundlegende Inbe-
+ triebnahme möglich wäre. Allerdings gibt es noch viele Anhaltspunkte, die zu einer verbesserten
+ Modellleistung und damit zu höherer Vorschlagsqualität führen könnten. In zukünftigen DSR-
+ Iterationen könnte an einer Anbindung von Reranking-Modellen zur Auswahl des besten von
+ mehreren Vorschlägen geforscht werden. Außerdem könnten Embedding-Modelle helfen, die Co-
+ debasis semantisch besser zu verstehen, um gezieltere Vorschläge zu generieren.
+ 65
+ 13 Reflexion und Ausblick
+ Besonders in den vergangenen Monaten sind zunehmend sogenannte Reasoning-Modelle aufge-
+ kommen. Diese sind in der Lage, Denkprozesse zu simulieren, Aufgaben in mehrere Teilschritte
+ zu gliedern und diese nacheinander zu lösen. Obwohl dies in der Regel zu längeren Laufzeiten
+ führt, ist es sinnvoll, die Eignung solcher Modelle im Code-Completion-Kontext zu prüfen. Al-
+ ternativ könnte damit auch die Chat-Funktion der Continue.dev-Plattform verbessert werden,
+ da dort längere Antwortzeiten weniger kritisch sind.
+ Ein weiterer Trend, der im Markt zu beobachten ist, ist die Entwicklung der Code-Completions
+ hin zur sogenannten Agentic AI. Erste Experimente können bereits in Aktion gesehen werden, wie
+ beispielsweise bei GitHub Copilot. Dabei sollen selbstständig agierende Agenten ganze Aufgaben
+ eines Entwicklungszyklus übernehmen können. Um mit der fortschreitenden Forschung Schritt
+ zu halten und frühzeitig disruptive Technologien zu identifizieren, ist es sinnvoll, auch solche
+ Trends zeitnah genauer zu betrachten.
+<h2>13.3 Fazit und Ausblick</h2>
+ Diese Arbeit leistet einen Beitrag zur Integration moderner Ansätze für Code-Completion-Systeme
+ im datensensiblen Unternehmensumfeld. Sie ist als Teil eines langfristigen, iterativen Prozesses
+ zu verstehen, bei dem deutlich wird, dass eine einmalige Durchführung allein nicht ausreicht.
+ Mehrere Iterationen sind notwendig, um das volle Potenzial von Code-Completion-Systemen
+ auszuschöpfen. Die entwickelte Lösung soll daher kontinuierlich weiterentwickelt und um neue
+ Komponenten ergänzt werden – insbesondere im Hinblick auf sich wandelnde Anforderungen,
+ technologische Fortschritte und zukünftige Einsatzszenarien.
+ Sowohl innerhalb der S-Management Services GmbH als auch im Kontext öffentlicher Forschung
+ und Entwicklung bietet diese Arbeit eine tragfähige theoretische und praktische Grundlage für
+ die schrittweise Erarbeitung leistungsfähiger, anpassbarer und verantwortungsvoll einsetzbarer
+ Systeme im datensensiblen Unternehmensumfeld.
+ Damit ist ein Ausgangspunkt geschaffen, der nicht als Abschluss, sondern als Einladung zur
+ Weiterarbeit zu verstehen ist.
+ 66
+<h1>Anhang</h1>

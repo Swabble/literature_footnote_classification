@@ -42,5 +42,335 @@
     "doi": "10.48550/arXiv.2402.05122",
     "url": "http://arxiv.org/abs/2402.05122",
     "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-5",
+    "titel": "Large language models: a survey of their development, capabilities, and applications",
+    "autor": {
+      "vorname": "Yadagiri",
+      "nachname": "Annepaka"
+    },
+    "doi": "10.1007/s10115-024-02310-4",
+    "url": "https://link.springer.com/10.1007/s10115-024-02310-4",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-6",
+    "titel": "Claude 3.7 Sonnet",
+    "autor": {
+      "vorname": "Anthropic",
+      "nachname": ""
+    },
+    "doi": null,
+    "url": "https://www.anthropic.com/claude/sonnet",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-7",
+    "titel": "The Impact of Artificial Intelligence on Chatbot Technology: A Study on the Current Advancements and Leading Innovations",
+    "autor": {
+      "vorname": "Farhan",
+      "nachname": "Aslam"
+    },
+    "doi": "10.47672/ejt.1561",
+    "url": "https://www.researchgate.net/publication/373138851_The_Impact_of_Artificial_Intelligence_on_Chatbot_Technology_A_Study_on_the_Current_Advancements_and_Leading_Innovations",
+    "erscheinungsjahr": 2023
+  },
+  {
+    "segment_id": "seg-1",
+    "titel": "Neural Machine Translation by Jointly Learning to Align and Translate",
+    "autor": {
+      "vorname": "Dzmitry",
+      "nachname": "Bahdanau"
+    },
+    "doi": "10.48550/arXiv.1409.0473",
+    "url": "http://arxiv.org/abs/1409.0473",
+    "erscheinungsjahr": 2014
+  },
+  {
+    "segment_id": "seg-2",
+    "titel": "Balancing data-driven and rule-based approaches in the context of a multimodal conversational system",
+    "autor": {
+      "vorname": "S.",
+      "nachname": "Bangalore"
+    },
+    "doi": "10.1109/ASRU.2003.1318444",
+    "url": "http://ieeexplore.ieee.org/document/1318444/",
+    "erscheinungsjahr": 2003
+  },
+  {
+    "segment_id": "seg-3",
+    "titel": "Expert systems for configuration at Digital: XCON and beyond",
+    "autor": {
+      "vorname": "Virginia E.",
+      "nachname": "Barker"
+    },
+    "doi": "10.1145/62065.62067",
+    "url": "https://dl.acm.org/doi/10.1145/62065.62067",
+    "erscheinungsjahr": 1989
+  },
+  {
+    "segment_id": "seg-4",
+    "titel": "AI News Values: Axiologies Guiding Content Production in Google Gemini, Microsoft Copilot, and Newspapers",
+    "autor": {
+      "vorname": "Wyatt",
+      "nachname": "Bettis"
+    },
+    "doi": null,
+    "url": "https://jscholarship.library.jhu.edu/handle/1774.2/70344",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-5",
+    "titel": "Statically Contextualizing Large Language Models with Typed Holes",
+    "autor": {
+      "vorname": "Andrew",
+      "nachname": "Blinn"
+    },
+    "doi": "10.1145/3689728",
+    "url": "https://dl.acm.org/doi/10.1145/3689728",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-6",
+    "titel": "Fundamentals of Expert Systems",
+    "autor": {
+      "vorname": "Bruce G.",
+      "nachname": "Buchanan"
+    },
+    "doi": "10.1146/annurev.cs.03.060188.000323",
+    "url": "https://www.annualreviews.org/content/journals/10.1146/annurev.cs.03.060188.000323",
+    "erscheinungsjahr": 1988
+  },
+  {
+    "segment_id": "seg-7",
+    "titel": "On the track of Artificial Intelligence: Learning with Intelligent Personal Assistants",
+    "autor": {
+      "vorname": "Nil Goksel",
+      "nachname": "Canbek"
+    },
+    "doi": null,
+    "url": "https://www.j-humansciences.com/ojs/index.php/IJHS/article/view/3549",
+    "erscheinungsjahr": 2016
+  },
+  {
+    "segment_id": "seg-8",
+    "titel": "A contemporary review on chatbots, AI-powered virtual conversational agents, ChatGPT: Applications, open challenges and future research directions",
+    "autor": {
+      "vorname": "Avyay",
+      "nachname": "Casheekar"
+    },
+    "doi": "10.1016/j.cosrev.2024.100632",
+    "url": "https://www.sciencedirect.com/science/article/pii/S1574013724000169",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-9",
+    "titel": "The Integration and Impact of Artificial Intelligence in Software Engineering",
+    "autor": {
+      "vorname": "Celia Dolores",
+      "nachname": "Benitez"
+    },
+    "doi": "10.48175/IJARSCT-19190",
+    "url": "http://ijarsct.co.in/Paper19190.pdf",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-1",
+    "titel": "Advantages and Limitations of Open-Source Versus Commercial Large Language Models (LLMs): A Comparative Study of DeepSeek and OpenAI’s ChatGPT",
+    "autor": {
+      "vorname": "Wan Chong",
+      "nachname": "Choi"
+    },
+    "doi": "10.20944/preprints202503.1081.v1",
+    "url": "https://www.preprints.org/manuscript/202503.1081/v1",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-2",
+    "titel": "Conversational Assistants for Software Development: Integration, Traceability and Coordination",
+    "autor": {
+      "vorname": "Albert",
+      "nachname": "Contreras"
+    },
+    "doi": "10.5220/0012561600003687",
+    "url": "https://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0012561600003687",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-3",
+    "titel": "Enhancing software development practices with AI insights in high-tech companies",
+    "autor": {
+      "vorname": "Daniel",
+      "nachname": "Ajiga"
+    },
+    "doi": "10.51594/csitrj.v5i8.1450",
+    "url": "https://fepbl.com/index.php/csitrj/article/view/1450",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-4",
+    "titel": "CPU DB: recording microprocessor history",
+    "autor": {
+      "vorname": "Andrew",
+      "nachname": "Danowitz"
+    },
+    "doi": "10.1145/2133806.2133822",
+    "url": "https://dl.acm.org/doi/10.1145/2133806.2133822",
+    "erscheinungsjahr": 2012
+  },
+  {
+    "segment_id": "seg-5",
+    "titel": "Conditional Computation in Deep and Recurrent Neural Networks",
+    "autor": {
+      "vorname": "Andrew",
+      "nachname": "Davis"
+    },
+    "doi": null,
+    "url": "https://trace.tennessee.edu/utk_graddiss/3907",
+    "erscheinungsjahr": 2016
+  },
+  {
+    "segment_id": "seg-6",
+    "titel": "DeepSeek-Coder-V2: Breaking the Barrier of Closed-Source Models in Code Intelligence",
+    "autor": {
+      "vorname": "Qihao",
+      "nachname": "Zhu"
+    },
+    "doi": "10.48550/arXiv.2406.11931",
+    "url": "http://arxiv.org/abs/2406.11931",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-7",
+    "titel": "Chatterbots",
+    "autor": {
+      "vorname": "O. V.",
+      "nachname": "Deryugina"
+    },
+    "doi": "10.3103/S0147688210020097",
+    "url": "https://doi.org/10.3103/S0147688210020097",
+    "erscheinungsjahr": 2010
+  },
+  {
+    "segment_id": "seg-8",
+    "titel": "Understanding User Mental Models in AI-Driven Code Completion Tools: Insights from an Elicitation Study",
+    "autor": {
+      "vorname": "Giuseppe",
+      "nachname": "Desolda"
+    },
+    "doi": "10.48550/ARXIV.2502.02194",
+    "url": "https://arxiv.org/abs/2502.02194",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-1",
+    "titel": "Large Language Models and Software Testing",
+    "autor": {
+      "vorname": "Marco",
+      "nachname": "Dewey"
+    },
+    "doi": null,
+    "url": "https://scholar.sun.ac.za/server/api/core/bitstreams/ed3a0d90-749c-420d-9d25-a8909f8ad192/content",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-2",
+    "titel": "Recommendations 01/2020 on measures that supplement transfer tools to ensure compliance with the EU level of protection of personal data",
+    "autor": {
+      "vorname": "European Data Protection Board (EDPB)",
+      "nachname": ""
+    },
+    "doi": null,
+    "url": "https://www.edpb.europa.eu/sites/default/files/consultation/edpb_recommendations_202001_supplementarymeasurestransferstools_en.pdf",
+    "erscheinungsjahr": 2020
+  },
+  {
+    "segment_id": "seg-3",
+    "titel": "To augment human capacity—Artificial intelligence evolution through causal layered analysis",
+    "autor": {
+      "vorname": "Elissa",
+      "nachname": "Farrow"
+    },
+    "doi": "10.1016/j.futures.2019.02.022",
+    "url": "https://www.sciencedirect.com/science/article/pii/S001632871830332X",
+    "erscheinungsjahr": 2019
+  },
+  {
+    "segment_id": "seg-4",
+    "titel": "Features | Zencoder – The AI Coding Agent",
+    "autor": {
+      "vorname": "For Good AI Inc.",
+      "nachname": ""
+    },
+    "doi": null,
+    "url": "https://zencoder.ai/product/features",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-5",
+    "titel": "A review on statistical language and neural network based code completion",
+    "autor": {
+      "vorname": "Ze",
+      "nachname": "Gao"
+    },
+    "doi": "10.54254/2755-2721/22/20231222",
+    "url": "https://www.ewadirect.com/proceedings/ace/article/view/4827",
+    "erscheinungsjahr": 2023
+  },
+  {
+    "segment_id": "seg-6",
+    "titel": "Taking Computation to Data: Integrating Privacy-preserving AI techniques and Blockchain Allowing Secure Analysis of Sensitive Data on Premise",
+    "autor": {
+      "vorname": "Jiahui",
+      "nachname": "Geng"
+    },
+    "doi": null,
+    "url": "https://uis.brage.unit.no/uis-xmlui/handle/11250/3086242",
+    "erscheinungsjahr": 2023
+  },
+  {
+    "segment_id": "seg-7",
+    "titel": "Der Gerichtshof erklärt den Beschluss 2016/1250 über die Angemessenheit des vom EU-US-Datenschutzschild gebotenen Schutzes für ungültig",
+    "autor": {
+      "vorname": "Gerichtshof der Europäischen Union",
+      "nachname": ""
+    },
+    "doi": null,
+    "url": "https://curia.europa.eu/jcms/upload/docs/application/pdf/2020-07/cp200091de.pdf",
+    "erscheinungsjahr": 2020
+  },
+  {
+    "segment_id": "seg-8",
+    "titel": "Gemini 2.5 Pro",
+    "autor": {
+      "vorname": "Google DeepMind",
+      "nachname": ""
+    },
+    "doi": null,
+    "url": "https://deepmind.google/technologies/gemini/pro/",
+    "erscheinungsjahr": 2025
+  },
+  {
+    "segment_id": "seg-9",
+    "titel": "Artificial intelligence alphafold model for molecular biology and drug discovery: a machine-learning-driven informatics investigation",
+    "autor": {
+      "vorname": "Song-Bin",
+      "nachname": "Guo"
+    },
+    "doi": "10.1186/s12943-024-02140-6",
+    "url": "https://doi.org/10.1186/s12943-024-02140-6",
+    "erscheinungsjahr": 2024
+  },
+  {
+    "segment_id": "seg-10",
+    "titel": "Cooperative Expendable Micro-Slice Servers (CEMS): Low Cost, Low Power Servers For Internet-Scale Services",
+    "autor": {
+      "vorname": "James",
+      "nachname": "Hamilton"
+    },
+    "doi": null,
+    "url": "https://www.scribd.com/document/61467287/10-1-1-145",
+    "erscheinungsjahr": 2009
   }
 ]
