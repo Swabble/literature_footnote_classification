@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from collections import defaultdict
 from typing import Dict, List
 
 from .data_ingestion import LiteratureEntry, Footnote
@@ -15,6 +16,8 @@ class Matcher:
         self.status = status
         template_path = Path("prompt_templates/basic_prompt.txt")
         self.base_prompt = template_path.read_text(encoding="utf-8").strip()
+        disamb_path = Path("prompt_templates/disambiguation_prompt.txt")
+        self.disamb_prompt = disamb_path.read_text(encoding="utf-8").strip()
 
     def match(self, entries: List[LiteratureEntry], footnotes: List[Footnote]) -> Dict[str, List[str]]:
         logger.info("Starting matching of %d entries", len(entries))
@@ -36,6 +39,7 @@ class Matcher:
                 footnote_keys = response.get(entry.key, [])
                 logger.debug("Received %d footnote keys", len(footnote_keys))
                 result.setdefault(entry.key, []).extend(footnote_keys)
+        result = self._resolve_duplicates(result, entries, footnotes)
         logger.info("Finished matching")
         return result
 
@@ -48,3 +52,56 @@ class Matcher:
         )
         logger.debug("Built prompt for entry %s: %s", entry.key, prompt)
         return prompt
+
+    def _build_disambiguation_prompt(
+        self, footnote: Footnote, entries: List[LiteratureEntry]
+    ) -> str:
+        options = "\n".join(f"Literature entry:\nKey:{e.key} FirstName:{e.author_first} LastName:{e.author_last} Year:{e.year}\n" for e in entries)
+        prompt = (
+            f"{self.disamb_prompt}\n\n"
+            f"Footnote:\n{footnote.key} {footnote.text}\n"
+            f"Entries:\n{options}"
+        )
+        logger.debug(
+            "Built disambiguation prompt for footnote %s: %s", footnote.key, prompt
+        )
+        return prompt
+
+    def _resolve_duplicates(
+        self,
+        matches: Dict[str, List[str]],
+        entries: List[LiteratureEntry],
+        footnotes: List[Footnote],
+    ) -> Dict[str, List[str]]:
+        entry_lookup = {e.key: e for e in entries}
+        footnote_lookup = {f.key: f for f in footnotes}
+
+        occurrences: Dict[str, List[str]] = defaultdict(list)
+        for entry_key, note_keys in matches.items():
+            for fkey in note_keys:
+                occurrences[fkey].append(entry_key)
+
+        duplicates = {fk: ekeys for fk, ekeys in occurrences.items() if len(ekeys) > 1}
+
+        for fkey, ekeys in duplicates.items():
+            footnote = footnote_lookup.get(fkey)
+            if not footnote:
+                continue
+            candidate_entries = [entry_lookup[k] for k in ekeys if k in entry_lookup]
+            prompt = self._build_disambiguation_prompt(footnote, candidate_entries)
+            name = f"{fkey}_disamb"
+            try:
+                response = self.llm_client.query(prompt, name=name)
+            except Exception as e:
+                logger.error("Disambiguation query failed: %s", e)
+                continue
+            chosen = response.get(fkey)
+            if chosen not in ekeys:
+                logger.warning(
+                    "LLM returned invalid entry %s for footnote %s", chosen, fkey
+                )
+                continue
+            for ekey in ekeys:
+                if ekey != chosen and fkey in matches.get(ekey, []):
+                    matches[ekey].remove(fkey)
+        return matches

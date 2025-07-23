@@ -56,7 +56,11 @@ des aktuellen Laufs liegen.
 
 Der eigentliche Prompt wird aus der Datei `prompt_templates/basic_prompt.txt`
 gelesen und mit den Informationen zu Eintrag und Fußnoten kombiniert. Dort kann
-der Prompttext angepasst werden.
+der Prompttext angepasst werden.\
+Tritt ein Verweis mehrfach auf, nutzt das Programm zusätzlich
+`prompt_templates/disambiguation_prompt.txt`, um das LLM zu bitten, den
+korrekten Eintrag zu bestimmen. Auch hier darf ausschließlich ein gültiges
+JSON-Objekt ausgegeben werden.
 
 ## Ausführung
 Das Programm kann direkt über `run.py` gestartet werden. Es liest die Daten ein, ruft das (hier simulierte) LLM über den `LLMClient` an und schreibt Fortschrittsinformationen in `status.json`. Die Protokollierung wird zentral durch den `LoggingManager` gesteuert.

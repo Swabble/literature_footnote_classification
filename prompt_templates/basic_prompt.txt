@@ -22,11 +22,11 @@ Context within a text
 
 Content of the footnote or title of the literature
 
-❗ If either the author surname or the year does not match, you must not assign the footnote.
-❗ If you are uncertain about a match, you must exclude it.
-❗ If no footnotes match, return an empty list for that entry.
+If either the author surname or the year does not match, you must not assign the footnote.
+If you are uncertain about a match, you must exclude it.
+If no footnotes match, return an empty list for that entry.
 
-✅ Output only a valid JSON object in the following format:
+Output only a valid JSON object in the following format:
 
 json
 Kopieren

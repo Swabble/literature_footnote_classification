@@ -20,7 +20,7 @@ class LLMClient:
         api_key: Optional[str] = None,
         model: str = "gpt-4.1-nano",
         max_tokens: int = 500,
-        temperature: float = 0.0,
+        temperature: float = 0.3,
         request_interval: float = 1.0,
         responses_dir: Path | str = Path("responses"),
     ) -> None:
