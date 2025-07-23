@@ -43,7 +43,7 @@ class Matcher:
         notes = "\n".join(f"{f.key}: {f.text}" for f in footnotes)
         prompt = (
             f"{self.base_prompt}\n\n"
-            f"Literature entry:\n{entry.key} {entry.author_first} {entry.author_last} {entry.year}\n"
+            f"Literature entry:\nKey:{entry.key} FirstName:{entry.author_first} LastName:{entry.author_last} Year:{entry.year}\n"
             f"Footnotes:\n{notes}"
         )
         logger.debug("Built prompt for entry %s: %s", entry.key, prompt)
