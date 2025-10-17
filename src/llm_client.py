@@ -43,19 +43,25 @@ class LLMClient:
 
     def _save_response(self, name: str, content: str) -> None:
         """Persist raw or validated LLM output to file."""
-        # path = self.responses_dir / name
-        # try:
-        #     path.write_text(content, encoding="utf-8")
-        #     logger.debug("Saved response to %s", path)
-        # except OSError as e:
-        #     logger.warning("Failed to write response %s: %s", path, e)
+        path = self.responses_dir / name
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+            logger.debug("Saved response to %s", path)
+        except OSError as e:
+            logger.warning("Failed to write response %s: %s", path, e)
 
     def _prepare_responses_dir(self) -> None:
         """Create or clear the directory used for storing responses."""
         if self.responses_dir.exists():
             for f in self.responses_dir.iterdir():
                 try:
-                    f.unlink()
+                    if f.is_file():
+                        f.unlink()
+                    elif f.is_dir():
+                        import shutil
+
+                        shutil.rmtree(f)
                 except OSError as e:
                     logger.warning("Failed to remove %s: %s", f, e)
         else:

@@ -60,10 +60,14 @@ def load_footnotes(path: Path) -> List[Footnote]:
         if not footnote_id:
             continue
         key = f"F{i:05d}"
+        text = div.get_text(strip=True)
+        if not text:
+            logger.debug("Skipping footnote %s with empty text", footnote_id)
+            continue
         footnotes.append(
             Footnote(
                 footnote_id=footnote_id,
-                text=footnote_id,
+                text=text,
                 key=key,
             )
         )

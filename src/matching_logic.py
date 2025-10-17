@@ -45,10 +45,16 @@ class Matcher:
 
     def _build_prompt(self, entry: LiteratureEntry, footnotes: List[Footnote]) -> str:
         notes = "\n".join(f"{f.key}: {f.text}" for f in footnotes)
-        prompt = (
-            f"{self.base_prompt}\n\n"
-            f"Literature entry:\nKey:{entry.key} FirstName:{entry.author_first} LastName:{entry.author_last} Year:{entry.year}\n"
-            f"Footnotes:\n{notes}"
+        prompt = "".join(
+            (
+                f"{self.base_prompt}\n\n",
+                "Literature entry:\n",
+                f"Key:{entry.key} ",
+                f"FirstName:{entry.author_first} ",
+                f"LastName:{entry.author_last} ",
+                f"Year:{entry.year}\n",
+                f"Footnotes:\n{notes}",
+            )
         )
         logger.debug("Built prompt for entry %s: %s", entry.key, prompt)
         return prompt
@@ -56,11 +62,24 @@ class Matcher:
     def _build_disambiguation_prompt(
         self, footnote: Footnote, entries: List[LiteratureEntry]
     ) -> str:
-        options = "\n".join(f"Literature entry:\nKey:{e.key} FirstName:{e.author_first} LastName:{e.author_last} Year:{e.year}\n" for e in entries)
-        prompt = (
-            f"{self.disamb_prompt}\n\n"
-            f"Footnote:\n{footnote.key} {footnote.text}\n"
-            f"Entries:\n{options}"
+        options = "\n".join(
+            "".join(
+                (
+                    "Literature entry:\n",
+                    f"Key:{e.key} ",
+                    f"FirstName:{e.author_first} ",
+                    f"LastName:{e.author_last} ",
+                    f"Year:{e.year}\n",
+                )
+            )
+            for e in entries
+        )
+        prompt = "".join(
+            (
+                f"{self.disamb_prompt}\n\n",
+                f"Footnote:\n{footnote.key} {footnote.text}\n",
+                f"Entries:\n{options}",
+            )
         )
         logger.debug(
             "Built disambiguation prompt for footnote %s: %s", footnote.key, prompt
